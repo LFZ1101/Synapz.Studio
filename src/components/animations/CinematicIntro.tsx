@@ -1,26 +1,33 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const STORAGE_KEY = "synapz-intro-seen";
+const INTRO_VIDEO_SRC = "/media/videos/intro-synapz.mp4";
 
-type Phase = "boot" | "origin" | "transmit" | "create" | "form" | "exit" | "done";
+type Mode = "boot" | "video" | "flash" | "exit" | "done";
 
+/**
+ * Cinematic opening for first visit.
+ * Plays the official intro video when available; falls back to a short brand flash.
+ * Never blocks main HTML content permanently — skip always available.
+ */
 export function CinematicIntro() {
-  const [phase, setPhase] = useState<Phase>("boot");
-  const visible = phase !== "boot" && phase !== "done";
+  const [mode, setMode] = useState<Mode>("boot");
+  const [fadeOut, setFadeOut] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const visible = mode !== "boot" && mode !== "done";
 
   useEffect(() => {
     let cancelled = false;
     const timers: number[] = [];
-
-    const finish = () => {
-      if (!cancelled) setPhase("done");
-    };
-
     const schedule = (fn: () => void, ms: number) => {
       timers.push(window.setTimeout(fn, ms));
+    };
+
+    const finish = () => {
+      if (!cancelled) setMode("done");
     };
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -33,41 +40,25 @@ export function CinematicIntro() {
       };
     }
 
+    // Return visits: short brand flash only
     if (seen) {
       schedule(() => {
-        if (!cancelled) setPhase("form");
+        if (!cancelled) setMode("flash");
       }, 0);
       schedule(() => {
-        if (!cancelled) setPhase("exit");
-      }, 1200);
-      schedule(() => {
-        finish();
-      }, 1800);
+        if (!cancelled) setFadeOut(true);
+      }, 1100);
+      schedule(finish, 1600);
       return () => {
         cancelled = true;
         timers.forEach(clearTimeout);
       };
     }
 
+    // First visit: play video
     schedule(() => {
-      if (!cancelled) setPhase("origin");
+      if (!cancelled) setMode("video");
     }, 0);
-    schedule(() => {
-      if (!cancelled) setPhase("transmit");
-    }, 1600);
-    schedule(() => {
-      if (!cancelled) setPhase("create");
-    }, 3400);
-    schedule(() => {
-      if (!cancelled) setPhase("form");
-    }, 7000);
-    schedule(() => {
-      if (!cancelled) setPhase("exit");
-    }, 9200);
-    schedule(() => {
-      localStorage.setItem(STORAGE_KEY, "1");
-      finish();
-    }, 10200);
 
     return () => {
       cancelled = true;
@@ -75,28 +66,54 @@ export function CinematicIntro() {
     };
   }, []);
 
-  const skip = () => {
+  useEffect(() => {
+    if (mode !== "video") return;
+    const video = videoRef.current;
+    if (!video) return;
+
+    const play = async () => {
+      try {
+        video.currentTime = 0;
+        await video.play();
+      } catch {
+        // Autoplay blocked or failed — fall back to flash, don't block site
+        localStorage.setItem(STORAGE_KEY, "1");
+        setMode("flash");
+        window.setTimeout(() => setFadeOut(true), 1100);
+        window.setTimeout(() => setMode("done"), 1600);
+      }
+    };
+
+    void play();
+  }, [mode]);
+
+  const complete = () => {
     localStorage.setItem(STORAGE_KEY, "1");
-    setPhase("exit");
-    window.setTimeout(() => setPhase("done"), 400);
+    setFadeOut(true);
+    window.setTimeout(() => setMode("done"), 450);
+  };
+
+  const skip = () => {
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+    }
+    complete();
+  };
+
+  const onEnded = () => {
+    complete();
+  };
+
+  const onError = () => {
+    // Video missing/corrupt — short flash then continue
+    localStorage.setItem(STORAGE_KEY, "1");
+    setMode("flash");
+    window.setTimeout(() => setFadeOut(true), 1100);
+    window.setTimeout(() => setMode("done"), 1600);
   };
 
   if (!visible) return null;
-
-  const frames = [
-    "Wireframe",
-    "Tipografia",
-    "Interface",
-    "Vídeo",
-    "Campanha",
-    "Social",
-    "Landing",
-    "Site",
-    "Mobile",
-    "Código",
-    "Dashboard",
-    "Lançamento",
-  ];
 
   return (
     <div
@@ -104,6 +121,11 @@ export function CinematicIntro() {
       role="dialog"
       aria-label="Introdução SYNAPZ STUDIO"
       aria-modal="true"
+      style={{
+        opacity: fadeOut ? 0 : 1,
+        transition: "opacity 0.45s ease",
+        pointerEvents: fadeOut ? "none" : "auto",
+      }}
     >
       <button
         type="button"
@@ -113,96 +135,46 @@ export function CinematicIntro() {
         Pular introdução
       </button>
 
-      <div className="relative w-full max-w-4xl px-6 text-center">
-        {(phase === "origin" || phase === "transmit") && (
-          <svg
-            viewBox="0 0 800 400"
-            className="mx-auto h-auto w-full max-w-2xl"
-            aria-hidden
+      {mode === "video" && (
+        <div className="relative h-full w-full flex items-center justify-center bg-synapz-black">
+          <video
+            ref={videoRef}
+            className="h-full w-full object-contain"
+            src={INTRO_VIDEO_SRC}
+            muted
+            playsInline
+            preload="auto"
+            controls={false}
+            onEnded={onEnded}
+            onError={onError}
+            aria-label="Vídeo de introdução da SYNAPZ STUDIO"
           >
-            <circle
-              cx="80"
-              cy="200"
-              r="6"
-              fill="#B7FF00"
-              style={{
-                animation:
-                  phase === "origin"
-                    ? "pulse-dot 1.4s ease-in-out infinite"
-                    : undefined,
-              }}
-            />
-            {phase === "transmit" && (
-              <>
-                <path
-                  d="M86 200 H720"
-                  stroke="#B7FF00"
-                  strokeWidth="1.5"
-                  fill="none"
-                  pathLength={1}
-                  strokeDasharray="1"
-                  style={{ animation: "draw-line 1.2s ease forwards" }}
-                />
-                {[200, 320, 440, 560, 680].map((x, i) => (
-                  <circle
-                    key={x}
-                    cx={x}
-                    cy={200 + (i % 2 === 0 ? -40 : 40)}
-                    r="4"
-                    fill={i === 4 ? "#B7FF00" : "#ECEDE7"}
-                    opacity={0}
-                    style={{
-                      animation: `fade-up 0.4s ease ${0.15 * i}s forwards`,
-                    }}
-                  />
-                ))}
-              </>
-            )}
-          </svg>
-        )}
+            <track kind="descriptions" label="Introdução visual da marca SYNAPZ" />
+          </video>
+          {/* Accessible text alternative — content also exists in page HTML */}
+          <p className="sr-only">
+            Toda grande ideia começa com uma conexão. SYNAPZ STUDIO — estratégia,
+            criatividade e tecnologia em conexão.
+          </p>
+        </div>
+      )}
 
-        {phase === "create" && (
-          <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 sm:gap-3">
-            {frames.map((label, i) => (
-              <div
-                key={label}
-                className="aspect-[4/3] border border-synapz-neural/15 bg-synapz-graphite flex items-end p-3"
-                style={{
-                  animation: `fade-up 0.5s ease ${i * 0.06}s both`,
-                  filter: "grayscale(1)",
-                }}
-              >
-                <span className="eyebrow text-[10px]">{label}</span>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {(phase === "form" || phase === "exit") && (
-          <div
-            className="flex flex-col items-center gap-8"
-            style={{
-              animation:
-                phase === "exit"
-                  ? "fade-up 0.5s ease reverse both"
-                  : "fade-up 0.7s ease both",
-            }}
-          >
-            <Image
-              src="/brand/simbolo.png"
-              alt=""
-              width={160}
-              height={136}
-              priority
-              className="h-24 w-auto md:h-32"
-            />
-            <p className="font-display text-2xl sm:text-3xl md:text-4xl text-synapz-neural text-balance max-w-xl">
-              Toda grande ideia começa com uma{" "}
-              <span className="text-synapz-impulse">conexão</span>.
-            </p>
-          </div>
-        )}
-      </div>
+      {(mode === "flash" || mode === "exit") && (
+        <div className="flex flex-col items-center gap-8 px-6 text-center">
+          <Image
+            src="/brand/simbolo.png"
+            alt=""
+            width={160}
+            height={136}
+            priority
+            className="h-24 w-auto md:h-32"
+          />
+          <p className="font-display text-2xl sm:text-3xl md:text-4xl text-synapz-neural text-balance max-w-xl">
+            Toda grande ideia começa com uma{" "}
+            <span className="text-synapz-impulse">conexão</span>.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

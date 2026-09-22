@@ -1,18 +1,13 @@
 # Vídeos — SYNAPZ STUDIO
 
-Coloque aqui os arquivos de vídeo oficiais.
+## Abertura cinematográfica
+- `intro-synapz.mp4` — vídeo oficial da intro (primeira visita)
+  - duração atual: ~8s
+  - reprodução sem som (`muted` + `playsInline`)
+  - botão “Pular introdução” sempre disponível
+  - visitas seguintes: flash curto da marca
 
-## Abertura cinematográfica (intro)
-Nome sugerido:
-- `intro-synapz.mp4` (principal)
-- `intro-synapz.webm` (opcional, mais leve)
-
-Recomendações:
-- 8–12 segundos
-- sem áudio automático (ou áudio mudo)
-- resolução 1920×1080 ou 1280×720
-- compressão otimizada para web
-
-## Outros
-- institucionais: `institucional-*.mp4`
-- cases: `projeto-[slug]-*.mp4`
+## Convenções
+- Prefira nomes ASCII sem espaços (ex.: `intro-synapz.mp4`)
+- Cases: `projeto-[slug]-preview.mp4`
+- Institucional: `institucional.mp4`
