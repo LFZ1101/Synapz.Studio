@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100" fill="none" role="img" aria-hidden="true">
+  <!-- Geometric construction for motion system. Static brand mark uses official PNG. -->
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <!-- Paths -->
+    <path d="M38 50 C52 50, 58 28, 78 22" stroke="#ECEDE7" stroke-width="14"/>
+    <path d="M38 50 C56 50, 68 50, 86 50" stroke="#B7FF00" stroke-width="14"/>
+    <path d="M38 50 C52 50, 58 72, 78 78" stroke="#ECEDE7" stroke-width="14"/>
+    <!-- Nodes -->
+    <circle cx="30" cy="50" r="14" fill="#ECEDE7"/>
+    <circle cx="86" cy="22" r="12" fill="#ECEDE7"/>
+    <circle cx="98" cy="50" r="13" fill="#B7FF00"/>
+    <circle cx="86" cy="78" r="12" fill="#ECEDE7"/>
+  </g>
+</svg>

@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-synapz-black: #050605;
+  --color-synapz-impulse: #b7ff00;
+  --color-synapz-neural: #ecede7;
+  --color-synapz-graphite: #121412;
+  --color-synapz-signal: #898d86;
+  --color-background: var(--color-synapz-black);
+  --color-foreground: var(--color-synapz-neural);
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-ibm-plex-mono);
+  --spacing-section: clamp(5rem, 12vw, 9rem);
+  --spacing-gutter: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background: var(--color-synapz-black);
+    color: var(--color-synapz-neural);
+    font-family: var(--font-inter), system-ui, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-synapz-impulse) 35%, transparent);
+    color: var(--color-synapz-neural);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-synapz-impulse);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-space-grotesk), system-ui, sans-serif;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .eyebrow {
+    font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-synapz-signal);
+  }
+
+  .hairline {
+    border-color: color-mix(in srgb, var(--color-synapz-neural) 12%, transparent);
+  }
+
+  .impulse-word {
+    color: var(--color-synapz-impulse);
+  }
+
+  .grid-editorial {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .container-synapz {
+    width: min(100% - (var(--spacing-gutter) * 2), 1200px);
+    margin-inline: auto;
+  }
+
+  .container-wide {
+    width: min(100% - (var(--spacing-gutter) * 2), 1440px);
+    margin-inline: auto;
+  }
+}
+
+/* Button impulse line */
+.btn-impulse {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-impulse::after {
+  content: "";
+  position: absolute;
+  left: -20%;
+  bottom: 0;
+  width: 40%;
+  height: 1px;
+  background: var(--color-synapz-impulse);
+  transform: translateX(-120%);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-impulse:hover::after,
+.btn-impulse:focus-visible::after {
+  transform: translateX(280%);
+}
+
+/* Native details accordion */
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item[open] .faq-chevron {
+  transform: rotate(45deg);
+  color: var(--color-synapz-impulse);
+}
+
+/* Intro overlay */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #050605;
+  display: grid;
+  place-items: center;
+}
+
+/* Connection network canvas wrapper */
+.network-canvas {
+  pointer-events: none;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 200;
+  background: var(--color-synapz-impulse);
+  color: var(--color-synapz-black);
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 1;
+  }
+}
+
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
