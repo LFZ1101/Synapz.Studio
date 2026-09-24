@@ -1,6 +1,7 @@
 "use client";
 
 import { Container, Section } from "@/components/ui/Layout";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { methodSteps } from "@/content/studio";
 import { useEffect, useRef, useState } from "react";
 
@@ -33,10 +34,14 @@ export function MethodSection() {
     <Section id="metodo">
       <Container>
         <div className="max-w-2xl">
-          <p className="eyebrow text-synapz-impulse mb-4">Método</p>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08]">
-            Seis etapas. Uma linha.
-          </h2>
+          <ScrollReveal variant="fade">
+            <p className="eyebrow text-synapz-impulse mb-4">Método</p>
+          </ScrollReveal>
+          <ScrollReveal variant="mask" delay={70}>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08]">
+              Seis etapas. Uma linha.
+            </h2>
+          </ScrollReveal>
         </div>
 
         <div ref={ref} className="mt-12 relative">
@@ -60,8 +65,12 @@ export function MethodSection() {
                 data-step={index}
                 className="relative grid gap-3 md:grid-cols-2 md:gap-16"
               >
-                <div
-                  className={`md:text-right ${index % 2 === 1 ? "md:order-2 md:text-left" : ""}`}
+                <ScrollReveal
+                  variant="up"
+                  delay={40}
+                  className={
+                    index % 2 === 1 ? "md:order-2 md:text-left" : "md:text-right"
+                  }
                 >
                   <p
                     className={`eyebrow mb-2 ${active >= index ? "text-synapz-impulse" : ""}`}
@@ -71,7 +80,7 @@ export function MethodSection() {
                   <h3 className="font-display text-xl md:text-2xl text-synapz-neural">
                     {step.title}
                   </h3>
-                </div>
+                </ScrollReveal>
                 <div
                   className={`pl-10 md:pl-0 ${index % 2 === 1 ? "md:order-1 md:text-right" : ""}`}
                 >
@@ -83,9 +92,11 @@ export function MethodSection() {
                     }`}
                     aria-hidden
                   />
-                  <p className="text-synapz-signal text-sm md:text-base leading-relaxed max-w-md md:inline-block">
-                    {step.description}
-                  </p>
+                  <ScrollReveal variant="fade" delay={100}>
+                    <p className="text-synapz-signal text-sm md:text-base leading-relaxed max-w-md md:inline-block">
+                      {step.description}
+                    </p>
+                  </ScrollReveal>
                 </div>
               </li>
             ))}
