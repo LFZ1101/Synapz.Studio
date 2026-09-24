@@ -42,7 +42,7 @@ export default function ContatoPage() {
             <div className="lg:col-span-5 space-y-6">
               <Eyebrow accent>Contato</Eyebrow>
               <h1 className="font-display text-4xl sm:text-5xl text-balance">
-                Vamos ativar a próxima conexão?
+                Vamos ativar sua próxima conexão?
               </h1>
               <p className="text-synapz-signal leading-relaxed text-lg">
                 Conte um pouco sobre sua empresa, seu momento e o que precisa

@@ -57,7 +57,7 @@ export function ContactCtaSection() {
             <div className="lg:col-span-8 space-y-3">
               <p className="eyebrow text-synapz-impulse">Contato</p>
               <h2 className="font-display text-3xl md:text-4xl text-balance">
-                Vamos ativar a próxima conexão?
+                Vamos ativar sua próxima conexão?
               </h2>
               <p className="text-synapz-signal max-w-md">
                 Conte o momento do seu negócio. Definimos o próximo passo juntos.

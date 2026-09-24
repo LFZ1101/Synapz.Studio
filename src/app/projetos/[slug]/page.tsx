@@ -297,7 +297,7 @@ export default async function ProjectCasePage({ params }: Props) {
         <Container className="border border-synapz-neural/10 p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <h2 className="font-display text-2xl md:text-3xl">
-              Vamos ativar a próxima conexão?
+              Vamos ativar sua próxima conexão?
             </h2>
             <p className="mt-2 text-synapz-signal">
               Conte o momento do seu negócio.
