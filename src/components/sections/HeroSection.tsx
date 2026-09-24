@@ -25,8 +25,7 @@ export function HeroSection() {
           </h1>
 
           <p className="max-w-xl text-base md:text-lg leading-relaxed text-synapz-signal">
-            Estratégia, conteúdo, campanha e site — conectados em uma única
-            direção.
+            {SITE.description}
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-2">

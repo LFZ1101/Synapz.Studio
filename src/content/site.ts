@@ -14,9 +14,10 @@ export const SITE = {
   positioning:
     "A SYNAPZ STUDIO é um estúdio digital que conecta estratégia, marketing, criatividade, design e tecnologia para construir marcas, experiências e resultados.",
   promise: "Conectar competências diferentes para colocar negócios em movimento.",
-  headline: "Criamos tudo que uma marca precisa para ocupar o digital.",
+  /** Home hero — precise, not "we do everything" */
+  headline: "Conectamos estratégia, design e tecnologia para movimentar negócios.",
   description:
-    "Da estratégia ao conteúdo, da campanha ao site, conectamos design, marketing e tecnologia para criar experiências que movimentam negócios.",
+    "Marca, conteúdo, campanha e experiência digital — com a mesma direção.",
   identification: {
     type: "Estúdio digital independente",
     pillars: "Marketing · Design · Tecnologia",
