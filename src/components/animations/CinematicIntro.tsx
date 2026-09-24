@@ -4,18 +4,27 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const STORAGE_KEY = "synapz-intro-seen";
-const INTRO_VIDEO_SRC = "/media/videos/intro-synapz.mp4";
+const DESKTOP_SRC = "/media/videos/intro-synapz-desktop.mp4";
+const MOBILE_SRC = "/media/videos/intro-synapz-mobile.mp4";
 
 type Mode = "boot" | "video" | "flash" | "exit" | "done";
 
+function pickIntroSrc() {
+  if (typeof window === "undefined") return DESKTOP_SRC;
+  // Portrait / narrow viewports get the vertical cut
+  const mobile = window.matchMedia("(max-width: 767px), (orientation: portrait) and (max-width: 1024px)").matches;
+  return mobile ? MOBILE_SRC : DESKTOP_SRC;
+}
+
 /**
  * Cinematic opening for first visit.
- * Plays the official intro video when available; falls back to a short brand flash.
- * Never blocks main HTML content permanently — skip always available.
+ * Uses desktop (16:9) or mobile (9:16) intro based on viewport.
+ * Skip always available; reduced-motion bypasses video.
  */
 export function CinematicIntro() {
   const [mode, setMode] = useState<Mode>("boot");
   const [fadeOut, setFadeOut] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(DESKTOP_SRC);
   const videoRef = useRef<HTMLVideoElement>(null);
   const visible = mode !== "boot" && mode !== "done";
 
@@ -33,14 +42,19 @@ export function CinematicIntro() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const seen = localStorage.getItem(STORAGE_KEY) === "1";
 
+    // Resolve correct asset before showing video
+    schedule(() => {
+      if (!cancelled) setVideoSrc(pickIntroSrc());
+    }, 0);
+
     if (reduced) {
-      finish();
+      schedule(finish, 0);
       return () => {
         cancelled = true;
+        timers.forEach(clearTimeout);
       };
     }
 
-    // Return visits: short brand flash only
     if (seen) {
       schedule(() => {
         if (!cancelled) setMode("flash");
@@ -55,7 +69,6 @@ export function CinematicIntro() {
       };
     }
 
-    // First visit: play video
     schedule(() => {
       if (!cancelled) setMode("video");
     }, 0);
@@ -73,10 +86,10 @@ export function CinematicIntro() {
 
     const play = async () => {
       try {
+        video.load();
         video.currentTime = 0;
         await video.play();
       } catch {
-        // Autoplay blocked or failed — fall back to flash, don't block site
         localStorage.setItem(STORAGE_KEY, "1");
         setMode("flash");
         window.setTimeout(() => setFadeOut(true), 1100);
@@ -85,7 +98,7 @@ export function CinematicIntro() {
     };
 
     void play();
-  }, [mode]);
+  }, [mode, videoSrc]);
 
   const complete = () => {
     localStorage.setItem(STORAGE_KEY, "1");
@@ -94,23 +107,8 @@ export function CinematicIntro() {
   };
 
   const skip = () => {
-    const video = videoRef.current;
-    if (video) {
-      video.pause();
-    }
+    videoRef.current?.pause();
     complete();
-  };
-
-  const onEnded = () => {
-    complete();
-  };
-
-  const onError = () => {
-    // Video missing/corrupt — short flash then continue
-    localStorage.setItem(STORAGE_KEY, "1");
-    setMode("flash");
-    window.setTimeout(() => setFadeOut(true), 1100);
-    window.setTimeout(() => setMode("done"), 1600);
   };
 
   if (!visible) return null;
@@ -139,19 +137,23 @@ export function CinematicIntro() {
         <div className="relative h-full w-full flex items-center justify-center bg-synapz-black">
           <video
             ref={videoRef}
-            className="h-full w-full object-contain"
-            src={INTRO_VIDEO_SRC}
+            key={videoSrc}
+            className="h-full w-full object-cover"
             muted
             playsInline
             preload="auto"
             controls={false}
-            onEnded={onEnded}
-            onError={onError}
+            onEnded={complete}
+            onError={() => {
+              localStorage.setItem(STORAGE_KEY, "1");
+              setMode("flash");
+              window.setTimeout(() => setFadeOut(true), 1100);
+              window.setTimeout(() => setMode("done"), 1600);
+            }}
             aria-label="Vídeo de introdução da SYNAPZ STUDIO"
           >
-            <track kind="descriptions" label="Introdução visual da marca SYNAPZ" />
+            <source src={videoSrc} type="video/mp4" />
           </video>
-          {/* Accessible text alternative — content also exists in page HTML */}
           <p className="sr-only">
             Toda grande ideia começa com uma conexão. SYNAPZ STUDIO — estratégia,
             criatividade e tecnologia em conexão.
