@@ -53,7 +53,7 @@ export function Header() {
         )}
       >
         <div className="container-wide flex h-16 md:h-20 items-center justify-between gap-6">
-          <Logo variant="compacta" priority className="h-8 md:h-9 w-auto" />
+          <Logo variant="compacta" priority className="h-10 md:h-11 w-auto" />
 
           <nav
             className="hidden lg:flex items-center gap-8"
