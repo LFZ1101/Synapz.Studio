@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import { Container, Section, SectionHeading } from "@/components/ui/Layout";
+import { Container, Section } from "@/components/ui/Layout";
 import { getPublishedProjects } from "@/content/projects";
 import Link from "next/link";
 
@@ -9,40 +9,35 @@ export function ProjectsSection() {
   return (
     <Section tone="graphite" id="projetos">
       <Container>
-        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-          <SectionHeading
-            eyebrow="Projetos"
-            title="Conexões que se tornaram experiências."
-            description="Cada projeto começa com uma necessidade diferente. Nosso trabalho é encontrar a estratégia, a linguagem e a tecnologia capazes de transformar essa necessidade em resultado."
-          />
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-2xl">
+            <p className="eyebrow text-synapz-impulse mb-4">Projetos</p>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-balance">
+              Conexões que viraram experiência.
+            </h2>
+          </div>
           <Button href="/projetos" variant="secondary" className="shrink-0">
             Ver projetos
           </Button>
         </div>
 
         {projects.length === 0 ? (
-          <div className="mt-14 border border-synapz-neural/10 p-8 md:p-12">
-            <p className="eyebrow text-synapz-impulse mb-4">Em curadoria</p>
-            <h3 className="font-display text-2xl md:text-3xl text-synapz-neural max-w-xl">
-              Estudos de caso reais serão publicados aqui com processo, entregas
-              e resultados comprovados.
+          <div className="mt-12 border border-synapz-neural/10 p-8 md:p-10 max-w-2xl">
+            <p className="eyebrow text-synapz-impulse mb-3">Em breve</p>
+            <h3 className="font-display text-2xl text-synapz-neural">
+              Estudos de caso reais serão publicados aqui.
             </h3>
-            <p className="mt-4 max-w-2xl text-synapz-signal leading-relaxed">
-              Não exibimos clientes fictícios ou métricas inventadas. Enquanto
-              novos projetos são documentados, você pode conhecer nosso método
-              ou iniciar uma conversa.
+            <p className="mt-3 text-synapz-signal leading-relaxed">
+              Sem clientes ou métricas inventadas.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="/#metodo" variant="secondary">
-                Conhecer o método
-              </Button>
-              <Button href="/contato" variant="impulse">
+            <div className="mt-6">
+              <Button href="/contato" variant="impulse" size="sm">
                 Iniciar um projeto
               </Button>
             </div>
           </div>
         ) : (
-          <ul className="mt-14 divide-y divide-synapz-neural/10 border-y border-synapz-neural/10">
+          <ul className="mt-12 divide-y divide-synapz-neural/10 border-y border-synapz-neural/10">
             {projects.map((project) => (
               <li key={project.slug}>
                 <Link
@@ -61,7 +56,7 @@ export function ProjectsSection() {
                     {project.summary}
                   </p>
                   <span className="md:col-span-2 md:text-right text-sm text-synapz-impulse">
-                    Explorar projeto →
+                    Explorar →
                   </span>
                 </Link>
               </li>

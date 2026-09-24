@@ -1,52 +1,79 @@
 import { Button } from "@/components/ui/Button";
-import { Container, Eyebrow, Section, SectionHeading } from "@/components/ui/Layout";
+import { Container, Section } from "@/components/ui/Layout";
 import { nuclei } from "@/content/services";
 import Link from "next/link";
+
+/** Home shows only the essentials — full lists live on /servicos */
+const HOME_SERVICE_PREVIEW: Record<string, string[]> = {
+  marca: [
+    "estratégia de conteúdo",
+    "social media",
+    "vídeo e motion",
+    "materiais publicitários",
+  ],
+  web: [
+    "sites institucionais",
+    "landing pages",
+    "lojas virtuais",
+    "sistemas personalizados",
+  ],
+  marketing: [
+    "estratégia de campanha",
+    "conceitos criativos",
+    "páginas de campanha",
+    "otimização",
+  ],
+};
+
+const HOME_BLURB: Record<string, string> = {
+  marca: "Conteúdo e identidade para marcas presentes e consistentes.",
+  web: "Sites, páginas e sistemas claros, bonitos e funcionais.",
+  marketing: "Campanhas que conectam ideia, mídia e conversão.",
+};
 
 export function ServicesSection() {
   return (
     <Section tone="graphite" id="servicos">
       <Container>
-        <SectionHeading
-          eyebrow="Serviços"
-          title="Uma conexão completa com o digital."
-          description="Estratégia, criação e execução reunidas para que cada ponto da presença digital trabalhe na mesma direção."
-        />
+        <div className="max-w-2xl">
+          <p className="eyebrow text-synapz-impulse mb-4">Serviços</p>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-balance">
+            Três núcleos. Uma direção.
+          </h2>
+          <p className="mt-5 text-synapz-signal leading-relaxed">
+            Marca, web e campanha — juntos ou sob demanda.
+          </p>
+        </div>
 
-        <div className="mt-16 space-y-0 border-t border-synapz-neural/10">
+        <div className="mt-14 grid gap-6 lg:grid-cols-3">
           {nuclei.map((nucleus, index) => (
             <article
               key={nucleus.id}
-              className="group grid gap-8 border-b border-synapz-neural/10 py-10 md:py-14 lg:grid-cols-12"
+              className="flex flex-col border border-synapz-neural/10 p-6 md:p-8 transition-colors hover:border-synapz-impulse/40"
             >
-              <div className="lg:col-span-1">
-                <span className="eyebrow text-synapz-impulse">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-              </div>
-              <div className="lg:col-span-5 space-y-4">
-                <Eyebrow>{nucleus.title}</Eyebrow>
-                <h3 className="font-display text-2xl md:text-3xl leading-snug text-synapz-neural">
-                  {nucleus.headline}
-                </h3>
-                <p className="text-synapz-signal leading-relaxed">
-                  {nucleus.description}
-                </p>
+              <span className="eyebrow text-synapz-impulse mb-5">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="font-display text-2xl text-synapz-neural">
+                {nucleus.title}
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-synapz-signal">
+                {HOME_BLURB[nucleus.id]}
+              </p>
+              <ul className="mt-6 space-y-2 flex-1">
+                {(HOME_SERVICE_PREVIEW[nucleus.id] ?? []).map((item) => (
+                  <li
+                    key={item}
+                    className="border-l border-synapz-impulse/50 pl-3 text-sm text-synapz-signal"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8">
                 <Button href={nucleus.cta.href} variant="secondary" size="sm">
                   {nucleus.cta.label}
                 </Button>
-              </div>
-              <div className="lg:col-span-6">
-                <ul className="grid gap-3 sm:grid-cols-2">
-                  {nucleus.services.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-3 border-l border-synapz-neural/15 pl-4 text-sm text-synapz-signal transition-colors group-hover:border-synapz-impulse/50"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </article>
           ))}

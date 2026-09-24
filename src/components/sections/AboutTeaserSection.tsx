@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button";
-import { Container, Section, SectionHeading } from "@/components/ui/Layout";
+import { Container, Section } from "@/components/ui/Layout";
 import { SITE } from "@/content/site";
 import { differentials } from "@/content/studio";
 
@@ -7,38 +7,27 @@ export function AboutTeaserSection() {
   return (
     <Section tone="light" id="sobre">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <SectionHeading
-              light
-              eyebrow="Sobre"
-              title="Entre uma ideia e um resultado existe uma conexão bem construída."
-              description={
-                <>
-                  A SYNAPZ STUDIO é um estúdio digital que reúne estratégia,
-                  criatividade, marketing e tecnologia. Criamos marcas,
-                  conteúdos, campanhas, sites e sistemas a partir de uma visão
-                  integrada — cada entrega como parte de uma experiência maior.
-                </>
-              }
-            />
-            <div className="mt-8">
-              <Button href="/studio" variant="primary">
-                Conhecer o Studio
-              </Button>
-            </div>
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-7 space-y-5">
+            <p className="eyebrow text-synapz-black/50">Sobre</p>
+            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-synapz-black text-balance max-w-xl">
+              Estúdio digital com visão integrada.
+            </h2>
+            <p className="max-w-lg text-synapz-black/70 leading-relaxed">
+              Estratégia, criatividade, marketing e tecnologia no mesmo time —
+              para cada entrega fazer parte de uma experiência maior.
+            </p>
+            <Button href="/studio" variant="primary">
+              Conhecer o Studio
+            </Button>
           </div>
           <div className="lg:col-span-5">
-            <div className="aspect-[4/5] bg-synapz-black relative overflow-hidden">
-              <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_70%_40%,rgba(183,255,0,0.25),transparent_55%)]" />
-              <div className="absolute inset-0 flex flex-col justify-end p-6 text-synapz-neural">
-                <p className="eyebrow text-synapz-impulse mb-3">Institucional</p>
+            <div className="aspect-[16/10] lg:aspect-[4/5] bg-synapz-black relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,rgba(183,255,0,0.2),transparent_55%)]" />
+              <div className="absolute inset-6 flex flex-col justify-end text-synapz-neural">
+                <p className="eyebrow text-synapz-impulse mb-2">Conceito</p>
                 <p className="font-display text-2xl leading-snug">
                   {SITE.concept}
-                </p>
-                <p className="mt-4 text-sm text-synapz-signal">
-                  Espaço reservado para fotografia ou vídeo institucional em
-                  preto e branco com intervenção gráfica verde.
                 </p>
               </div>
             </div>
@@ -49,27 +38,26 @@ export function AboutTeaserSection() {
   );
 }
 
+/** Kept for /studio reuse — not shown on the simplified home */
 export function DifferentialsSection() {
   return (
     <Section tone="graphite">
       <Container>
-        <SectionHeading
-          eyebrow="Diferenças"
-          title="O que muda quando tudo se conecta."
-        />
-        <ul className="mt-14 divide-y divide-synapz-neural/10 border-y border-synapz-neural/10">
+        <p className="eyebrow text-synapz-impulse mb-4">Diferenças</p>
+        <h2 className="font-display text-3xl md:text-4xl max-w-xl">
+          O que muda quando tudo se conecta.
+        </h2>
+        <ul className="mt-12 divide-y divide-synapz-neural/10 border-y border-synapz-neural/10">
           {differentials.map((item, index) => (
             <li
               key={item.title}
-              className="grid gap-4 py-8 md:grid-cols-12 md:items-baseline"
+              className="grid gap-3 py-6 md:grid-cols-12 md:items-baseline"
             >
               <span className="eyebrow text-synapz-impulse md:col-span-2">
                 {String(index + 1).padStart(2, "0")}
               </span>
-              <h3 className="font-display text-xl md:text-2xl md:col-span-4">
-                {item.title}
-              </h3>
-              <p className="text-synapz-signal md:col-span-6 leading-relaxed">
+              <h3 className="font-display text-xl md:col-span-4">{item.title}</h3>
+              <p className="text-synapz-signal md:col-span-6 text-sm md:text-base">
                 {item.description}
               </p>
             </li>
@@ -81,21 +69,5 @@ export function DifferentialsSection() {
 }
 
 export function ResultsSection() {
-  return (
-    <Section>
-      <Container>
-        <SectionHeading
-          eyebrow="Resultados"
-          title="O resultado aparece quando tudo se conecta."
-          description="Esta seção está preparada para depoimentos reais, métricas com contexto e estudos de caso publicados. Enquanto isso, preferimos apresentar processo e entregas — sem inventar provas sociais."
-        />
-        <div className="mt-10 border border-dashed border-synapz-neural/20 p-8 text-synapz-signal">
-          <p>
-            Quando houver autorização de clientes, publicaremos aqui: depoimento,
-            cargo, empresa, projeto relacionado, métrica, período e fonte.
-          </p>
-        </div>
-      </Container>
-    </Section>
-  );
+  return null;
 }

@@ -1,4 +1,4 @@
-import { Container, Section, SectionHeading } from "@/components/ui/Layout";
+import { Container, Section } from "@/components/ui/Layout";
 
 function ImpulseWord({ children }: { children: string }) {
   return <span className="text-synapz-impulse">{children}</span>;
@@ -8,31 +8,17 @@ export function ManifestoSection() {
   return (
     <Section>
       <Container>
-        <SectionHeading
-          eyebrow="Manifesto"
-          title={
-            <>
-              Elementos isolados não constroem uma presença relevante.
-            </>
-          }
-        />
-        <div className="mt-10 max-w-3xl space-y-6 text-lg md:text-xl leading-relaxed text-synapz-signal">
-          <p>
-            Uma marca precisa de <ImpulseWord>estratégia</ImpulseWord> para
-            encontrar direção, <ImpulseWord>criatividade</ImpulseWord> para ser
-            percebida e <ImpulseWord>tecnologia</ImpulseWord> para transformar
-            atenção em experiência.
-          </p>
-          <p>
-            A SYNAPZ conecta essas competências para construir marcas mais
-            claras, presentes e preparadas para avançar.
-          </p>
-          <p>
-            Não criamos apenas páginas, publicações ou campanhas. Criamos{" "}
-            <ImpulseWord>conexões</ImpulseWord> entre o que uma empresa é, o que
-            ela comunica e o que as pessoas experimentam.
-          </p>
-        </div>
+        <p className="eyebrow text-synapz-impulse mb-6">Manifesto</p>
+        <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.1] text-balance max-w-3xl">
+          Elementos isolados não constroem uma presença relevante.
+        </h2>
+        <p className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-synapz-signal">
+          Uma marca precisa de <ImpulseWord>estratégia</ImpulseWord>,{" "}
+          <ImpulseWord>criatividade</ImpulseWord> e{" "}
+          <ImpulseWord>tecnologia</ImpulseWord> trabalhando juntas. A SYNAPZ
+          cria essas <ImpulseWord>conexões</ImpulseWord> — do que a empresa é ao
+          que as pessoas experimentam.
+        </p>
       </Container>
     </Section>
   );

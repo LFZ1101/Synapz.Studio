@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Section, SectionHeading } from "@/components/ui/Layout";
+import { Container, Section } from "@/components/ui/Layout";
 import { methodSteps } from "@/content/studio";
 import { useEffect, useRef, useState } from "react";
 
@@ -32,12 +32,14 @@ export function MethodSection() {
   return (
     <Section id="metodo">
       <Container>
-        <SectionHeading
-          eyebrow="Método"
-          title="Um processo conectado do início ao próximo passo."
-        />
+        <div className="max-w-2xl">
+          <p className="eyebrow text-synapz-impulse mb-4">Método</p>
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08]">
+            Seis etapas. Uma linha.
+          </h2>
+        </div>
 
-        <div ref={ref} className="mt-14 relative">
+        <div ref={ref} className="mt-12 relative">
           <div
             className="absolute left-[11px] top-3 bottom-3 w-px bg-synapz-neural/15 md:left-1/2 md:-translate-x-px"
             aria-hidden
@@ -51,22 +53,22 @@ export function MethodSection() {
             aria-hidden
           />
 
-          <ol className="space-y-10 md:space-y-16">
+          <ol className="space-y-8 md:space-y-12">
             {methodSteps.map((step, index) => (
               <li
                 key={step.number}
                 data-step={index}
-                className="relative grid gap-4 md:grid-cols-2 md:gap-16"
+                className="relative grid gap-3 md:grid-cols-2 md:gap-16"
               >
                 <div
                   className={`md:text-right ${index % 2 === 1 ? "md:order-2 md:text-left" : ""}`}
                 >
                   <p
-                    className={`eyebrow mb-3 ${active >= index ? "text-synapz-impulse" : ""}`}
+                    className={`eyebrow mb-2 ${active >= index ? "text-synapz-impulse" : ""}`}
                   >
-                    {step.number} — {step.title}
+                    {step.number}
                   </p>
-                  <h3 className="font-display text-2xl md:text-3xl text-synapz-neural">
+                  <h3 className="font-display text-xl md:text-2xl text-synapz-neural">
                     {step.title}
                   </h3>
                 </div>
@@ -81,7 +83,7 @@ export function MethodSection() {
                     }`}
                     aria-hidden
                   />
-                  <p className="text-synapz-signal leading-relaxed max-w-md md:inline-block">
+                  <p className="text-synapz-signal text-sm md:text-base leading-relaxed max-w-md md:inline-block">
                     {step.description}
                   </p>
                 </div>

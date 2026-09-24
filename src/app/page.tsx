@@ -4,11 +4,7 @@ import { ServicesSection } from "@/components/sections/ServicesSection";
 import { IntegrationSection } from "@/components/sections/IntegrationSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { MethodSection } from "@/components/sections/MethodSection";
-import {
-  AboutTeaserSection,
-  DifferentialsSection,
-  ResultsSection,
-} from "@/components/sections/AboutTeaserSection";
+import { AboutTeaserSection } from "@/components/sections/AboutTeaserSection";
 import {
   FaqSection,
   ContactCtaSection,
@@ -17,6 +13,18 @@ import { homeMetadata } from "@/lib/seo";
 
 export const metadata = homeMetadata;
 
+/**
+ * Home narrative (simplified):
+ * 1. What we do (Hero)
+ * 2. Why it matters (Manifesto)
+ * 3. What we offer (Services)
+ * 4. How it connects (Integration)
+ * 5. How we work (Method)
+ * 6. Proof / portfolio (Projects)
+ * 7. Who we are (About)
+ * 8. Objections (FAQ)
+ * 9. Action (Contact)
+ */
 export default function HomePage() {
   return (
     <main id="conteudo-principal">
@@ -24,11 +32,9 @@ export default function HomePage() {
       <ManifestoSection />
       <ServicesSection />
       <IntegrationSection />
-      <ProjectsSection />
       <MethodSection />
+      <ProjectsSection />
       <AboutTeaserSection />
-      <DifferentialsSection />
-      <ResultsSection />
       <FaqSection />
       <ContactCtaSection />
     </main>
