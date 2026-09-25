@@ -82,7 +82,7 @@ function ClientMark({
       alt={client.name}
       width={160}
       height={48}
-      className="h-8 md:h-10 w-auto max-w-[140px] object-contain opacity-55 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+      className="h-9 md:h-11 w-auto max-w-[150px] object-contain opacity-60 transition duration-300 group-hover:opacity-100"
     />
   );
 }
