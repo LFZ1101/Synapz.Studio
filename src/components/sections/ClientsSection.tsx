@@ -42,7 +42,7 @@ export function ClientsSection() {
             </div>
           </ScrollReveal>
         ) : (
-          <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-px bg-synapz-neural/10 border border-synapz-neural/10">
+          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px bg-synapz-neural/10 border border-synapz-neural/10">
             {clients.map((client, index) => (
               <ScrollReveal key={client.id} variant="fade" delay={index * 50}>
                 <li className="bg-synapz-graphite">
