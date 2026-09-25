@@ -52,8 +52,8 @@ export function Header() {
             : "bg-transparent",
         )}
       >
-        <div className="container-wide flex h-16 md:h-20 items-center justify-between gap-6">
-          <Logo variant="compacta" priority className="h-10 md:h-11 w-auto" />
+        <div className="container-wide flex h-[4.5rem] md:h-24 items-center justify-between gap-6">
+          <Logo variant="compacta" priority className="h-12 md:h-14 w-auto" />
 
           <nav
             className="hidden lg:flex items-center gap-8"
