@@ -15,16 +15,11 @@ export function ClientsSection() {
     <Section tone="graphite" id="clientes" className="!py-16 md:!py-20">
       <Container>
         <ScrollReveal variant="fade">
-          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between mb-10 md:mb-12">
-            <div>
-              <p className="eyebrow text-synapz-impulse mb-3">Clientes</p>
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-synapz-neural text-balance max-w-xl">
-                Marcas com quem já conectamos.
-              </h2>
-            </div>
-            <p className="text-sm text-synapz-signal max-w-sm md:text-right">
-              Parcerias reais — exibidas com autorização.
-            </p>
+          <div className="mb-10 md:mb-12">
+            <p className="eyebrow text-synapz-impulse mb-3">Clientes</p>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-synapz-neural text-balance max-w-xl">
+              Marcas com quem já conectamos.
+            </h2>
           </div>
         </ScrollReveal>
 
