@@ -222,7 +222,7 @@
 .clients-marquee-track {
   display: flex;
   width: max-content;
-  animation: clients-marquee 70s linear infinite;
+  animation: clients-marquee 48s linear infinite;
   will-change: transform;
 }
 
