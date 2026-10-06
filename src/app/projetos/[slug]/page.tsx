@@ -99,12 +99,22 @@ export default async function ProjectCasePage({ params }: Props) {
       <Section className="pt-0">
         <Container wide>
           <div className="relative aspect-[16/9] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
-            {project.cover ? (
+            {project.video ? (
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                controls
+                playsInline
+                preload="metadata"
+                poster={project.cover || undefined}
+              >
+                <source src={project.video} type="video/mp4" />
+              </video>
+            ) : project.cover ? (
               <Image
                 src={project.cover}
                 alt={project.coverAlt}
                 fill
-                className="object-cover grayscale"
+                className="object-cover"
                 sizes="100vw"
                 priority
               />
@@ -114,6 +124,18 @@ export default async function ProjectCasePage({ params }: Props) {
               </div>
             )}
           </div>
+          {project.externalUrl ? (
+            <p className="mt-4">
+              <a
+                href={project.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-synapz-impulse hover:underline"
+              >
+                Ver projeto online →
+              </a>
+            </p>
+          ) : null}
         </Container>
       </Section>
 
@@ -204,22 +226,50 @@ export default async function ProjectCasePage({ params }: Props) {
           <Container wide>
             <h2 className="font-display text-3xl mb-8">Galeria</h2>
             <ul className="grid gap-4 md:grid-cols-2">
-              {project.gallery.map((item) => (
-                <li key={item.src} className="space-y-2">
-                  <div className="relative aspect-[16/10] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      fill
-                      className="object-cover grayscale"
-                      sizes="(max-width:768px) 100vw, 50vw"
-                    />
-                  </div>
-                  {item.caption ? (
-                    <p className="text-sm text-synapz-signal">{item.caption}</p>
-                  ) : null}
-                </li>
-              ))}
+              {project.gallery.map((item, index) => {
+                const key =
+                  item.video || item.youtube || item.src || `item-${index}`;
+                return (
+                  <li key={key} className="space-y-2">
+                    <div className="relative aspect-[16/10] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
+                      {item.video ? (
+                        <video
+                          className="absolute inset-0 h-full w-full object-cover"
+                          controls
+                          playsInline
+                          preload="metadata"
+                          poster={item.poster}
+                        >
+                          <source src={item.video} type="video/mp4" />
+                        </video>
+                      ) : item.youtube ? (
+                        <iframe
+                          src={item.youtube}
+                          title={item.alt}
+                          className="absolute inset-0 h-full w-full"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          loading="lazy"
+                        />
+                      ) : item.src ? (
+                        <Image
+                          src={item.src}
+                          alt={item.alt}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width:768px) 100vw, 50vw"
+                        />
+                      ) : null}
+                    </div>
+                    {item.caption ? (
+                      <p className="text-sm text-synapz-neural">{item.caption}</p>
+                    ) : null}
+                    {item.note ? (
+                      <p className="text-sm text-synapz-signal">{item.note}</p>
+                    ) : null}
+                  </li>
+                );
+              })}
             </ul>
           </Container>
         </Section>

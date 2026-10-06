@@ -1,7 +1,7 @@
 /**
  * Project / case study data.
+ * Sourced from authorized portfolio assets (Drive / LFZ deploy).
  * Do not invent clients, metrics, or testimonials.
- * Add real projects here when approved assets and copy are available.
  */
 
 export interface ProjectResult {
@@ -19,6 +19,16 @@ export interface ProjectTestimonial {
   company: string;
   photo?: string;
 }
+
+export type ProjectGalleryItem = {
+  src?: string;
+  alt: string;
+  caption?: string;
+  video?: string;
+  poster?: string;
+  youtube?: string;
+  note?: string;
+};
 
 export interface Project {
   slug: string;
@@ -41,19 +51,587 @@ export interface Project {
   design: string;
   development: string;
   deliverables: string[];
-  gallery: { src: string; alt: string; caption?: string }[];
+  gallery: ProjectGalleryItem[];
   beforeAfter?: { before: string; after: string; label?: string }[];
   results: ProjectResult[];
   testimonial?: ProjectTestimonial;
   nextProject?: string;
   updatedAt: string;
+  externalUrl?: string;
 }
+
+const UPDATED = "2026-10-06";
 
 /**
  * Published projects only appear in listings and sitemap.
- * Keep empty until real case studies are ready — no fictional clients.
  */
-export const projects: Project[] = [];
+export const projects: Project[] = [
+  {
+    slug: "syelle",
+    name: "Syelle Joias",
+    client: "Syelle",
+    segment: "Identidade visual",
+    year: 2025,
+    summary:
+      "Sistema de marca completo — logo, paleta, manual e aplicações.",
+    cover: "/media/projects/branding/syelle/cover.webp",
+    coverAlt: "Syelle — identidade visual",
+    services: ["Identidade visual"],
+    featured: true,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: [
+      "Logo e variações",
+      "Paleta de cores",
+      "Manual de marca",
+      "Aplicações em suportes",
+    ],
+    gallery: [
+      {
+        src: "/media/projects/branding/syelle/syelle-logo-principal.webp",
+        alt: "Syelle — logo principal",
+      },
+      {
+        src: "/media/projects/branding/syelle/syelle-paleta-cores.webp",
+        alt: "Syelle — paleta de cores",
+      },
+      {
+        src: "/media/projects/branding/syelle/syelle-manual-marca.webp",
+        alt: "Syelle — manual de marca",
+      },
+      {
+        src: "/media/projects/branding/syelle/syelle-aplicacoes-marca.webp",
+        alt: "Syelle — aplicações da marca",
+      },
+      {
+        src: "/media/projects/branding/syelle/syelle-detalhes-logo.webp",
+        alt: "Syelle — detalhes do logo",
+      },
+      {
+        src: "/media/projects/branding/syelle/syelle-processo-criativo.webp",
+        alt: "Syelle — processo criativo",
+      },
+      {
+        src: "/media/projects/branding/syelle/syelle-aplicacoes-suportes.webp",
+        alt: "Syelle — aplicações em suportes",
+      },
+      {
+        src: "/media/projects/branding/syelle/syelle-resultado-final.webp",
+        alt: "Syelle — resultado final",
+      },
+      {
+        src: "/media/projects/branding/syelle/syelle-aplicacoes-praticas.webp",
+        alt: "Syelle — aplicações práticas",
+      },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "viane-brasil",
+    name: "Viane Brasil",
+    client: "Viane Brasil",
+    segment: "Identidade visual",
+    year: 2025,
+    summary:
+      "Identidade completa para consultoria empresarial — logo kit, tipografia, paleta, mockups e social media.",
+    cover: "/media/projects/branding/viane/cover.webp",
+    coverAlt: "Viane Brasil — identidade visual",
+    services: ["Identidade visual", "Social media"],
+    featured: true,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: [
+      "Logo kit",
+      "Tipografia e paleta",
+      "Mockups",
+      "Peças de social media",
+    ],
+    gallery: [
+      { src: "/media/projects/branding/viane/1.webp", alt: "Viane Brasil — peça 1" },
+      { src: "/media/projects/branding/viane/2.webp", alt: "Viane Brasil — peça 2" },
+      { src: "/media/projects/branding/viane/3.webp", alt: "Viane Brasil — peça 3" },
+      { src: "/media/projects/branding/viane/4.webp", alt: "Viane Brasil — peça 4" },
+      {
+        youtube: "https://www.youtube.com/embed/I47O4XmVHog",
+        alt: "Viane Brasil — vídeo",
+        caption: "Apresentação da marca",
+      },
+      { src: "/media/projects/branding/viane/6.webp", alt: "Viane Brasil — peça 6" },
+      { src: "/media/projects/branding/viane/7.webp", alt: "Viane Brasil — peça 7" },
+      { src: "/media/projects/branding/viane/8.webp", alt: "Viane Brasil — peça 8" },
+      { src: "/media/projects/branding/viane/9.webp", alt: "Viane Brasil — peça 9" },
+      { src: "/media/projects/branding/viane/10.webp", alt: "Viane Brasil — peça 10" },
+      { src: "/media/projects/branding/viane/11.webp", alt: "Viane Brasil — peça 11" },
+      { src: "/media/projects/branding/viane/12.webp", alt: "Viane Brasil — peça 12" },
+      { src: "/media/projects/branding/viane/13.webp", alt: "Viane Brasil — peça 13" },
+      { src: "/media/projects/branding/viane/14.webp", alt: "Viane Brasil — peça 14" },
+      { src: "/media/projects/branding/viane/15.webp", alt: "Viane Brasil — peça 15" },
+      { src: "/media/projects/branding/viane/16.webp", alt: "Viane Brasil — peça 16" },
+      { src: "/media/projects/branding/viane/17.webp", alt: "Viane Brasil — peça 17" },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "dunamis-wear",
+    name: "Dunamis Wear",
+    client: "Dunamis Wear",
+    segment: "E-commerce",
+    year: 2025,
+    summary:
+      "E-commerce de moda premium com estética dark luxury — hero cinematográfico, catálogo limpo e jornada de compra focada em presença.",
+    cover: "/media/projects/web/dunamis/cover.webp",
+    coverAlt: "Dunamis Wear — e-commerce",
+    services: ["E-commerce", "Sites"],
+    featured: true,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: [
+      "Interface de e-commerce",
+      "Hero e vitrine",
+      "Páginas de produto",
+    ],
+    gallery: [
+      { src: "/media/projects/web/dunamis/1.webp", alt: "Dunamis Wear — tela 1" },
+      { src: "/media/projects/web/dunamis/2.webp", alt: "Dunamis Wear — tela 2" },
+      { src: "/media/projects/web/dunamis/3.webp", alt: "Dunamis Wear — tela 3" },
+      { src: "/media/projects/web/dunamis/4.webp", alt: "Dunamis Wear — tela 4" },
+      { src: "/media/projects/web/dunamis/5.webp", alt: "Dunamis Wear — tela 5" },
+      { src: "/media/projects/web/dunamis/6.webp", alt: "Dunamis Wear — tela 6" },
+    ],
+    results: [],
+    externalUrl: "https://dunamiswear.com.br/",
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "cheetos-sweetos",
+    name: "Cheetos Sweetos",
+    segment: "Manipulação digital",
+    year: 2025,
+    summary:
+      "Peça digital com narrativa visual e composição de alto impacto.",
+    cover: "/media/projects/branding/cheetos/cover.webp",
+    coverAlt: "Cheetos Sweetos — manipulação digital",
+    services: ["Manipulação digital"],
+    featured: false,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: ["Key arts digitais", "Composições de campanha"],
+    gallery: [
+      { src: "/media/projects/branding/cheetos/2.webp", alt: "Cheetos Sweetos — peça 1" },
+      { src: "/media/projects/branding/cheetos/1.webp", alt: "Cheetos Sweetos — peça 2" },
+      { src: "/media/projects/branding/cheetos/3.webp", alt: "Cheetos Sweetos — peça 3" },
+      { src: "/media/projects/branding/cheetos/4.webp", alt: "Cheetos Sweetos — peça 4" },
+      { src: "/media/projects/branding/cheetos/5.webp", alt: "Cheetos Sweetos — peça 5" },
+      { src: "/media/projects/branding/cheetos/6.webp", alt: "Cheetos Sweetos — peça 6" },
+      { src: "/media/projects/branding/cheetos/7.webp", alt: "Cheetos Sweetos — peça 7" },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "valhalla-eivor",
+    name: "Valhalla — Eivor",
+    segment: "Manipulação digital",
+    year: 2025,
+    summary:
+      "Série de key arts com clima cinematográfico e tratamento de imagem.",
+    cover: "/media/projects/digital/assassins-creed-valhalla/cover.webp",
+    coverAlt: "Valhalla Eivor — key art",
+    video: "/media/projects/digital/assassins-creed-valhalla/video-final.mp4",
+    services: ["Manipulação digital", "Vídeo e motion"],
+    featured: false,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: ["Série de key arts", "Vídeo final"],
+    gallery: [
+      { src: "/media/projects/digital/assassins-creed-valhalla/1.webp", alt: "Valhalla — arte 1" },
+      { src: "/media/projects/digital/assassins-creed-valhalla/2.webp", alt: "Valhalla — arte 2" },
+      { src: "/media/projects/digital/assassins-creed-valhalla/3.webp", alt: "Valhalla — arte 3" },
+      { src: "/media/projects/digital/assassins-creed-valhalla/4.webp", alt: "Valhalla — arte 4" },
+      { src: "/media/projects/digital/assassins-creed-valhalla/5.webp", alt: "Valhalla — arte 5" },
+      { src: "/media/projects/digital/assassins-creed-valhalla/6.webp", alt: "Valhalla — arte 6" },
+      { src: "/media/projects/digital/assassins-creed-valhalla/7.webp", alt: "Valhalla — arte 7" },
+      { src: "/media/projects/digital/assassins-creed-valhalla/8.webp", alt: "Valhalla — arte 8" },
+      { src: "/media/projects/digital/assassins-creed-valhalla/10.webp", alt: "Valhalla — arte 10" },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "granvita",
+    name: "Granvita",
+    client: "Granvita",
+    segment: "Material publicitário",
+    year: 2025,
+    summary:
+      "Outdoor e impressos com linguagem forte para o agronegócio.",
+    cover: "/media/projects/print/vulcano-material-publicitario/cover.webp",
+    coverAlt: "Granvita — material publicitário",
+    services: ["Material publicitário"],
+    featured: false,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: ["Outdoor", "Impressos"],
+    gallery: [
+      {
+        src: "/media/projects/print/vulcano-material-publicitario/4.webp",
+        alt: "Granvita — peça 1",
+      },
+      {
+        src: "/media/projects/print/vulcano-material-publicitario/1.webp",
+        alt: "Granvita — peça 2",
+      },
+      {
+        src: "/media/projects/print/vulcano-material-publicitario/2.webp",
+        alt: "Granvita — peça 3",
+      },
+      {
+        src: "/media/projects/print/vulcano-material-publicitario/3.webp",
+        alt: "Granvita — peça 4",
+      },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "trots",
+    name: "Trot's",
+    client: "Trot's",
+    segment: "Social media",
+    year: 2025,
+    summary:
+      "Campanha para posts e stories com mensagem direta e memorável.",
+    cover: "/media/projects/social/campanhas/cover.webp",
+    coverAlt: "Trot's — campanha social",
+    services: ["Social media", "Campanhas"],
+    featured: false,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: ["Posts", "Stories"],
+    gallery: [
+      { src: "/media/projects/social/campanhas/1.webp", alt: "Trot's — post 1" },
+      { src: "/media/projects/social/campanhas/2.webp", alt: "Trot's — post 2" },
+      { src: "/media/projects/social/campanhas/3.webp", alt: "Trot's — post 3" },
+      { src: "/media/projects/social/campanhas/4.webp", alt: "Trot's — post 4" },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "rose-pasteis",
+    name: "Rose Pastéis",
+    client: "Rose Pastéis",
+    segment: "Social media",
+    year: 2025,
+    summary:
+      "Social media para reforçar a identidade da Rose Pastéis, pastelaria tradicional de Apucarana desde 1995 — cores quentes, foto de produto e comunicação próxima.",
+    cover: "/media/projects/social/rose-pasteis/cover.webp",
+    coverAlt: "Rose Pastéis — social media",
+    services: ["Social media"],
+    featured: false,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: ["Feed", "Peças de produto"],
+    gallery: [
+      { src: "/media/projects/social/rose-pasteis/1.webp", alt: "Rose Pastéis — peça 1" },
+      { src: "/media/projects/social/rose-pasteis/2.webp", alt: "Rose Pastéis — peça 2" },
+      { src: "/media/projects/social/rose-pasteis/3.webp", alt: "Rose Pastéis — peça 3" },
+      { src: "/media/projects/social/rose-pasteis/4.webp", alt: "Rose Pastéis — peça 4" },
+      { src: "/media/projects/social/rose-pasteis/5.webp", alt: "Rose Pastéis — peça 5" },
+      { src: "/media/projects/social/rose-pasteis/6.webp", alt: "Rose Pastéis — peça 6" },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "audi-rs7",
+    name: "Audi RS7",
+    segment: "Landing page",
+    year: 2025,
+    summary:
+      "Conceito de página de lançamento com foco em presença e conversão.",
+    cover: "/media/projects/web/landing-pages/cover.webp",
+    coverAlt: "Audi RS7 — landing page",
+    services: ["Landing page"],
+    featured: false,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: ["Layout desktop/mobile", "Hero e seções de oferta"],
+    gallery: [
+      { src: "/media/projects/web/landing-pages/2.webp", alt: "Audi RS7 — tela 1" },
+      { src: "/media/projects/web/landing-pages/CAPA.webp", alt: "Audi RS7 — capa" },
+      { src: "/media/projects/web/landing-pages/1.webp", alt: "Audi RS7 — tela 2" },
+      { src: "/media/projects/web/landing-pages/3.webp", alt: "Audi RS7 — tela 3" },
+      { src: "/media/projects/web/landing-pages/4.webp", alt: "Audi RS7 — tela 4" },
+      { src: "/media/projects/web/landing-pages/6.webp", alt: "Audi RS7 — tela 5" },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "fc-plus",
+    name: "FC+",
+    client: "FC+",
+    segment: "Edição de vídeo",
+    year: 2025,
+    summary:
+      "Série institucional para a FC+ — estratégia de marca, identidade visual e bastidores criativos.",
+    cover: "/media/projects/video/fc-plus/cover.webp",
+    coverAlt: "FC+ — conteúdo institucional",
+    services: ["Edição de vídeo", "Conteúdo institucional"],
+    featured: true,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: [
+      "Estratégia de Marca (vídeo)",
+      "Identidade Visual (vídeo)",
+      "Bastidores Criativos (vídeo)",
+    ],
+    gallery: [
+      {
+        video: "/media/projects/video/fc-plus/estrategia-marca.mp4",
+        poster: "/media/projects/video/fc-plus/estrategia-marca.poster.webp",
+        alt: "FC+ — Estratégia de Marca",
+        caption: "FC+ — Estratégia de Marca",
+        note: "Conteúdo institucional sobre propósito, posicionamento e a importância de uma estratégia consistente para as marcas.",
+      },
+      {
+        video: "/media/projects/video/fc-plus/identidade-visual.mp4",
+        poster: "/media/projects/video/fc-plus/identidade-visual.poster.webp",
+        alt: "FC+ — Identidade Visual",
+        caption: "FC+ — Identidade Visual",
+        note: "Apresentação da identidade visual da FC+ aplicada a diferentes materiais, dispositivos e espaços urbanos.",
+      },
+      {
+        video: "/media/projects/video/fc-plus/bastidores-criativos.mp4",
+        poster: "/media/projects/video/fc-plus/bastidores-criativos.poster.webp",
+        alt: "FC+ — Bastidores Criativos",
+        caption: "FC+ — Bastidores Criativos",
+        note: "Bastidores do processo de criação digital da FC+, passando pelo Photoshop e pela produção de conteúdo para redes sociais.",
+      },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "western-co",
+    name: "Western&Co",
+    client: "Western&Co",
+    segment: "Edição de vídeo",
+    year: 2025,
+    summary:
+      "Campanhas de moda western com peças de produto e lookbook — botas, jaqueta de franjas e looks em ritmo publicitário.",
+    cover: "/media/projects/video/western-co/cover.webp",
+    coverAlt: "Western&Co — moda e publicidade",
+    services: ["Edição de vídeo", "Moda e publicidade"],
+    featured: true,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: [
+      "Botas Texanas",
+      "Jaqueta de Franjas",
+      "Look Cowgirl",
+      "Look Rosa",
+    ],
+    gallery: [
+      {
+        video: "/media/projects/video/western-co/botas-texanas.mp4",
+        poster: "/media/projects/video/western-co/botas-texanas.poster.webp",
+        alt: "Western&Co — Botas Texanas",
+        caption: "Western&Co — Botas Texanas",
+        note: "Vídeo de produto com foco nos detalhes, na textura e no acabamento de um par de botas texanas.",
+      },
+      {
+        video: "/media/projects/video/western-co/jaqueta-franjas.mp4",
+        poster: "/media/projects/video/western-co/jaqueta-franjas.poster.webp",
+        alt: "Western&Co — Jaqueta de Franjas",
+        caption: "Western&Co — Jaqueta de Franjas",
+        note: "Fashion film destacando uma jaqueta western com franjas e aplicações, combinando produto e lifestyle.",
+      },
+      {
+        video: "/media/projects/video/western-co/look-cowgirl.mp4",
+        poster: "/media/projects/video/western-co/look-cowgirl.poster.webp",
+        alt: "Western&Co — Look Cowgirl",
+        caption: "Western&Co — Look Cowgirl",
+        note: "Fashion film vertical que apresenta um look cowgirl feminino em uma ambientação rústica.",
+      },
+      {
+        video: "/media/projects/video/western-co/look-rosa.mp4",
+        poster: "/media/projects/video/western-co/look-rosa.poster.webp",
+        alt: "Western&Co — Look Rosa",
+        caption: "Western&Co — Look Rosa",
+        note: "Editorial western com modelo, cavalo e peças em rosa, explorando moda e identidade equestre.",
+      },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "edificio-sao-jose",
+    name: "Edifício São José",
+    client: "Edifício São José",
+    segment: "Edição de vídeo",
+    year: 2025,
+    summary:
+      "Apresentação audiovisual do Edifício São José — arquitetura e imobiliário com leitura cinematográfica do espaço.",
+    cover: "/media/projects/video/edificio-sao-jose/cover.webp",
+    coverAlt: "Edifício São José — vídeo imobiliário",
+    services: ["Edição de vídeo", "Arquitetura e imobiliário"],
+    featured: false,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: ["Vídeo de apresentação"],
+    gallery: [
+      {
+        video: "/media/projects/video/edificio-sao-jose/apresentacao.mp4",
+        poster: "/media/projects/video/edificio-sao-jose/apresentacao.poster.webp",
+        alt: "Edifício São José — Apresentação",
+        caption: "Edifício São José — Apresentação",
+        note: "Vídeo imobiliário do Edifício São José, valorizando o empreendimento e sua presença na paisagem urbana.",
+      },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "my-eyes",
+    name: "My Eyes",
+    segment: "Motion design",
+    year: 2025,
+    summary:
+      "Motion design e cultura pop — poster design animado com timing preciso e presença visual forte.",
+    cover: "/media/projects/video/my-eyes/cover.webp",
+    coverAlt: "My Eyes — motion design",
+    services: ["Motion design"],
+    featured: false,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: ["Poster design animado"],
+    gallery: [
+      {
+        video: "/media/projects/video/my-eyes/poster-design.mp4",
+        poster: "/media/projects/video/my-eyes/poster-design.poster.webp",
+        alt: "My Eyes — Poster Design",
+        caption: "My Eyes — Poster Design",
+        note: "Processo criativo de um pôster inspirado em “MY EYES”, acompanhando a construção no Photoshop até o resultado final.",
+      },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+  {
+    slug: "conteudo-autoral",
+    name: "Conteúdo autoral",
+    segment: "Edição de vídeo",
+    year: 2025,
+    summary:
+      "Conteúdo autoral — Momentos 2025, com edição linear, ritmo e narrativa pessoal.",
+    cover: "/media/projects/video/conteudo-autoral/cover.webp",
+    coverAlt: "Conteúdo autoral — Momentos 2025",
+    services: ["Edição de vídeo", "Vlog e lifestyle"],
+    featured: false,
+    published: true,
+    context: "",
+    problem: "",
+    objective: "",
+    strategy: "",
+    creativeDirection: "",
+    design: "",
+    development: "",
+    deliverables: ["Vlog Momentos 2025"],
+    gallery: [
+      {
+        video: "/media/projects/video/conteudo-autoral/momentos-2025.mp4",
+        poster: "/media/projects/video/conteudo-autoral/momentos-2025.poster.webp",
+        alt: "Momentos 2025 — Vlog",
+        caption: "Momentos 2025 — Vlog",
+        note: "Recorte de momentos de 2025 entre viagens, música, estrada e encontros, reunidos em uma edição curta e atmosférica.",
+      },
+    ],
+    results: [],
+    updatedAt: UPDATED,
+  },
+];
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug && p.published);

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container, Section, Eyebrow } from "@/components/ui/Layout";
@@ -81,7 +82,17 @@ export default function ProjetosPage() {
                     href={`/projetos/${project.slug}`}
                     className="group grid gap-4 py-10 md:grid-cols-12 md:items-center"
                   >
-                    <div className="md:col-span-4 aspect-[16/10] bg-synapz-black border border-synapz-neural/10" />
+                    <div className="md:col-span-4 relative aspect-[16/10] bg-synapz-black border border-synapz-neural/10 overflow-hidden">
+                      {project.cover ? (
+                        <Image
+                          src={project.cover}
+                          alt={project.coverAlt}
+                          fill
+                          className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                          sizes="(max-width:768px) 100vw, 33vw"
+                        />
+                      ) : null}
+                    </div>
                     <div className="md:col-span-5 space-y-2">
                       <p className="eyebrow">
                         {project.segment} · {project.year}

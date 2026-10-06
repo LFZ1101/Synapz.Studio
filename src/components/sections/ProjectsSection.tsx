@@ -1,11 +1,14 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container, Section } from "@/components/ui/Layout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { getPublishedProjects } from "@/content/projects";
-import Link from "next/link";
+import { getFeaturedProjects, getPublishedProjects } from "@/content/projects";
 
 export function ProjectsSection() {
-  const projects = getPublishedProjects();
+  const featured = getFeaturedProjects();
+  const projects =
+    featured.length > 0 ? featured : getPublishedProjects().slice(0, 5);
 
   return (
     <Section tone="graphite" id="projetos">
@@ -54,7 +57,18 @@ export function ProjectsSection() {
                     href={`/projetos/${project.slug}`}
                     className="group grid gap-4 py-8 md:grid-cols-12 md:items-center"
                   >
-                    <div className="md:col-span-5">
+                    <div className="md:col-span-3 relative aspect-[16/10] bg-synapz-black border border-synapz-neural/10 overflow-hidden">
+                      {project.cover ? (
+                        <Image
+                          src={project.cover}
+                          alt={project.coverAlt}
+                          fill
+                          className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                          sizes="(max-width:768px) 100vw, 25vw"
+                        />
+                      ) : null}
+                    </div>
+                    <div className="md:col-span-4">
                       <p className="eyebrow mb-2">
                         {project.segment} · {project.year}
                       </p>
@@ -62,7 +76,7 @@ export function ProjectsSection() {
                         {project.name}
                       </h3>
                     </div>
-                    <p className="md:col-span-5 text-synapz-signal text-sm md:text-base">
+                    <p className="md:col-span-3 text-synapz-signal text-sm md:text-base">
                       {project.summary}
                     </p>
                     <span className="md:col-span-2 md:text-right text-sm text-synapz-impulse">
