@@ -205,6 +205,49 @@
   }
 }
 
+/* Clients logo conveyor — slow enough to read every mark */
+@keyframes clients-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.clients-marquee {
+  overflow: hidden;
+}
+
+.clients-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: clients-marquee 70s linear infinite;
+  will-change: transform;
+}
+
+.clients-marquee:hover .clients-marquee-track {
+  animation-play-state: paused;
+}
+
+.clients-marquee-group {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0.75rem 0;
+}
+
+.clients-marquee-item {
+  flex: 0 0 auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clients-marquee-track {
+    animation: none;
+  }
+}
+
 /* Scroll reveal system — transmission, not agitation */
 .reveal {
   opacity: 0;

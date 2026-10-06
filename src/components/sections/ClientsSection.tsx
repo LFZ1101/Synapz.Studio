@@ -1,15 +1,15 @@
 import Image from "next/image";
 import { Container, Section } from "@/components/ui/Layout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { getPublishedClients } from "@/content/clients";
+import { getPublishedClients, type ClientLogo } from "@/content/clients";
 
 /**
- * Home strip of client marks.
- * Renders a refined empty state until authorized logos are added
- * in src/content/clients.ts + public/media/clients/.
+ * Home strip of client marks as a slow continuous marquee ("esteira").
+ * Pauses on hover; falls back to a static wrap when reduced-motion is on.
  */
 export function ClientsSection() {
   const clients = getPublishedClients();
+  const track = [...clients, ...clients];
 
   return (
     <Section tone="graphite" id="clientes" className="!py-16 md:!py-20">
@@ -22,8 +22,10 @@ export function ClientsSection() {
             </h2>
           </div>
         </ScrollReveal>
+      </Container>
 
-        {clients.length === 0 ? (
+      {clients.length === 0 ? (
+        <Container>
           <ScrollReveal variant="up">
             <div className="border border-dashed border-synapz-neural/15 px-6 py-10 md:py-12">
               <p className="eyebrow text-synapz-impulse mb-3">Em preparação</p>
@@ -36,48 +38,95 @@ export function ClientsSection() {
               </p>
             </div>
           </ScrollReveal>
-        ) : (
-          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-px bg-synapz-neural/10 border border-synapz-neural/10">
-            {clients.map((client, index) => (
-              <ScrollReveal key={client.id} variant="fade" delay={index * 50}>
-                <li className="bg-synapz-graphite">
-                  {client.url ? (
-                    <a
-                      href={client.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex h-28 md:h-32 items-center justify-center px-6 transition-colors hover:bg-synapz-black focus-visible:outline-offset-[-4px]"
-                      aria-label={client.name}
-                    >
-                      <ClientMark client={client} />
-                    </a>
-                  ) : (
-                    <div className="group flex h-28 md:h-32 items-center justify-center px-6">
-                      <ClientMark client={client} />
-                    </div>
-                  )}
+        </Container>
+      ) : (
+        <ScrollReveal variant="fade">
+          <div
+            className="clients-marquee relative border-y border-synapz-neural/10 bg-synapz-graphite"
+            aria-label="Logos de clientes"
+          >
+            <div
+              className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 md:w-24 bg-gradient-to-r from-synapz-graphite to-transparent"
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 md:w-24 bg-gradient-to-l from-synapz-graphite to-transparent"
+              aria-hidden
+            />
+
+            <p className="sr-only">
+              {clients.map((client) => client.name).join(", ")}.
+            </p>
+
+            {/* Animated track — hidden when user prefers reduced motion */}
+            <div className="clients-marquee-track motion-reduce:hidden" aria-hidden>
+              <ul className="clients-marquee-group">
+                {track.map((client, index) => (
+                  <li key={`${client.id}-${index}`} className="clients-marquee-item">
+                    <ClientMark client={client} decorative />
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Static fallback for reduced motion */}
+            <ul className="hidden motion-reduce:flex flex-wrap items-center justify-center gap-x-10 gap-y-8 px-6 py-10 md:px-10">
+              {clients.map((client) => (
+                <li key={client.id} className="clients-marquee-item">
+                  <ClientMark client={client} />
                 </li>
-              </ScrollReveal>
-            ))}
-          </ul>
-        )}
-      </Container>
+              ))}
+            </ul>
+          </div>
+        </ScrollReveal>
+      )}
     </Section>
   );
 }
 
 function ClientMark({
   client,
+  decorative = false,
 }: {
-  client: { name: string; logo: string };
+  client: ClientLogo;
+  decorative?: boolean;
 }) {
-  return (
+  const mark = (
     <Image
       src={client.logo}
-      alt={client.name}
-      width={160}
-      height={48}
-      className="h-9 md:h-11 w-auto max-w-[150px] object-contain opacity-60 transition duration-300 group-hover:opacity-100"
+      alt={decorative ? "" : client.name}
+      width={180}
+      height={64}
+      className="h-10 md:h-12 w-auto max-w-[160px] md:max-w-[180px] object-contain opacity-55 transition duration-300 group-hover:opacity-100"
+      draggable={false}
     />
+  );
+
+  if (decorative) {
+    return (
+      <div className="group flex h-24 md:h-28 items-center justify-center px-6 md:px-8" aria-hidden>
+        {mark}
+      </div>
+    );
+  }
+
+  if (client.url) {
+    return (
+      <a
+        href={client.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex h-24 md:h-28 items-center justify-center px-6 md:px-8 focus-visible:outline-offset-[-4px]"
+        aria-label={client.name}
+      >
+        {mark}
+      </a>
+    );
+  }
+
+  return (
+    <div className="group flex h-24 md:h-28 items-center justify-center px-6 md:px-8">
+      {mark}
+    </div>
   );
 }

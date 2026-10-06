@@ -48,6 +48,60 @@ export const clients: ClientLogo[] = [
     logo: "/media/clients/viane-brasil.png",
     published: true,
   },
+  {
+    id: "gabriel-lebre",
+    name: "Gabriel Lebre",
+    logo: "/media/clients/gabriel-lebre.png",
+    published: true,
+  },
+  {
+    id: "aegis-tech",
+    name: "Aegis Tech",
+    logo: "/media/clients/aegis-tech.png",
+    published: true,
+  },
+  {
+    id: "perez-coelho",
+    name: "Perez Coelho Negócios Imobiliários",
+    logo: "/media/clients/perez-coelho.png",
+    published: true,
+  },
+  {
+    id: "djeduh",
+    name: "DJEDUH",
+    logo: "/media/clients/djeduh.png",
+    published: true,
+  },
+  {
+    id: "kings-ranch",
+    name: "Kings Ranch",
+    logo: "/media/clients/kings-ranch.png",
+    published: true,
+  },
+  {
+    id: "open-tennis",
+    name: "Open Tennis e Beach Tennis Club",
+    logo: "/media/clients/open-tennis.png",
+    published: true,
+  },
+  {
+    id: "piperhub",
+    name: "PiperHub",
+    logo: "/media/clients/piperhub.png",
+    published: true,
+  },
+  {
+    id: "torqx",
+    name: "Torqx Acessórios",
+    logo: "/media/clients/torqx.png",
+    published: true,
+  },
+  {
+    id: "mafia-do-churrasco",
+    name: "Máfia do Churrasco",
+    logo: "/media/clients/mafia-do-churrasco.png",
+    published: true,
+  },
 ];
 
 export function getPublishedClients(): ClientLogo[] {
