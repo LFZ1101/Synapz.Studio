@@ -98,10 +98,10 @@ export default async function ProjectCasePage({ params }: Props) {
 
       <Section className="pt-0">
         <Container wide>
-          <div className="relative aspect-[16/9] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
-            {project.video ? (
+          {project.video ? (
+            <div className="flex items-center justify-center bg-synapz-black border border-synapz-neural/10 overflow-hidden min-h-[220px]">
               <video
-                className="absolute inset-0 h-full w-full object-cover"
+                className="max-w-full w-auto h-auto max-h-[70vh] md:max-h-[75vh]"
                 controls
                 playsInline
                 preload="metadata"
@@ -109,21 +109,25 @@ export default async function ProjectCasePage({ params }: Props) {
               >
                 <source src={project.video} type="video/mp4" />
               </video>
-            ) : project.cover ? (
-              <Image
-                src={project.cover}
-                alt={project.coverAlt}
-                fill
-                className="object-cover"
-                sizes="100vw"
-                priority
-              />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center text-synapz-signal">
-                Mídia do projeto indisponível
-              </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="relative aspect-[16/9] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
+              {project.cover ? (
+                <Image
+                  src={project.cover}
+                  alt={project.coverAlt}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                  priority
+                />
+              ) : (
+                <div className="absolute inset-0 flex items-center justify-center text-synapz-signal">
+                  Mídia do projeto indisponível
+                </div>
+              )}
+            </div>
+          )}
           {project.externalUrl ? (
             <p className="mt-4">
               <a
@@ -225,16 +229,31 @@ export default async function ProjectCasePage({ params }: Props) {
         <Section>
           <Container wide>
             <h2 className="font-display text-3xl mb-8">Galeria</h2>
-            <ul className="grid gap-4 md:grid-cols-2">
+            <ul
+              className={
+                project.gallery.some((item) => item.video || item.youtube)
+                  ? "grid gap-6 md:grid-cols-2"
+                  : "grid gap-4 md:grid-cols-2"
+              }
+            >
               {project.gallery.map((item, index) => {
                 const key =
                   item.video || item.youtube || item.src || `item-${index}`;
+                const isMedia = Boolean(item.video || item.youtube);
+
                 return (
-                  <li key={key} className="space-y-2">
-                    <div className="relative aspect-[16/10] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
-                      {item.video ? (
+                  <li
+                    key={key}
+                    className={
+                      isMedia
+                        ? "space-y-2 md:col-span-2 lg:col-span-1"
+                        : "space-y-2"
+                    }
+                  >
+                    {item.video ? (
+                      <div className="flex items-center justify-center bg-synapz-black border border-synapz-neural/10 overflow-hidden min-h-[200px]">
                         <video
-                          className="absolute inset-0 h-full w-full object-cover"
+                          className="max-w-full w-auto h-auto max-h-[65vh] md:max-h-[70vh]"
                           controls
                           playsInline
                           preload="metadata"
@@ -242,7 +261,9 @@ export default async function ProjectCasePage({ params }: Props) {
                         >
                           <source src={item.video} type="video/mp4" />
                         </video>
-                      ) : item.youtube ? (
+                      </div>
+                    ) : item.youtube ? (
+                      <div className="relative aspect-video bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
                         <iframe
                           src={item.youtube}
                           title={item.alt}
@@ -251,7 +272,9 @@ export default async function ProjectCasePage({ params }: Props) {
                           allowFullScreen
                           loading="lazy"
                         />
-                      ) : item.src ? (
+                      </div>
+                    ) : item.src ? (
+                      <div className="relative aspect-[16/10] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
                         <Image
                           src={item.src}
                           alt={item.alt}
@@ -259,8 +282,8 @@ export default async function ProjectCasePage({ params }: Props) {
                           className="object-cover"
                           sizes="(max-width:768px) 100vw, 50vw"
                         />
-                      ) : null}
-                    </div>
+                      </div>
+                    ) : null}
                     {item.caption ? (
                       <p className="text-sm text-synapz-neural">{item.caption}</p>
                     ) : null}
