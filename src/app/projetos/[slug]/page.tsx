@@ -11,18 +11,13 @@ import {
   creativeWorkSchema,
   webPageSchema,
 } from "@/lib/schema";
-import {
-  getNextProject,
-  getProject,
-  getPublishedProjects,
-} from "@/content/projects";
+import { getNextProject, getProject } from "@/content/projects";
 import { CTA } from "@/content/site";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return getPublishedProjects().map((p) => ({ slug: p.slug }));
-}
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;

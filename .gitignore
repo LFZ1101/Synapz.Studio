@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# Admin uploads (keep folder via .gitkeep)
+/public/media/projects/uploads/**
+!/public/media/projects/uploads/.gitkeep
+
 # debug
 npm-debug.log*
 yarn-debug.log*

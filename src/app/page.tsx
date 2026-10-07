@@ -14,6 +14,9 @@ import { homeMetadata } from "@/lib/seo";
 
 export const metadata = homeMetadata;
 
+/** Allow admin edits (projects) to refresh the home listing after revalidatePath */
+export const dynamic = "force-dynamic";
+
 /**
  * Home journey:
  * Who we are → Why SYNAPZ → What we do → Clients → How it connects →

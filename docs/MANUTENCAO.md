@@ -5,8 +5,17 @@
 - Dados gerais, CTAs e contato: `src/content/site.ts`
 - Serviços e núcleos: `src/content/services.ts`
 - Método, FAQ e opções do formulário: `src/content/studio.ts`
-- Projetos: `src/content/projects.ts`
+- Projetos (editáveis no painel): `data/projects.json` + tipos em `src/content/project-types.ts`
 - Clientes: `src/content/clients.ts`
+
+## Painel admin (só para você)
+
+- URL: `/admin` — **não** aparece no menu público; bloqueada em `robots.txt`
+- Senha: variável de ambiente `ADMIN_SECRET` (mín. 8 caracteres) em `.env.local` ou no servidor
+- Visitantes do site **não** fazem login; só quem tem a senha entra no painel
+- Funções: listar, criar, editar, remover projetos; upload de capas, imagens e vídeos
+- Uploads vão para `public/media/projects/uploads/`
+- Em hospedagem serverless (ex.: Vercel) o disco é efêmero — use VPS/`next start` ou adapte o storage depois
 
 ## Mídias
 

@@ -3,6 +3,8 @@ import { SITE } from "@/content/site";
 import { services } from "@/content/services";
 import { getPublishedProjects } from "@/content/projects";
 
+export const dynamic = "force-dynamic";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE.url.replace(/\/$/, "");
   const now = new Date();

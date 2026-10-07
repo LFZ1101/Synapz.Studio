@@ -8,6 +8,8 @@ import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { getPublishedProjects } from "@/content/projects";
 import { CTA } from "@/content/site";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = buildMetadata({
   title: "Projetos e Estudos de Caso — SYNAPZ STUDIO",
   description:
