@@ -1,16 +1,25 @@
-# Vídeos — SYNAPZ STUDIO
+# Vídeos institucionais
 
-## Abertura cinematográfica
-- `intro-synapz-desktop.mp4` — 1920×1080 (~5s) — desktop / landscape
-- `intro-synapz-mobile.mp4` — 1080×1920 (~5.7s) — mobile / portrait
+## Studio — bloco “O que é a SYNAPZ”
 
-### Comportamento
-- primeira visita: toca o vídeo adequado ao viewport
-- sem som (`muted` + `playsInline`)
-- botão “Pular introdução”
-- visitas seguintes: flash curto da marca
-- `prefers-reduced-motion`: pula o vídeo
+Coloque o vídeo institucional neste caminho (nome exato):
 
-## Convenções
-- Prefira nomes ASCII sem espaços
-- Cases: `projeto-[slug]-preview.mp4`
+```
+public/media/videos/studio-synapz.mp4
+```
+
+Opcional (capa antes de dar play):
+
+```
+public/media/videos/studio-synapz.poster.jpg
+```
+
+### No GitHub
+
+1. Abra a pasta:
+   https://github.com/LFZ1101/Synapz.Studio/tree/main/public/media/videos
+2. Clique em **Add file → Upload files**
+3. Envie o arquivo como `studio-synapz.mp4`
+4. Commit na branch `main`
+
+Depois do upload, o vídeo aparece automaticamente no retângulo da página `/studio`.

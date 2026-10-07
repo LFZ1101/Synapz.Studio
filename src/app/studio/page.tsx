@@ -77,17 +77,18 @@ export default function StudioPage() {
               </p>
             </div>
             <div className="lg:col-span-6">
-              <div className="aspect-[4/5] bg-synapz-black border border-synapz-neural/10 relative">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_60%_35%,rgba(183,255,0,0.18),transparent_50%)]" />
-                <div className="absolute inset-6 flex flex-col justify-end">
-                  <p className="eyebrow text-synapz-impulse mb-3">
-                    Visual institucional
-                  </p>
-                  <p className="text-synapz-signal text-sm">
-                    Placeholder para fotografia ou vídeo em preto e branco com
-                    intervenção gráfica verde — conforme manual de identidade.
-                  </p>
-                </div>
+              <div className="aspect-[4/5] bg-synapz-black border border-synapz-neural/10 relative overflow-hidden flex items-center justify-center">
+                <video
+                  className="max-h-full max-w-full w-full h-full object-contain bg-synapz-black"
+                  controls
+                  playsInline
+                  preload="metadata"
+                >
+                  <source
+                    src="/media/videos/studio-synapz.mp4"
+                    type="video/mp4"
+                  />
+                </video>
               </div>
             </div>
           </div>
