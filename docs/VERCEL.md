@@ -4,34 +4,48 @@
 
 - Conta/team: `synapz-studio` (Hobby)
 - Projeto: `synapz-studio-site`
-- URLs públicas atuais:
+- URLs públicas:
+  - https://synapz-studio.com.br *(domínio Hostinger apontado)*
   - https://synapz-studio-site.vercel.app
   - https://workspace-orcin-nine-46.vercel.app
 - Admin: `/admin` · senha `ADMIN_SECRET` = `Studio200573`
 
-## Domínio `synapz.studio`
+## Domínio `synapz-studio.com.br`
 
-O DNS já aponta para a Vercel, mas o domínio está registrado em **outra conta Vercel**
-(não na team `synapz-studio`). Por isso ainda não dá para anexar aqui.
+Domínio ativo na Hostinger (conta correta), anexado ao projeto Vercel
+`synapz-studio-site`.
 
-Para apontar o domínio para este projeto:
+### DNS na Hostinger (Registros DNS)
 
-1. Entre na conta Vercel que hoje controla `synapz.studio`
-2. Remova o domínio do projeto antigo **ou** transfira o domínio para a team `SYNAPZ-STUDIO`
-3. Em `synapz-studio-site` → Settings → Domains → adicione:
-   - `synapz.studio`
-   - `www.synapz.studio`
+| Tipo | Nome | Valor | TTL |
+| --- | --- | --- | --- |
+| A | `@` | `216.198.79.1` | 14400 |
+| A | `@` | `64.29.17.1` | 14400 |
+| CNAME | `www` | `7ea7bf104c85a4d7.vercel-dns-017.com` | 300 |
 
-Enquanto isso o site já está no ar no `*.vercel.app`.
+Os dois registros **A** do apex já estão publicados e a Vercel marca o domínio
+como `configured-correctly`. O HTTPS pode levar alguns minutos para emitir o
+certificado SSL após a propagação.
+
+Para o `www`, adicione o CNAME acima no hPanel → Domínios →
+`synapz-studio.com.br` → DNS / Nameservers → Registros DNS.
+
+### Verificação
+
+```bash
+dig +short A synapz-studio.com.br
+npx vercel domains verify synapz-studio.com.br --scope synapz-studio
+curl -I http://synapz-studio.com.br
+```
 
 ## Variáveis de ambiente
 
-Já configuradas em Production/Preview:
+Já configuradas em Production:
 
 | Nome | Valor |
 | --- | --- |
 | `ADMIN_SECRET` | `Studio200573` |
-| `NEXT_PUBLIC_SITE_URL` | `https://synapz.studio` |
+| `NEXT_PUBLIC_SITE_URL` | `https://synapz-studio.com.br` |
 
 ## Redeploy
 
