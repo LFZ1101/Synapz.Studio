@@ -119,10 +119,10 @@ export const projectTypes = [
 
 export const investmentRanges = [
   "A definir juntos",
-  "Até R$ 5 mil",
-  "R$ 5 mil – R$ 15 mil",
-  "R$ 15 mil – R$ 30 mil",
-  "Acima de R$ 30 mil",
+  "Até R$ 2 mil",
+  "R$ 2 mil – R$ 5 mil",
+  "R$ 5 mil – R$ 12 mil",
+  "Acima de R$ 12 mil",
 ] as const;
 
 export const timelineOptions = [
