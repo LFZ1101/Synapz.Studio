@@ -34,10 +34,32 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [serverMessage, setServerMessage] = useState("");
 
+  const studioWhatsapp = SITE.contact.whatsapp || "5543999541462";
+
   const wa = whatsappUrl(
-    SITE.contact.whatsapp,
+    studioWhatsapp,
     "Olá SYNAPZ, gostaria de conversar sobre um projeto.",
   );
+
+  function buildWhatsappMessage() {
+    const lines = [
+      "Olá SYNAPZ! Vim pelo formulário do site.",
+      "",
+      `Nome: ${values.name.trim()}`,
+      values.company.trim() ? `Empresa: ${values.company.trim()}` : "",
+      `WhatsApp: ${values.whatsapp.trim()}`,
+      `E-mail: ${values.email.trim()}`,
+      `Tipo de projeto: ${values.projectType}`,
+      values.investment ? `Faixa de investimento: ${values.investment}` : "",
+      values.timeline ? `Prazo: ${values.timeline}` : "",
+      values.objective.trim() ? `Objetivo: ${values.objective.trim()}` : "",
+      "",
+      "Mensagem:",
+      values.message.trim(),
+    ].filter((line) => line !== "");
+
+    return lines.join("\n");
+  }
 
   function validate() {
     const next: FieldErrors = {};
@@ -54,53 +76,22 @@ export function ContactForm() {
     return Object.keys(next).length === 0;
   }
 
-  async function onSubmit(e: FormEvent) {
+  function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!validate()) return;
 
-    setStatus("submitting");
-    setServerMessage("");
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      });
-      const data = (await res.json()) as {
-        ok: boolean;
-        message?: string;
-        code?: string;
-      };
-
-      if (res.status === 503 || data.code === "UNCONFIGURED") {
-        setStatus("unavailable");
-        setServerMessage(
-          data.message ??
-            "O formulário ainda não está conectado a um canal de envio. Use o WhatsApp ou o e-mail.",
-        );
-        return;
-      }
-
-      if (!res.ok || !data.ok) {
-        setStatus("error");
-        setServerMessage(
-          data.message ?? "Não foi possível enviar. Tente novamente.",
-        );
-        return;
-      }
-
-      setStatus("success");
-      setServerMessage(
-        data.message ?? "Mensagem enviada. Retornaremos em breve.",
-      );
-      setValues(initial);
-    } catch {
+    const destination = whatsappUrl(studioWhatsapp, buildWhatsappMessage());
+    if (!destination) {
       setStatus("error");
       setServerMessage(
-        "Falha de conexão. Seus dados foram preservados — tente novamente.",
+        "Não foi possível abrir o WhatsApp. Tente novamente em instantes.",
       );
+      return;
     }
+
+    setStatus("success");
+    setServerMessage("Abrindo o WhatsApp com sua mensagem...");
+    window.location.href = destination;
   }
 
   const field = (
@@ -350,9 +341,9 @@ export function ContactForm() {
             type="submit"
             variant="impulse"
             size="lg"
-            disabled={status === "submitting"}
+            disabled={status === "success"}
           >
-            {status === "submitting" ? "Enviando..." : "Iniciar conversa"}
+            {status === "success" ? "Abrindo WhatsApp..." : "Iniciar conversa"}
           </Button>
           {wa ? (
             <Button
@@ -362,7 +353,7 @@ export function ContactForm() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Conversar pelo WhatsApp
+              Abrir WhatsApp direto
             </Button>
           ) : null}
         </div>

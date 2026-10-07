@@ -6,7 +6,8 @@ import Link from "next/link";
 
 export function Footer() {
   const year = formatYear();
-  const hasWhatsapp = Boolean(SITE.contact.whatsapp);
+  const whatsappNumber = SITE.contact.whatsapp || "5543999541462";
+  const hasWhatsapp = Boolean(whatsappNumber);
   const hasInstagram = Boolean(SITE.social.instagram);
   const hasLinkedin = Boolean(SITE.social.linkedin);
 
@@ -100,7 +101,7 @@ export function Footer() {
               {hasWhatsapp ? (
                 <li>
                   <a
-                    href={`https://wa.me/${SITE.contact.whatsapp.replace(/\D/g, "")}`}
+                    href={`https://wa.me/${whatsappNumber.replace(/\D/g, "")}`}
                     className="hover:text-synapz-neural"
                     target="_blank"
                     rel="noopener noreferrer"

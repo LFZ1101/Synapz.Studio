@@ -44,8 +44,8 @@ export const SITE = {
   contact: {
     /** Replace with official channels before publish */
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "",
-    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "",
-    whatsappDisplay: "",
+    whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "5543999541462",
+    whatsappDisplay: "+55 43 99954-1462",
     phone: "",
     address: "",
     city: "",

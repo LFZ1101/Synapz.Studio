@@ -16,7 +16,7 @@ export const metadata: Metadata = buildMetadata({
 
 export default function ContatoPage() {
   const wa = whatsappUrl(
-    SITE.contact.whatsapp,
+    SITE.contact.whatsapp || "5543999541462",
     "Olá SYNAPZ, gostaria de conversar sobre um projeto.",
   );
 
