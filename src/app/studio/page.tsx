@@ -114,54 +114,65 @@ export default function StudioPage() {
             }
           />
 
-          <div className="mt-12 grid gap-8 lg:grid-cols-12 border border-synapz-neural/10 p-6 md:p-10">
+          <div className="mt-12 grid gap-8 lg:grid-cols-12 surface-panel p-6 md:p-10">
             <div className="lg:col-span-4">
               <div className="relative aspect-[4/5] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
                 <Image
                   src={SITE.founder.photo}
-                  alt={SITE.founder.name}
+                  alt={`${SITE.founder.name} — ${SITE.founder.role}`}
                   fill
                   className="object-cover object-[center_18%]"
                   sizes="(max-width:1024px) 100vw, 30vw"
                 />
               </div>
             </div>
-            <div className="lg:col-span-8 grid gap-6 sm:grid-cols-2">
-              <div>
-                <p className="eyebrow mb-2 text-synapz-impulse">Nome</p>
-                <p>{SITE.founder.name}</p>
+            <div className="lg:col-span-8 flex flex-col justify-center gap-8">
+              <div className="grid gap-6 sm:grid-cols-2">
+                <div>
+                  <p className="eyebrow mb-2 text-synapz-impulse">Nome</p>
+                  <p className="font-display text-xl">{SITE.founder.name}</p>
+                </div>
+                <div>
+                  <p className="eyebrow mb-2 text-synapz-impulse">Atuação</p>
+                  <p className="text-synapz-signal">{SITE.founder.role}</p>
+                </div>
+                {SITE.founder.bio ? (
+                  <div className="sm:col-span-2">
+                    <p className="eyebrow mb-2 text-synapz-impulse">Biografia</p>
+                    <p className="text-synapz-signal text-sm leading-relaxed">
+                      {SITE.founder.bio}
+                    </p>
+                  </div>
+                ) : null}
+                {SITE.founder.education ? (
+                  <div>
+                    <p className="eyebrow mb-2 text-synapz-impulse">Formação</p>
+                    <p className="text-synapz-signal text-sm">
+                      {SITE.founder.education}
+                    </p>
+                  </div>
+                ) : null}
+                {SITE.founder.experience ? (
+                  <div>
+                    <p className="eyebrow mb-2 text-synapz-impulse">Experiência</p>
+                    <p className="text-synapz-signal text-sm">
+                      {SITE.founder.experience}
+                    </p>
+                  </div>
+                ) : null}
+                {SITE.founder.location ? (
+                  <div>
+                    <p className="eyebrow mb-2 text-synapz-impulse">Localização</p>
+                    <p className="text-synapz-signal text-sm">
+                      {SITE.founder.location}
+                    </p>
+                  </div>
+                ) : null}
               </div>
               <div>
-                <p className="eyebrow mb-2 text-synapz-impulse">Função</p>
-                <p>{SITE.founder.role}</p>
-              </div>
-              <div>
-                <p className="eyebrow mb-2 text-synapz-impulse">Biografia</p>
-                <p className="text-synapz-signal text-sm">
-                  {SITE.founder.bio ||
-                    "Campo editável — biografia oficial a ser publicada."}
-                </p>
-              </div>
-              <div>
-                <p className="eyebrow mb-2 text-synapz-impulse">Formação</p>
-                <p className="text-synapz-signal text-sm">
-                  {SITE.founder.education ||
-                    "Campo editável — formação a ser publicada."}
-                </p>
-              </div>
-              <div>
-                <p className="eyebrow mb-2 text-synapz-impulse">Experiência</p>
-                <p className="text-synapz-signal text-sm">
-                  {SITE.founder.experience ||
-                    "Campo editável — experiência a ser publicada."}
-                </p>
-              </div>
-              <div>
-                <p className="eyebrow mb-2 text-synapz-impulse">Localização</p>
-                <p className="text-synapz-signal text-sm">
-                  {SITE.founder.location ||
-                    "Campo editável — localização a ser publicada."}
-                </p>
+                <Button href={CTA.primary.href} variant="impulse">
+                  {CTA.primary.label}
+                </Button>
               </div>
             </div>
           </div>

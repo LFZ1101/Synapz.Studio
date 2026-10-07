@@ -16,13 +16,13 @@ export function AboutTeaserSection() {
             </ScrollReveal>
             <ScrollReveal variant="mask" delay={70}>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-synapz-black text-balance max-w-xl">
-                Estúdio digital com visão integrada.
+                Um estúdio para manter tudo alinhado.
               </h2>
             </ScrollReveal>
             <ScrollReveal variant="up" delay={140}>
               <p className="max-w-lg text-synapz-black/70 leading-relaxed text-pretty">
-                Estratégia, criatividade, marketing e tecnologia no mesmo time —
-                para cada entrega fazer parte de uma experiência maior.
+                Estratégia, criação e execução no mesmo processo — para mensagem,
+                conteúdo, interface e tecnologia avançarem juntos.
               </p>
             </ScrollReveal>
             <ScrollReveal variant="fade" delay={200}>

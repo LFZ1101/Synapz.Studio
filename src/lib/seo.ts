@@ -60,8 +60,8 @@ export function buildMetadata({
 }
 
 export const homeMetadata = buildMetadata({
-  title: "SYNAPZ STUDIO — Estratégia, Marketing, Design e Tecnologia",
+  title: "SYNAPZ STUDIO — Estúdio de marca, web e campanhas",
   description:
-    "A SYNAPZ STUDIO conecta estratégia, criatividade, marketing, design e tecnologia para criar marcas, campanhas, sites e sistemas que movimentam negócios.",
+    "Estúdio digital que une estratégia, design e tecnologia para marcas, conteúdos, campanhas, sites e sistemas — com uma única direção.",
   path: "/",
 });

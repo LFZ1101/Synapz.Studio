@@ -41,11 +41,11 @@ export default function ProjetosPage() {
             Projetos
           </Eyebrow>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl max-w-4xl text-balance">
-            Conexões que se tornaram experiências.
+            Trabalhos reais, com entrega visível.
           </h1>
           <p className="mt-6 max-w-2xl text-base md:text-lg text-synapz-signal leading-relaxed text-pretty">
-            Identidade, social, web e vídeo — escolha um projeto e explore a
-            entrega completa.
+            Identidade, social, web e vídeo — filtre por tipo e abra o case para
+            ver a galeria completa.
           </p>
         </Container>
       </Section>

@@ -1,35 +1,34 @@
 /**
  * Site-wide constants and brand configuration.
- * Replace placeholder contact values before production publish.
+ * Update contact channels and social profiles before production publish.
  */
 
 export const SITE = {
   name: "SYNAPZ STUDIO",
   shortName: "SYNAPZ",
   legalName: "SYNAPZ STUDIO",
-  tagline: "Estratégia, criatividade e tecnologia em conexão.",
+  tagline: "Estratégia, criatividade e tecnologia na mesma direção.",
   concept: "O impulso que conecta.",
   purpose:
     "Transformar ideias e necessidades de negócio em experiências digitais relevantes, funcionais e memoráveis.",
   positioning:
     "A SYNAPZ STUDIO é um estúdio digital que conecta estratégia, marketing, criatividade, design e tecnologia para construir marcas, experiências e resultados.",
-  promise: "Conectar competências diferentes para colocar negócios em movimento.",
+  promise: "Reunir competências diferentes para colocar negócios em movimento.",
   /** Home hero — precise, not "we do everything" */
-  headline: "Conectamos estratégia, design e tecnologia para movimentar negócios.",
+  headline: "Estratégia, design e tecnologia trabalhando juntos no seu negócio.",
   description:
-    "Marca, conteúdo, campanha e experiência digital — com a mesma direção.",
+    "A SYNAPZ cuida de marca, conteúdo, campanha e experiência digital com uma única direção — do diagnóstico à publicação.",
   identification: {
-    type: "Estúdio digital independente",
-    pillars: "Marketing · Design · Tecnologia",
+    type: "Estúdio digital",
+    pillars: "Marca · Web · Campanhas",
   },
-  /** Replace with real production domain before publish */
+  /** Confirmed production domain when ready; override via NEXT_PUBLIC_SITE_URL */
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://synapz.studio",
   locale: "pt_BR",
   language: "pt-BR",
   founder: {
     name: "Luis Felipe B. Zambianco",
-    role: "WebDesigner, Designer gráfico e editor de vídeo",
-    /** Optional fields — leave empty until real data is available */
+    role: "Web designer, designer gráfico e editor de vídeo",
     photo: "/brand/founder-luis-felipe.webp",
     bio: "",
     education: "",
@@ -42,7 +41,6 @@ export const SITE = {
     },
   },
   contact: {
-    /** Replace with official channels before publish */
     email: process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "",
     whatsapp: process.env.NEXT_PUBLIC_WHATSAPP ?? "5543999541462",
     whatsappDisplay: "+55 43 99954-1462",
@@ -70,16 +68,17 @@ export const SITE = {
 } as const;
 
 export const NAV_ITEMS = [
-  { href: "/studio", label: "Studio" },
   { href: "/servicos", label: "Serviços" },
   { href: "/projetos", label: "Projetos" },
+  { href: "/studio", label: "Studio" },
   { href: "/#metodo", label: "Método" },
-  { href: "/studio#sobre", label: "Sobre" },
   { href: "/contato", label: "Contato" },
 ] as const;
 
 export const CTA = {
-  primary: { href: "/contato", label: "Iniciar um projeto" },
-  secondary: { href: "/projetos", label: "Conhecer trabalhos" },
-  whatsapp: { label: "Conversar pelo WhatsApp" },
+  primary: { href: "/contato", label: "Conversar sobre meu projeto" },
+  secondary: { href: "/servicos", label: "Conhecer os serviços" },
+  projects: { href: "/projetos", label: "Ver projetos" },
+  whatsapp: { label: "Abrir WhatsApp" },
+  activate: { href: "/contato", label: "Ative o próximo passo" },
 } as const;

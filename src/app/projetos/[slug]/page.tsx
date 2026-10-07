@@ -372,10 +372,10 @@ export default async function ProjectCasePage({ params }: Props) {
           <div className="surface-panel p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <h2 className="font-display text-2xl md:text-3xl">
-                Vamos ativar sua próxima conexão?
+                Quer um resultado parecido para o seu negócio?
               </h2>
               <p className="mt-2 text-synapz-signal">
-                Conte o momento do seu negócio.
+                Conte o momento da empresa e alinhamos o próximo passo.
               </p>
             </div>
             <Button href={CTA.primary.href} variant="impulse" size="lg">

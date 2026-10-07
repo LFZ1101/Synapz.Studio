@@ -46,7 +46,8 @@ export function ServicesSection() {
           </ScrollReveal>
           <ScrollReveal variant="up" delay={140}>
             <p className="mt-5 text-synapz-signal leading-relaxed text-pretty">
-              Marca, web e campanha — juntos ou sob demanda.
+              Contrate uma frente específica ou uma jornada completa — marca e
+              conteúdo, web e tecnologia, marketing e campanhas.
             </p>
           </ScrollReveal>
         </div>

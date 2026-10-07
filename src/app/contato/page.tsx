@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
 import { Container, Section, Eyebrow } from "@/components/ui/Layout";
+import { Button } from "@/components/ui/Button";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
-import { SITE } from "@/content/site";
+import { CTA, SITE } from "@/content/site";
 import { whatsappUrl } from "@/lib/utils";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Inicie um Projeto com a SYNAPZ STUDIO",
+  title: "Contato — Conversar com a SYNAPZ STUDIO",
   description:
-    "Converse com a SYNAPZ sobre estratégia, marketing, design, sites, campanhas e sistemas personalizados.",
+    "Fale com a SYNAPZ sobre marca, conteúdo, campanhas, sites e sistemas. Envie o formulário e continue a conversa no WhatsApp.",
   path: "/contato",
 });
 
@@ -37,22 +38,32 @@ export default function ContatoPage() {
       />
 
       <Section className="relative overflow-hidden pt-28 md:pt-32">
-        <div className="pointer-events-none absolute inset-0 ambient-glow opacity-40" />
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_40%_at_15%_10%,rgba(183,255,0,0.08),transparent_70%)]"
+          aria-hidden
+        />
         <Container className="relative">
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5 space-y-6">
               <Eyebrow accent>Contato</Eyebrow>
               <h1 className="font-display text-4xl sm:text-5xl text-balance">
-                Vamos ativar sua próxima conexão?
+                Conte o que precisa. Seguimos juntos no WhatsApp.
               </h1>
               <p className="text-synapz-signal leading-relaxed text-lg text-pretty">
-                Conte um pouco sobre sua empresa, seu momento e o que precisa
-                ser colocado em movimento.
+                Preencha o formulário com o essencial do projeto. Ao enviar, você
+                é direcionado ao WhatsApp da SYNAPZ com a mensagem já montada.
               </p>
-              <ul className="space-y-3 text-sm text-synapz-signal">
+
+              <ul className="space-y-4 text-sm text-synapz-signal border border-synapz-neural/10 p-5 bg-synapz-black/40">
+                <li>
+                  <p className="eyebrow text-synapz-impulse mb-1">WhatsApp</p>
+                  <p className="text-synapz-neural text-base">
+                    {SITE.contact.whatsappDisplay || "+55 43 99954-1462"}
+                  </p>
+                </li>
                 {SITE.contact.email ? (
                   <li>
-                    E-mail:{" "}
+                    <p className="eyebrow text-synapz-impulse mb-1">E-mail</p>
                     <a
                       className="text-synapz-neural underline underline-offset-4"
                       href={`mailto:${SITE.contact.email}`}
@@ -61,27 +72,24 @@ export default function ContatoPage() {
                     </a>
                   </li>
                 ) : null}
-                {wa ? (
-                  <li>
-                    WhatsApp:{" "}
-                    <a
-                      className="text-synapz-neural underline underline-offset-4"
-                      href={wa}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Conversar agora
-                    </a>
-                  </li>
-                ) : (
-                  <li>
-                    Canais diretos (e-mail e WhatsApp) podem ser configurados via
-                    variáveis de ambiente antes da publicação.
-                  </li>
-                )}
-                <li>Atendimento: {SITE.contact.areaServed}</li>
+                <li>
+                  <p className="eyebrow text-synapz-impulse mb-1">Atendimento</p>
+                  <p>{SITE.contact.areaServed}</p>
+                </li>
               </ul>
+
+              {wa ? (
+                <Button
+                  href={wa}
+                  variant="secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {CTA.whatsapp.label}
+                </Button>
+              ) : null}
             </div>
+
             <div className="lg:col-span-7">
               <div className="surface-panel p-6 md:p-8">
                 <ContactForm />

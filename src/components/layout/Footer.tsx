@@ -106,7 +106,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    WhatsApp
+                    WhatsApp {SITE.contact.whatsappDisplay}
                   </a>
                 </li>
               ) : null}

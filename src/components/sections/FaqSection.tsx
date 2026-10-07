@@ -30,11 +30,11 @@ export function FaqSection() {
       <Container>
         <div className="max-w-2xl">
           <ScrollReveal variant="fade">
-            <p className="eyebrow text-synapz-impulse mb-4">FAQ</p>
+            <p className="eyebrow text-synapz-impulse mb-4">Dúvidas frequentes</p>
           </ScrollReveal>
           <ScrollReveal variant="mask" delay={70}>
             <h2 className="font-display text-3xl sm:text-4xl leading-[1.08]">
-              Perguntas rápidas.
+              Respostas objetivas para começar com clareza.
             </h2>
           </ScrollReveal>
         </div>
@@ -51,28 +51,27 @@ export function FaqSection() {
 export function ContactCtaSection() {
   return (
     <Section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 ambient-glow opacity-60" />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_40%_at_80%_20%,rgba(183,255,0,0.08),transparent_70%)]"
+        aria-hidden
+      />
       <Container className="relative">
         <ScrollReveal variant="up">
           <div className="surface-panel relative overflow-hidden p-8 md:p-12 lg:p-14">
-            <div
-              className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-synapz-impulse/10 blur-3xl"
-              aria-hidden
-            />
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center relative">
               <div className="lg:col-span-8 space-y-3">
-                <p className="eyebrow text-synapz-impulse">Contato</p>
+                <p className="eyebrow text-synapz-impulse">Próximo passo</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] text-balance leading-tight">
-                  Vamos ativar sua próxima conexão?
+                  Vamos conversar sobre o que seu negócio precisa agora?
                 </h2>
                 <p className="text-synapz-signal max-w-md text-pretty">
-                  Conte o momento do seu negócio. Definimos o próximo passo
-                  juntos.
+                  Conte o momento da empresa. Em poucos minutos alinhamos
+                  escopo, caminho e próximos passos.
                 </p>
               </div>
               <div className="lg:col-span-4 lg:justify-self-end">
                 <Button href={CTA.primary.href} variant="impulse" size="lg">
-                  {CTA.primary.label}
+                  {CTA.activate.label}
                 </Button>
               </div>
             </div>

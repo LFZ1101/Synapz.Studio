@@ -15,9 +15,9 @@ import { homeMetadata } from "@/lib/seo";
 export const metadata = homeMetadata;
 
 /**
- * Home narrative:
- * Hero → Manifesto → Serviços → Clientes → Integração → Método →
- * Projetos → Sobre → FAQ → Contato
+ * Home journey:
+ * Who we are → Why SYNAPZ → What we do → Clients → How it connects →
+ * Method → Evidence → About → FAQ → Contact
  */
 export default function HomePage() {
   return (

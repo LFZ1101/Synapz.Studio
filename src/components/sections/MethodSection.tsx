@@ -39,8 +39,11 @@ export function MethodSection() {
           </ScrollReveal>
           <ScrollReveal variant="mask" delay={70}>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08]">
-              Seis etapas. Uma linha.
+              Como o trabalho acontece.
             </h2>
+            <p className="mt-4 text-synapz-signal max-w-xl text-pretty">
+              Seis etapas claras — do entendimento do negócio à evolução contínua.
+            </p>
           </ScrollReveal>
         </div>
 

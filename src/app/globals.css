@@ -138,9 +138,9 @@
   }
 
   .surface-panel-hover:hover {
-    border-color: color-mix(in srgb, var(--color-synapz-impulse) 42%, transparent);
-    box-shadow: var(--shadow-glow);
-    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-synapz-impulse) 35%, transparent);
+    box-shadow: 0 18px 48px -36px color-mix(in srgb, var(--color-synapz-impulse) 28%, transparent);
+    transform: translateY(-1px);
   }
 
   .ambient-glow {

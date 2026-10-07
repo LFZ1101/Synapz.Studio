@@ -6,11 +6,14 @@ import { CTA, SITE } from "@/content/site";
 export function HeroSection() {
   return (
     <section className="relative min-h-[100svh] overflow-hidden pt-24 md:pt-28">
-      <div className="absolute inset-0 opacity-[0.55]">
+      <div className="absolute inset-0 opacity-45">
         <ConnectionNetwork />
       </div>
-      <div className="absolute inset-0 ambient-glow pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-synapz-black/10 via-transparent to-synapz-black pointer-events-none" />
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_45%_at_12%_18%,rgba(183,255,0,0.10),transparent_70%)]"
+        aria-hidden
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-synapz-black/20 via-transparent to-synapz-black pointer-events-none" />
 
       <Container
         wide
@@ -19,7 +22,7 @@ export function HeroSection() {
         <div className="max-w-4xl space-y-7 md:space-y-8">
           <div className="inline-flex items-center gap-3">
             <span
-              className="h-1.5 w-1.5 rounded-full bg-synapz-impulse motion-safe:animate-[pulse-dot_2.4s_ease-in-out_infinite]"
+              className="h-1.5 w-1.5 rounded-full bg-synapz-impulse motion-safe:animate-[pulse-dot_2.8s_ease-in-out_infinite]"
               aria-hidden
             />
             <Eyebrow accent>
@@ -27,7 +30,7 @@ export function HeroSection() {
             </Eyebrow>
           </div>
 
-          <h1 className="font-display text-[2.35rem] sm:text-5xl md:text-6xl lg:text-[4.2rem] leading-[1.02] text-balance">
+          <h1 className="font-display text-[2.35rem] sm:text-5xl md:text-6xl lg:text-[4.05rem] leading-[1.03] text-balance">
             {SITE.headline}
           </h1>
 
@@ -39,8 +42,8 @@ export function HeroSection() {
             <Button href={CTA.primary.href} variant="impulse" size="lg">
               {CTA.primary.label}
             </Button>
-            <Button href="/servicos" variant="secondary" size="lg">
-              Ver serviços
+            <Button href={CTA.secondary.href} variant="secondary" size="lg">
+              {CTA.secondary.label}
             </Button>
           </div>
         </div>

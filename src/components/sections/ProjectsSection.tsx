@@ -30,7 +30,7 @@ export function ProjectsSection() {
           </div>
           <ScrollReveal variant="fade" delay={120}>
             <Button href="/projetos" variant="secondary" className="shrink-0">
-              Ver todos
+              Ver projetos
             </Button>
           </ScrollReveal>
         </div>
@@ -47,7 +47,7 @@ export function ProjectsSection() {
               </p>
               <div className="mt-6">
                 <Button href="/contato" variant="impulse" size="sm">
-                  Iniciar um projeto
+                  Conversar sobre meu projeto
                 </Button>
               </div>
             </div>

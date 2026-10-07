@@ -6,11 +6,12 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 import { breadcrumbSchema, webPageSchema } from "@/lib/schema";
 import { nuclei, services } from "@/content/services";
+import { CTA } from "@/content/site";
 
 export const metadata: Metadata = buildMetadata({
-  title: "Serviços de Marketing, Design e Tecnologia — SYNAPZ STUDIO",
+  title: "Serviços — Marca, Web e Campanhas | SYNAPZ STUDIO",
   description:
-    "Conheça as soluções da SYNAPZ para marca, conteúdo, social media, campanhas, vídeos, sites, landing pages, lojas virtuais e sistemas personalizados.",
+    "Conheça os serviços da SYNAPZ: marca e conteúdo, social media, vídeo, materiais, marketing, sites, landing pages, lojas virtuais e sistemas.",
   path: "/servicos",
 });
 
@@ -37,12 +38,12 @@ export default function ServicosPage() {
             Serviços
           </Eyebrow>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl max-w-4xl text-balance">
-            Uma conexão completa com o digital.
+            O que a SYNAPZ pode fazer pelo seu negócio.
           </h1>
-          <p className="mt-8 max-w-2xl text-lg text-synapz-signal leading-relaxed">
-            Estratégia, criação e execução reunidas para que cada ponto da
-            presença digital trabalhe na mesma direção. A SYNAPZ atua em três
-            núcleos: marca e conteúdo, web e tecnologia, marketing e campanhas.
+          <p className="mt-8 max-w-2xl text-lg text-synapz-signal leading-relaxed text-pretty">
+            Três núcleos de atuação — marca e conteúdo, web e tecnologia,
+            marketing e campanhas — para você contratar o que precisa agora ou
+            estruturar uma jornada completa.
           </p>
         </Container>
       </Section>
@@ -58,7 +59,7 @@ export default function ServicosPage() {
                 <h2 className="font-display text-3xl md:text-4xl leading-snug">
                   {nucleus.headline}
                 </h2>
-                <p className="text-synapz-signal leading-relaxed">
+                <p className="text-synapz-signal leading-relaxed text-pretty">
                   {nucleus.description}
                 </p>
                 <Button href={nucleus.cta.href} variant="secondary">
@@ -84,13 +85,21 @@ export default function ServicosPage() {
 
       <Section tone="graphite">
         <Container>
-          <h2 className="font-display text-3xl mb-10">Páginas de serviço</h2>
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-10">
+            <div>
+              <p className="eyebrow text-synapz-impulse mb-3">Detalhamento</p>
+              <h2 className="font-display text-3xl">Páginas de serviço</h2>
+            </div>
+            <Button href={CTA.primary.href} variant="impulse" size="sm">
+              {CTA.primary.label}
+            </Button>
+          </div>
           <ul className="divide-y divide-synapz-neural/10 border-y border-synapz-neural/10">
             {services.map((service) => (
               <li key={service.slug}>
                 <Link
                   href={`/servicos/${service.slug}`}
-                  className="group flex flex-col gap-2 py-6 md:flex-row md:items-center md:justify-between"
+                  className="group flex flex-col gap-2 py-5 md:flex-row md:items-center md:justify-between"
                 >
                   <div>
                     <p className="eyebrow mb-1">{service.eyebrow}</p>

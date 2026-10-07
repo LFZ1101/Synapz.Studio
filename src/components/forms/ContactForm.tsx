@@ -90,8 +90,12 @@ export function ContactForm() {
     }
 
     setStatus("success");
-    setServerMessage("Abrindo o WhatsApp com sua mensagem...");
-    window.location.href = destination;
+    setServerMessage(
+      "Abrindo o WhatsApp com sua mensagem preenchida. Se nada acontecer, use o botão “WhatsApp sem formulário”.",
+    );
+    window.setTimeout(() => {
+      window.location.href = destination;
+    }, 150);
   }
 
   const field = (
@@ -343,7 +347,7 @@ export function ContactForm() {
             size="lg"
             disabled={status === "success"}
           >
-            {status === "success" ? "Abrindo WhatsApp..." : "Iniciar conversa"}
+            {status === "success" ? "Abrindo WhatsApp..." : "Enviar e abrir WhatsApp"}
           </Button>
           {wa ? (
             <Button
@@ -353,7 +357,7 @@ export function ContactForm() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Abrir WhatsApp direto
+              WhatsApp sem formulário
             </Button>
           ) : null}
         </div>
