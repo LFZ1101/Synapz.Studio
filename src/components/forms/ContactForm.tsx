@@ -234,13 +234,14 @@ export function ContactForm() {
           </select>,
         )}
 
-        {field(
-          "investment",
-          "Faixa de investimento",
+        <div className="space-y-3 pt-1 md:pt-2">
+          <label htmlFor="investment" className="eyebrow text-synapz-signal block mb-1">
+            Faixa de investimento
+          </label>
           <select
             id="investment"
             name="investment"
-            className={inputClass}
+            className={`${inputClass} mt-1`}
             value={values.investment}
             onChange={(e) =>
               setValues((v) => ({ ...v, investment: e.target.value }))
@@ -252,8 +253,13 @@ export function ContactForm() {
                 {t}
               </option>
             ))}
-          </select>,
-        )}
+          </select>
+          {errors.investment ? (
+            <p id="investment-error" className="text-sm text-red-300" role="alert">
+              {errors.investment}
+            </p>
+          ) : null}
+        </div>
 
         {field(
           "timeline",
