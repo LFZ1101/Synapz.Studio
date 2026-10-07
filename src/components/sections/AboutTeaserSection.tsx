@@ -35,26 +35,12 @@ export function AboutTeaserSection() {
             <div className="aspect-[16/10] lg:aspect-[4/5] bg-synapz-black relative overflow-hidden border border-synapz-black/10">
               <Image
                 src={SITE.founder.photo}
-                alt={SITE.founder.name}
+                alt={`${SITE.founder.name} — ${SITE.founder.role}`}
                 fill
-                className="object-cover object-[center_18%] scale-[1.02]"
+                className="object-cover object-[center_18%]"
                 sizes="(max-width:1024px) 100vw, 40vw"
                 priority={false}
               />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(183,255,0,0.18),transparent_50%)]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-synapz-black via-synapz-black/55 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5 md:p-6 text-synapz-neural">
-                <p className="eyebrow text-synapz-impulse mb-2">Fundador</p>
-                <p className="font-display text-xl md:text-2xl leading-tight">
-                  {SITE.founder.name}
-                </p>
-                <p className="mt-2 text-sm text-synapz-signal leading-relaxed">
-                  {SITE.founder.role}
-                </p>
-                <p className="mt-3 font-display text-base md:text-lg text-synapz-neural/90">
-                  {SITE.concept}
-                </p>
-              </div>
             </div>
           </ScrollReveal>
         </div>
