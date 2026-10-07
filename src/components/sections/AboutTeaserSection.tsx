@@ -19,7 +19,7 @@ export function AboutTeaserSection() {
               </h2>
             </ScrollReveal>
             <ScrollReveal variant="up" delay={140}>
-              <p className="max-w-lg text-synapz-black/70 leading-relaxed">
+              <p className="max-w-lg text-synapz-black/70 leading-relaxed text-pretty">
                 Estratégia, criatividade, marketing e tecnologia no mesmo time —
                 para cada entrega fazer parte de uma experiência maior.
               </p>
@@ -31,11 +31,12 @@ export function AboutTeaserSection() {
             </ScrollReveal>
           </div>
           <ScrollReveal variant="up" delay={160} className="lg:col-span-5">
-            <div className="aspect-[16/10] lg:aspect-[4/5] bg-synapz-black relative overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,rgba(183,255,0,0.2),transparent_55%)]" />
+            <div className="aspect-[16/10] lg:aspect-[4/5] bg-synapz-black relative overflow-hidden border border-synapz-black/10">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_35%,rgba(183,255,0,0.28),transparent_55%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_35%,rgba(5,6,5,0.85)_100%)]" />
               <div className="absolute inset-6 flex flex-col justify-end text-synapz-neural">
                 <p className="eyebrow text-synapz-impulse mb-2">Conceito</p>
-                <p className="font-display text-2xl leading-snug">
+                <p className="font-display text-2xl md:text-3xl leading-snug">
                   {SITE.concept}
                 </p>
               </div>

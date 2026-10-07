@@ -7,18 +7,22 @@ function ImpulseWord({ children }: { children: string }) {
 
 export function ManifestoSection() {
   return (
-    <Section>
+    <Section className="relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-synapz-impulse/40 to-transparent"
+        aria-hidden
+      />
       <Container>
         <ScrollReveal variant="fade" delay={0}>
           <p className="eyebrow text-synapz-impulse mb-6">Manifesto</p>
         </ScrollReveal>
         <ScrollReveal variant="mask" delay={80}>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.1] text-balance max-w-3xl">
+          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-balance max-w-3xl">
             Elementos isolados não constroem uma presença relevante.
           </h2>
         </ScrollReveal>
         <ScrollReveal variant="up" delay={180}>
-          <p className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-synapz-signal">
+          <p className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-synapz-signal text-pretty">
             Uma marca precisa de <ImpulseWord>estratégia</ImpulseWord>,{" "}
             <ImpulseWord>criatividade</ImpulseWord> e{" "}
             <ImpulseWord>tecnologia</ImpulseWord> trabalhando juntas. A SYNAPZ

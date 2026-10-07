@@ -15,7 +15,7 @@ export function ProjectCard({ project, priority = false }: Props) {
   return (
     <Link
       href={`/projetos/${project.slug}`}
-      className="group flex h-full flex-col border border-synapz-neural/10 bg-synapz-black/40 transition-colors hover:border-synapz-impulse/40 hover:bg-synapz-black focus-visible:outline-offset-4"
+      className="group surface-panel surface-panel-hover flex h-full flex-col overflow-hidden focus-visible:outline-offset-4"
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-synapz-graphite">
         {project.cover ? (
@@ -24,19 +24,20 @@ export function ProjectCard({ project, priority = false }: Props) {
             alt={project.coverAlt}
             fill
             priority={priority}
-            className="object-cover transition duration-500 group-hover:scale-[1.04]"
+            className="object-cover transition duration-700 ease-out group-hover:scale-[1.05]"
             sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
           />
         ) : null}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-synapz-black/55 via-transparent to-transparent opacity-80" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-synapz-black/70 via-synapz-black/10 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_30%_20%,rgba(183,255,0,0.16),transparent_45%)]" />
         {hasVideo ? (
-          <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-synapz-black/70 px-2.5 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-synapz-neural backdrop-blur-sm">
+          <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 border border-white/10 bg-synapz-black/75 px-2.5 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-synapz-neural backdrop-blur-sm">
             <span aria-hidden>▶</span> Vídeo
           </span>
         ) : null}
       </div>
 
-      <div className="flex flex-1 flex-col gap-2 p-4 md:p-5">
+      <div className="flex flex-1 flex-col gap-2.5 p-4 md:p-5">
         <p className="eyebrow text-[0.65rem] md:text-xs">
           {project.segment} · {project.year}
         </p>
@@ -46,8 +47,14 @@ export function ProjectCard({ project, priority = false }: Props) {
         <p className="text-sm text-synapz-signal leading-relaxed line-clamp-2">
           {project.summary}
         </p>
-        <span className="mt-auto pt-3 text-sm text-synapz-impulse">
-          Ver projeto →
+        <span className="mt-auto pt-4 inline-flex items-center gap-2 text-sm text-synapz-impulse">
+          Ver projeto
+          <span
+            className="transition-transform duration-300 group-hover:translate-x-1"
+            aria-hidden
+          >
+            →
+          </span>
         </span>
       </div>
     </Link>

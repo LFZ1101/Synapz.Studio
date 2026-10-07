@@ -19,18 +19,18 @@ export function FaqAccordion({
     >
       {items.map((item) => (
         <details key={item.question} className="faq-item group">
-          <summary className="flex items-start justify-between gap-6 py-6 md:py-7">
-            <span className="font-display text-lg md:text-xl leading-snug text-synapz-neural pr-4">
+          <summary className="flex items-start justify-between gap-6 py-5 md:py-6 transition-colors">
+            <span className="faq-question font-display text-lg md:text-xl leading-snug text-synapz-neural pr-4 transition-colors">
               {item.question}
             </span>
             <span
-              className="faq-chevron mt-1 inline-flex h-6 w-6 shrink-0 items-center justify-center text-synapz-signal transition-transform duration-300"
+              className="faq-chevron mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center border border-synapz-neural/15 text-synapz-signal transition-all duration-300 group-open:border-synapz-impulse/50"
               aria-hidden
             >
               +
             </span>
           </summary>
-          <div className="pb-6 md:pb-7 pr-10 text-synapz-signal leading-relaxed max-w-3xl">
+          <div className="pb-6 md:pb-7 pr-10 text-synapz-signal leading-relaxed max-w-3xl text-pretty">
             {item.answer}
           </div>
         </details>

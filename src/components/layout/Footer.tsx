@@ -11,12 +11,16 @@ export function Footer() {
   const hasLinkedin = Boolean(SITE.social.linkedin);
 
   return (
-    <footer className="border-t border-synapz-neural/10 bg-synapz-graphite">
+    <footer className="relative border-t border-synapz-neural/10 bg-synapz-graphite overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-synapz-impulse/35 to-transparent"
+        aria-hidden
+      />
       <div className="container-wide py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5 space-y-6">
             <Logo variant="principal" className="h-10 w-auto" />
-            <p className="max-w-sm text-synapz-signal leading-relaxed">
+            <p className="max-w-sm text-synapz-signal leading-relaxed text-pretty">
               {SITE.tagline}
             </p>
             <p className="font-display text-xl text-synapz-neural">

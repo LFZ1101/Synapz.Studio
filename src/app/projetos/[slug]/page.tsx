@@ -366,19 +366,22 @@ export default async function ProjectCasePage({ params }: Props) {
         </Section>
       ) : null}
 
-      <Section>
-        <Container className="border border-synapz-neural/10 p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div>
-            <h2 className="font-display text-2xl md:text-3xl">
-              Vamos ativar sua próxima conexão?
-            </h2>
-            <p className="mt-2 text-synapz-signal">
-              Conte o momento do seu negócio.
-            </p>
+      <Section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 ambient-glow opacity-40" />
+        <Container className="relative">
+          <div className="surface-panel p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <h2 className="font-display text-2xl md:text-3xl">
+                Vamos ativar sua próxima conexão?
+              </h2>
+              <p className="mt-2 text-synapz-signal">
+                Conte o momento do seu negócio.
+              </p>
+            </div>
+            <Button href={CTA.primary.href} variant="impulse" size="lg">
+              {CTA.primary.label}
+            </Button>
           </div>
-          <Button href={CTA.primary.href} variant="impulse" size="lg">
-            {CTA.primary.label}
-          </Button>
         </Container>
       </Section>
     </main>

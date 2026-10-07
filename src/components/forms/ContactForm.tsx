@@ -121,8 +121,7 @@ export function ContactForm() {
     </div>
   );
 
-  const inputClass =
-    "w-full bg-synapz-black border border-synapz-neural/15 px-4 py-3 text-synapz-neural placeholder:text-synapz-signal/60 focus:border-synapz-impulse focus:outline-none";
+  const inputClass = "field-input";
 
   return (
     <div className="space-y-8">

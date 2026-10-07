@@ -22,6 +22,11 @@ export function ProjectsSection() {
                 Conexões que viraram experiência.
               </h2>
             </ScrollReveal>
+            <ScrollReveal variant="fade" delay={110}>
+              <p className="mt-4 max-w-lg text-synapz-signal text-pretty">
+                Uma seleção do que já colocamos em movimento.
+              </p>
+            </ScrollReveal>
           </div>
           <ScrollReveal variant="fade" delay={120}>
             <Button href="/projetos" variant="secondary" className="shrink-0">

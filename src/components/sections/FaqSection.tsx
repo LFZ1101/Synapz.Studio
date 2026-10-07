@@ -50,23 +50,31 @@ export function FaqSection() {
 
 export function ContactCtaSection() {
   return (
-    <Section>
-      <Container>
+    <Section className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 ambient-glow opacity-60" />
+      <Container className="relative">
         <ScrollReveal variant="up">
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-center border border-synapz-neural/10 p-8 md:p-12">
-            <div className="lg:col-span-8 space-y-3">
-              <p className="eyebrow text-synapz-impulse">Contato</p>
-              <h2 className="font-display text-3xl md:text-4xl text-balance">
-                Vamos ativar sua próxima conexão?
-              </h2>
-              <p className="text-synapz-signal max-w-md">
-                Conte o momento do seu negócio. Definimos o próximo passo juntos.
-              </p>
-            </div>
-            <div className="lg:col-span-4 lg:justify-self-end">
-              <Button href={CTA.primary.href} variant="impulse" size="lg">
-                {CTA.primary.label}
-              </Button>
+          <div className="surface-panel relative overflow-hidden p-8 md:p-12 lg:p-14">
+            <div
+              className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-synapz-impulse/10 blur-3xl"
+              aria-hidden
+            />
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-center relative">
+              <div className="lg:col-span-8 space-y-3">
+                <p className="eyebrow text-synapz-impulse">Contato</p>
+                <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] text-balance leading-tight">
+                  Vamos ativar sua próxima conexão?
+                </h2>
+                <p className="text-synapz-signal max-w-md text-pretty">
+                  Conte o momento do seu negócio. Definimos o próximo passo
+                  juntos.
+                </p>
+              </div>
+              <div className="lg:col-span-4 lg:justify-self-end">
+                <Button href={CTA.primary.href} variant="impulse" size="lg">
+                  {CTA.primary.label}
+                </Button>
+              </div>
             </div>
           </div>
         </ScrollReveal>

@@ -12,14 +12,20 @@ export function ClientsSection() {
   const track = [...clients, ...clients];
 
   return (
-    <Section tone="graphite" id="clientes" className="!py-16 md:!py-20">
+    <Section tone="graphite" id="clientes" className="!py-14 md:!py-16">
       <Container>
         <ScrollReveal variant="fade">
-          <div className="mb-10 md:mb-12">
-            <p className="eyebrow text-synapz-impulse mb-3">Clientes</p>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-synapz-neural text-balance max-w-xl">
-              Marcas com quem já conectamos.
-            </h2>
+          <div className="mb-8 md:mb-10 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="eyebrow text-synapz-impulse mb-3">Clientes</p>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-synapz-neural text-balance max-w-xl">
+                Marcas com quem já conectamos.
+              </h2>
+            </div>
+            <p className="text-sm text-synapz-signal max-w-xs md:text-right">
+              Uma seleção de marcas acompanhadas em identidade, conteúdo e
+              digital.
+            </p>
           </div>
         </ScrollReveal>
       </Container>

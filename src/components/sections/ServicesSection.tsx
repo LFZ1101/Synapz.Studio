@@ -45,34 +45,36 @@ export function ServicesSection() {
             </h2>
           </ScrollReveal>
           <ScrollReveal variant="up" delay={140}>
-            <p className="mt-5 text-synapz-signal leading-relaxed">
+            <p className="mt-5 text-synapz-signal leading-relaxed text-pretty">
               Marca, web e campanha — juntos ou sob demanda.
             </p>
           </ScrollReveal>
         </div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 md:mt-14 grid gap-4 md:gap-5 lg:grid-cols-3">
           {nuclei.map((nucleus, index) => (
-            <ScrollReveal
-              key={nucleus.id}
-              variant="up"
-              delay={index * 100}
-            >
-              <article className="flex h-full flex-col border border-synapz-neural/10 p-6 md:p-8 transition-colors hover:border-synapz-impulse/40">
-                <span className="eyebrow text-synapz-impulse mb-5">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-display text-2xl text-synapz-neural">
+            <ScrollReveal key={nucleus.id} variant="up" delay={index * 90}>
+              <article className="surface-panel surface-panel-hover flex h-full flex-col p-6 md:p-8">
+                <div className="mb-6 flex items-center justify-between gap-3">
+                  <span className="eyebrow text-synapz-impulse">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className="h-px flex-1 bg-gradient-to-r from-synapz-impulse/50 to-transparent"
+                    aria-hidden
+                  />
+                </div>
+                <h3 className="font-display text-2xl md:text-[1.7rem] text-synapz-neural leading-tight">
                   {nucleus.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-synapz-signal">
                   {HOME_BLURB[nucleus.id]}
                 </p>
-                <ul className="mt-6 space-y-2 flex-1">
+                <ul className="mt-6 space-y-2.5 flex-1">
                   {(HOME_SERVICE_PREVIEW[nucleus.id] ?? []).map((item) => (
                     <li
                       key={item}
-                      className="border-l border-synapz-impulse/50 pl-3 text-sm text-synapz-signal"
+                      className="border-l border-synapz-impulse/45 pl-3 text-sm text-synapz-signal"
                     >
                       {item}
                     </li>
@@ -90,10 +92,7 @@ export function ServicesSection() {
 
         <ScrollReveal variant="fade" delay={120}>
           <div className="mt-10">
-            <Link
-              href="/servicos"
-              className="text-sm text-synapz-impulse hover:underline underline-offset-4"
-            >
+            <Link href="/servicos" className="text-link text-sm">
               Ver todos os serviços →
             </Link>
           </div>

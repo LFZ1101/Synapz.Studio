@@ -7,13 +7,13 @@ type Size = "md" | "lg" | "sm";
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-synapz-neural text-synapz-black hover:bg-white border border-transparent",
+    "bg-synapz-neural text-synapz-black hover:bg-white border border-transparent shadow-[0_10px_40px_-24px_rgba(236,237,231,0.55)]",
   secondary:
-    "bg-transparent text-synapz-neural border border-synapz-neural/25 hover:border-synapz-impulse/60 hover:text-synapz-neural",
+    "bg-transparent text-synapz-neural border border-synapz-neural/20 hover:border-synapz-impulse/70 hover:bg-synapz-impulse/[0.04]",
   ghost:
     "bg-transparent text-synapz-signal hover:text-synapz-neural border border-transparent",
   impulse:
-    "bg-synapz-impulse text-synapz-black hover:brightness-110 border border-transparent",
+    "bg-synapz-impulse text-synapz-black hover:brightness-110 border border-transparent shadow-[0_16px_50px_-28px_rgba(183,255,0,0.85)]",
 };
 
 const sizes: Record<Size, string> = {
@@ -51,7 +51,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const classes = cn(
-    "btn-impulse inline-flex items-center justify-center gap-2 font-medium tracking-tight transition-colors duration-300 disabled:opacity-50 disabled:pointer-events-none",
+    "btn-impulse inline-flex items-center justify-center gap-2 font-medium tracking-tight transition-[color,background-color,border-color,filter,box-shadow,transform] duration-300 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.985]",
     impulse && "btn-impulse",
     variants[variant],
     sizes[size],
@@ -62,7 +62,7 @@ export function Button({
     const { href, ...rest } = props;
     return (
       <Link href={href} className={classes} {...rest}>
-        {children}
+        <span>{children}</span>
       </Link>
     );
   }
@@ -70,7 +70,7 @@ export function Button({
   const buttonProps = props as ButtonAsButton;
   return (
     <button className={classes} {...buttonProps}>
-      {children}
+      <span>{children}</span>
     </button>
   );
 }

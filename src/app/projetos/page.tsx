@@ -34,15 +34,16 @@ export default function ProjetosPage() {
         ]}
       />
 
-      <Section className="pt-28 md:pt-32 !pb-8 md:!pb-10">
-        <Container>
+      <Section className="relative overflow-hidden pt-28 md:pt-32 !pb-8 md:!pb-10">
+        <div className="pointer-events-none absolute inset-0 ambient-glow opacity-50" />
+        <Container className="relative">
           <Eyebrow accent className="mb-4">
             Projetos
           </Eyebrow>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl max-w-4xl text-balance">
             Conexões que se tornaram experiências.
           </h1>
-          <p className="mt-6 max-w-2xl text-base md:text-lg text-synapz-signal leading-relaxed">
+          <p className="mt-6 max-w-2xl text-base md:text-lg text-synapz-signal leading-relaxed text-pretty">
             Identidade, social, web e vídeo — escolha um projeto e explore a
             entrega completa.
           </p>

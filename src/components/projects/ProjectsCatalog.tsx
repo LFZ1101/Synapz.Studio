@@ -23,8 +23,13 @@ export function ProjectsCatalog({ projects }: Props) {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col gap-3">
-        <p className="eyebrow text-synapz-signal">Filtrar por tipo</p>
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="eyebrow text-synapz-signal mb-2">Filtrar por tipo</p>
+          <p className="text-sm text-synapz-signal/80">
+            {filtered.length} projeto{filtered.length === 1 ? "" : "s"}
+          </p>
+        </div>
         <div
           className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           role="tablist"
@@ -77,10 +82,10 @@ function FilterChip({
       aria-selected={active}
       onClick={onClick}
       className={[
-        "shrink-0 rounded-full border px-3.5 py-2 text-xs tracking-wide transition-colors",
+        "shrink-0 border px-3.5 py-2 text-xs tracking-wide transition-all duration-300",
         active
-          ? "border-synapz-impulse bg-synapz-impulse text-synapz-black"
-          : "border-synapz-neural/15 bg-transparent text-synapz-signal hover:border-synapz-neural/35 hover:text-synapz-neural",
+          ? "border-synapz-impulse bg-synapz-impulse text-synapz-black shadow-[0_10px_30px_-18px_rgba(183,255,0,0.9)]"
+          : "border-synapz-neural/15 bg-synapz-black/30 text-synapz-signal hover:border-synapz-neural/35 hover:text-synapz-neural",
       ].join(" ")}
     >
       {label}

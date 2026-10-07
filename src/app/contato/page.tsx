@@ -36,15 +36,16 @@ export default function ContatoPage() {
         ]}
       />
 
-      <Section className="pt-28 md:pt-32">
-        <Container>
+      <Section className="relative overflow-hidden pt-28 md:pt-32">
+        <div className="pointer-events-none absolute inset-0 ambient-glow opacity-40" />
+        <Container className="relative">
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5 space-y-6">
               <Eyebrow accent>Contato</Eyebrow>
               <h1 className="font-display text-4xl sm:text-5xl text-balance">
                 Vamos ativar sua próxima conexão?
               </h1>
-              <p className="text-synapz-signal leading-relaxed text-lg">
+              <p className="text-synapz-signal leading-relaxed text-lg text-pretty">
                 Conte um pouco sobre sua empresa, seu momento e o que precisa
                 ser colocado em movimento.
               </p>
@@ -82,7 +83,9 @@ export default function ContatoPage() {
               </ul>
             </div>
             <div className="lg:col-span-7">
-              <ContactForm />
+              <div className="surface-panel p-6 md:p-8">
+                <ContactForm />
+              </div>
             </div>
           </div>
         </Container>

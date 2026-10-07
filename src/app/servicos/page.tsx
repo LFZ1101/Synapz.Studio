@@ -70,7 +70,7 @@ export default function ServicosPage() {
                   {nucleus.services.map((item) => (
                     <li
                       key={item}
-                      className="border border-synapz-neural/10 px-4 py-3 text-sm text-synapz-signal"
+                      className="surface-panel surface-panel-hover px-4 py-3.5 text-sm text-synapz-signal"
                     >
                       {item}
                     </li>

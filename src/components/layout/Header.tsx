@@ -15,7 +15,7 @@ export function Header() {
   const menuId = useId();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -46,14 +46,14 @@ export function Header() {
       </a>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300",
           scrolled || open
-            ? "bg-synapz-black/95 backdrop-blur-sm border-b border-synapz-neural/8"
-            : "bg-transparent",
+            ? "bg-synapz-black/90 backdrop-blur-md border-b border-synapz-neural/[0.08] shadow-[0_10px_40px_-28px_rgba(0,0,0,0.9)]"
+            : "bg-transparent border-b border-transparent",
         )}
       >
-        <div className="container-wide flex h-[4.5rem] md:h-24 items-center justify-between gap-6">
-          <Logo variant="compacta" priority className="h-12 md:h-14 w-auto" />
+        <div className="container-wide flex h-[4.5rem] md:h-[5.5rem] items-center justify-between gap-6">
+          <Logo variant="compacta" priority className="h-11 md:h-14 w-auto" />
 
           <nav
             className="hidden lg:flex items-center gap-8"
@@ -64,7 +64,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "text-sm tracking-tight transition-colors",
+                  "nav-link text-sm tracking-tight",
                   isActive(item.href)
                     ? "text-synapz-impulse"
                     : "text-synapz-signal hover:text-synapz-neural",
@@ -88,7 +88,7 @@ export function Header() {
 
             <button
               type="button"
-              className="lg:hidden inline-flex h-11 w-11 items-center justify-center border border-synapz-neural/15 text-synapz-neural"
+              className="lg:hidden inline-flex h-11 w-11 items-center justify-center border border-synapz-neural/15 text-synapz-neural transition-colors hover:border-synapz-impulse/50"
               aria-expanded={open}
               aria-controls={menuId}
               aria-label={open ? "Fechar menu" : "Abrir menu"}
@@ -98,19 +98,19 @@ export function Header() {
               <span className="relative block h-3 w-5" aria-hidden>
                 <span
                   className={cn(
-                    "absolute left-0 top-0 h-px w-full bg-current transition-transform",
+                    "absolute left-0 top-0 h-px w-full bg-current transition-transform duration-300",
                     open && "translate-y-[6px] rotate-45",
                   )}
                 />
                 <span
                   className={cn(
-                    "absolute left-0 top-[6px] h-px w-full bg-current transition-opacity",
+                    "absolute left-0 top-[6px] h-px w-full bg-current transition-opacity duration-300",
                     open && "opacity-0",
                   )}
                 />
                 <span
                   className={cn(
-                    "absolute left-0 top-[12px] h-px w-full bg-current transition-transform",
+                    "absolute left-0 top-[12px] h-px w-full bg-current transition-transform duration-300",
                     open && "-translate-y-[6px] -rotate-45",
                   )}
                 />
@@ -123,16 +123,16 @@ export function Header() {
       <div
         id={menuId}
         className={cn(
-          "fixed inset-0 z-40 bg-synapz-black pt-24 px-[var(--spacing-gutter)] pb-10 transition-opacity duration-300 lg:hidden",
+          "fixed inset-0 z-40 bg-synapz-black/98 backdrop-blur-xl pt-24 px-[var(--spacing-gutter)] pb-10 transition-opacity duration-300 lg:hidden",
           open
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none",
         )}
         hidden={!open}
       >
-        <nav aria-label="Mobile" className="relative flex flex-col gap-2">
+        <nav aria-label="Mobile" className="relative flex flex-col gap-1">
           <span
-            className="absolute left-0 top-3 bottom-3 w-px bg-synapz-impulse/80"
+            className="absolute left-0 top-3 bottom-3 w-px bg-gradient-to-b from-synapz-impulse via-synapz-impulse/40 to-transparent"
             aria-hidden
           />
           {NAV_ITEMS.map((item, index) => (
@@ -140,10 +140,10 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                "relative pl-8 py-3 font-display text-3xl sm:text-4xl tracking-tight transition-colors",
+                "relative pl-8 py-3.5 font-display text-3xl sm:text-4xl tracking-tight transition-colors",
                 isActive(item.href)
                   ? "text-synapz-impulse"
-                  : "text-synapz-neural",
+                  : "text-synapz-neural hover:text-synapz-impulse",
               )}
               onClick={closeMenu}
             >

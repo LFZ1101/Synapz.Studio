@@ -32,7 +32,7 @@ export function IntegrationSection() {
                   </span>
                   {index < integrationFlow.length - 1 ? (
                     <span
-                      className="h-px flex-1 bg-synapz-impulse/40"
+                      className="h-px flex-1 bg-gradient-to-r from-synapz-impulse/55 to-synapz-impulse/10"
                       aria-hidden
                     />
                   ) : null}
