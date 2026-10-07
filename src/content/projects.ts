@@ -599,38 +599,6 @@ export const projects: Project[] = [
     results: [],
     updatedAt: UPDATED,
   },
-  {
-    slug: "conteudo-autoral",
-    name: "Conteúdo autoral",
-    segment: "Edição de vídeo",
-    year: 2025,
-    summary:
-      "Conteúdo autoral — Momentos 2025, com edição linear, ritmo e narrativa pessoal.",
-    cover: "/media/projects/video/conteudo-autoral/cover.webp",
-    coverAlt: "Conteúdo autoral — Momentos 2025",
-    services: ["Edição de vídeo", "Vlog e lifestyle"],
-    featured: false,
-    published: true,
-    context: "",
-    problem: "",
-    objective: "",
-    strategy: "",
-    creativeDirection: "",
-    design: "",
-    development: "",
-    deliverables: ["Vlog Momentos 2025"],
-    gallery: [
-      {
-        video: "/media/projects/video/conteudo-autoral/momentos-2025.mp4",
-        poster: "/media/projects/video/conteudo-autoral/momentos-2025.poster.webp",
-        alt: "Momentos 2025 — Vlog",
-        caption: "Momentos 2025 — Vlog",
-        note: "Recorte de momentos de 2025 entre viagens, música, estrada e encontros, reunidos em uma edição curta e atmosférica.",
-      },
-    ],
-    results: [],
-    updatedAt: UPDATED,
-  },
 ];
 
 export function getProject(slug: string): Project | undefined {
