@@ -1,14 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container, Section } from "@/components/ui/Layout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { ProjectCard } from "@/components/projects/ProjectCard";
 import { getFeaturedProjects, getPublishedProjects } from "@/content/projects";
 
 export function ProjectsSection() {
   const featured = getFeaturedProjects();
   const projects =
-    featured.length > 0 ? featured : getPublishedProjects().slice(0, 5);
+    featured.length > 0 ? featured.slice(0, 6) : getPublishedProjects().slice(0, 6);
 
   return (
     <Section tone="graphite" id="projetos">
@@ -26,7 +25,7 @@ export function ProjectsSection() {
           </div>
           <ScrollReveal variant="fade" delay={120}>
             <Button href="/projetos" variant="secondary" className="shrink-0">
-              Ver projetos
+              Ver todos
             </Button>
           </ScrollReveal>
         </div>
@@ -49,40 +48,11 @@ export function ProjectsSection() {
             </div>
           </ScrollReveal>
         ) : (
-          <ul className="mt-8 md:mt-10 divide-y divide-synapz-neural/10 border-y border-synapz-neural/10">
+          <ul className="mt-8 md:mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {projects.map((project, index) => (
-              <ScrollReveal key={project.slug} variant="up" delay={index * 50}>
-                <li>
-                  <Link
-                    href={`/projetos/${project.slug}`}
-                    className="group grid grid-cols-[5.75rem_1fr] items-center gap-3 py-3.5 sm:grid-cols-[7rem_1fr] sm:gap-4 md:grid-cols-12 md:gap-5 md:py-4"
-                  >
-                    <div className="relative aspect-[4/3] bg-synapz-black border border-synapz-neural/10 overflow-hidden md:col-span-2 md:aspect-[16/10]">
-                      {project.cover ? (
-                        <Image
-                          src={project.cover}
-                          alt={project.coverAlt}
-                          fill
-                          className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                          sizes="(max-width:768px) 112px, 16vw"
-                        />
-                      ) : null}
-                    </div>
-                    <div className="min-w-0 md:col-span-4">
-                      <p className="eyebrow mb-1 text-[0.65rem] md:text-xs">
-                        {project.segment} · {project.year}
-                      </p>
-                      <h3 className="font-display text-lg sm:text-xl md:text-2xl leading-tight group-hover:text-synapz-impulse transition-colors">
-                        {project.name}
-                      </h3>
-                    </div>
-                    <p className="hidden md:block md:col-span-4 text-synapz-signal text-sm line-clamp-2">
-                      {project.summary}
-                    </p>
-                    <span className="hidden md:block md:col-span-2 md:text-right text-sm text-synapz-impulse">
-                      Explorar →
-                    </span>
-                  </Link>
+              <ScrollReveal key={project.slug} variant="up" delay={index * 60}>
+                <li className="h-full">
+                  <ProjectCard project={project} priority={index < 3} />
                 </li>
               </ScrollReveal>
             ))}
