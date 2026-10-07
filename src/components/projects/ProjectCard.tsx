@@ -17,14 +17,14 @@ export function ProjectCard({ project, priority = false }: Props) {
       href={`/projetos/${project.slug}`}
       className="group surface-panel surface-panel-hover flex h-full flex-col overflow-hidden focus-visible:outline-offset-4"
     >
-      <div className="relative aspect-[16/10] overflow-hidden bg-synapz-graphite">
+      <div className="relative aspect-[16/10] overflow-hidden bg-synapz-black">
         {project.cover ? (
           <Image
             src={project.cover}
             alt={project.coverAlt}
             fill
             priority={priority}
-            className="object-cover transition duration-700 ease-out group-hover:scale-[1.05]"
+            className="object-contain transition duration-700 ease-out group-hover:scale-[1.03]"
             sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
           />
         ) : null}

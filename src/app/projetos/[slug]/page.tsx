@@ -4,6 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Container, Section, Eyebrow } from "@/components/ui/Layout";
+import {
+  ProjectCoverImage,
+  ProjectGalleryImage,
+  ProjectGalleryVideo,
+} from "@/components/projects/ProjectMedia";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildMetadata } from "@/lib/seo";
 import {
@@ -94,33 +99,20 @@ export default async function ProjectCasePage({ params }: Props) {
       <Section className="pt-0">
         <Container wide>
           {project.video ? (
-            <div className="flex items-center justify-center bg-synapz-black border border-synapz-neural/10 overflow-hidden min-h-[220px]">
-              <video
-                className="max-w-full w-auto h-auto max-h-[70vh] md:max-h-[75vh]"
-                controls
-                playsInline
-                preload="metadata"
-                poster={project.cover || undefined}
-              >
-                <source src={project.video} type="video/mp4" />
-              </video>
-            </div>
+            <ProjectGalleryVideo
+              src={project.video}
+              poster={project.cover || undefined}
+              label={`Vídeo — ${project.name}`}
+            />
+          ) : project.cover ? (
+            <ProjectCoverImage
+              src={project.cover}
+              alt={project.coverAlt}
+              priority
+            />
           ) : (
-            <div className="relative aspect-[16/9] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
-              {project.cover ? (
-                <Image
-                  src={project.cover}
-                  alt={project.coverAlt}
-                  fill
-                  className="object-cover"
-                  sizes="100vw"
-                  priority
-                />
-              ) : (
-                <div className="absolute inset-0 flex items-center justify-center text-synapz-signal">
-                  Mídia do projeto indisponível
-                </div>
-              )}
+            <div className="flex min-h-[220px] items-center justify-center border border-synapz-neural/10 bg-synapz-graphite text-synapz-signal">
+              Mídia do projeto indisponível
             </div>
           )}
           {project.externalUrl ? (
@@ -224,41 +216,21 @@ export default async function ProjectCasePage({ params }: Props) {
         <Section>
           <Container wide>
             <h2 className="font-display text-3xl mb-8">Galeria</h2>
-            <ul
-              className={
-                project.gallery.some((item) => item.video || item.youtube)
-                  ? "grid gap-6 md:grid-cols-2"
-                  : "grid gap-4 md:grid-cols-2"
-              }
-            >
+            <ul className="grid grid-cols-1 gap-6 md:gap-8">
               {project.gallery.map((item, index) => {
                 const key =
                   item.video || item.youtube || item.src || `item-${index}`;
-                const isMedia = Boolean(item.video || item.youtube);
 
                 return (
-                  <li
-                    key={key}
-                    className={
-                      isMedia
-                        ? "space-y-2 md:col-span-2 lg:col-span-1"
-                        : "space-y-2"
-                    }
-                  >
+                  <li key={key} className="space-y-2">
                     {item.video ? (
-                      <div className="flex items-center justify-center bg-synapz-black border border-synapz-neural/10 overflow-hidden min-h-[200px]">
-                        <video
-                          className="max-w-full w-auto h-auto max-h-[65vh] md:max-h-[70vh]"
-                          controls
-                          playsInline
-                          preload="metadata"
-                          poster={item.poster}
-                        >
-                          <source src={item.video} type="video/mp4" />
-                        </video>
-                      </div>
+                      <ProjectGalleryVideo
+                        src={item.video}
+                        poster={item.poster}
+                        label={item.alt || item.caption || `Vídeo ${index + 1}`}
+                      />
                     ) : item.youtube ? (
-                      <div className="relative aspect-video bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
+                      <div className="relative aspect-video bg-synapz-black border border-synapz-neural/10 overflow-hidden">
                         <iframe
                           src={item.youtube}
                           title={item.alt}
@@ -269,15 +241,11 @@ export default async function ProjectCasePage({ params }: Props) {
                         />
                       </div>
                     ) : item.src ? (
-                      <div className="relative aspect-[16/10] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
-                        <Image
-                          src={item.src}
-                          alt={item.alt}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width:768px) 100vw, 50vw"
-                        />
-                      </div>
+                      <ProjectGalleryImage
+                        src={item.src}
+                        alt={item.alt}
+                        priority={index < 2}
+                      />
                     ) : null}
                     {item.caption ? (
                       <p className="text-sm text-synapz-neural">{item.caption}</p>
@@ -303,20 +271,26 @@ export default async function ProjectCasePage({ params }: Props) {
                   key={pair.before + pair.after}
                   className="grid gap-4 md:grid-cols-2"
                 >
-                  <div className="relative aspect-video bg-synapz-black border border-synapz-neural/10">
+                  <div className="bg-synapz-black border border-synapz-neural/10 overflow-hidden">
                     <Image
                       src={pair.before}
                       alt={`Antes — ${pair.label ?? project.name}`}
-                      fill
-                      className="object-cover grayscale"
+                      width={1600}
+                      height={900}
+                      className="mx-auto block h-auto w-full object-contain grayscale"
+                      style={{ width: "100%", height: "auto", aspectRatio: "auto" }}
+                      sizes="(max-width:768px) 100vw, 50vw"
                     />
                   </div>
-                  <div className="relative aspect-video bg-synapz-black border border-synapz-neural/10">
+                  <div className="bg-synapz-black border border-synapz-neural/10 overflow-hidden">
                     <Image
                       src={pair.after}
                       alt={`Depois — ${pair.label ?? project.name}`}
-                      fill
-                      className="object-cover grayscale"
+                      width={1600}
+                      height={900}
+                      className="mx-auto block h-auto w-full object-contain grayscale"
+                      style={{ width: "100%", height: "auto", aspectRatio: "auto" }}
+                      sizes="(max-width:768px) 100vw, 50vw"
                     />
                   </div>
                 </li>
