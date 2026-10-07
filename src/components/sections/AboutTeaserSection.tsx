@@ -41,6 +41,17 @@ export function AboutTeaserSection() {
                 sizes="(max-width:1024px) 100vw, 40vw"
                 priority={false}
               />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-synapz-black/90 via-synapz-black/35 to-transparent pt-24">
+                <div className="p-5 md:p-6 text-synapz-neural">
+                  <p className="eyebrow text-synapz-signal mb-2">Fundador</p>
+                  <p className="font-display text-xl md:text-2xl leading-tight">
+                    {SITE.founder.name}
+                  </p>
+                  <p className="mt-2 text-sm md:text-[0.95rem] text-synapz-signal leading-relaxed">
+                    {SITE.founder.role}
+                  </p>
+                </div>
+              </div>
             </div>
           </ScrollReveal>
         </div>
