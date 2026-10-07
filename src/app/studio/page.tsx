@@ -51,8 +51,8 @@ export default function StudioPage() {
 
       <Section tone="graphite" id="sobre">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-            <div className="lg:col-span-5 space-y-6 text-synapz-signal leading-relaxed">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 lg:items-start">
+            <div className="lg:col-span-6 space-y-6 text-synapz-signal leading-relaxed">
               <h2 className="font-display text-3xl text-synapz-neural">
                 O que é a SYNAPZ
               </h2>
@@ -76,8 +76,8 @@ export default function StudioPage() {
                 {SITE.positioning}
               </p>
             </div>
-            <div className="lg:col-span-7">
-              <div className="relative aspect-video overflow-hidden border border-synapz-neural/10 bg-synapz-black">
+            <div className="lg:col-span-6">
+              <div className="relative mx-auto aspect-[9/16] max-h-[70vh] w-full max-w-[420px] overflow-hidden border border-synapz-neural/10 bg-synapz-black lg:ml-auto lg:mr-0">
                 <video
                   className="absolute inset-0 h-full w-full object-cover"
                   autoPlay

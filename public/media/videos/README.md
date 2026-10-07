@@ -9,7 +9,7 @@ public/media/videos/studio-synapz.mp4
 ```
 
 ### Formato esperado
-- **1920×1080 (16:9 / landscape)**
+- **1080×1920 (9:16 / vertical)**
 - MP4 (H.264 + AAC)
 - Autoplay no site (muted + loop)
 
