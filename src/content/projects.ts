@@ -536,14 +536,14 @@ export const projects: Project[] = [
   },
   {
     slug: "edificio-sao-jose",
-    name: "Edifício São José",
-    client: "Edifício São José",
+    name: "Edifício São José - Ceriani",
+    client: "Ceriani",
     segment: "Edição de vídeo",
     year: 2025,
     summary:
       "Apresentação audiovisual do Edifício São José — arquitetura e imobiliário com leitura cinematográfica do espaço.",
     cover: "/media/projects/video/edificio-sao-jose/cover.webp",
-    coverAlt: "Edifício São José — vídeo imobiliário",
+    coverAlt: "Edifício São José - Ceriani — vídeo imobiliário",
     services: ["Edição de vídeo", "Arquitetura e imobiliário"],
     featured: false,
     published: true,
