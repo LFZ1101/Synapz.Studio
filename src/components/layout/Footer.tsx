@@ -31,12 +31,12 @@ export function Footer() {
 
           <div className="lg:col-span-2">
             <p className="eyebrow mb-4 text-synapz-impulse">Serviços</p>
-            <ul className="space-y-3 text-sm text-synapz-signal">
+            <ul className="space-y-1 text-sm text-synapz-signal">
               {nuclei.map((n) => (
                 <li key={n.id}>
                   <Link
                     href={n.href}
-                    className="hover:text-synapz-neural transition-colors"
+                    className="inline-flex min-h-10 items-center hover:text-synapz-neural transition-colors"
                   >
                     {n.title}
                   </Link>
@@ -45,7 +45,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/servicos"
-                  className="hover:text-synapz-neural transition-colors"
+                  className="inline-flex min-h-10 items-center hover:text-synapz-neural transition-colors"
                 >
                   Ver todos
                 </Link>
@@ -55,24 +55,36 @@ export function Footer() {
 
           <div className="lg:col-span-2">
             <p className="eyebrow mb-4 text-synapz-impulse">Studio</p>
-            <ul className="space-y-3 text-sm text-synapz-signal">
+            <ul className="space-y-1 text-sm text-synapz-signal">
               <li>
-                <Link href="/studio" className="hover:text-synapz-neural">
+                <Link
+                  href="/studio"
+                  className="inline-flex min-h-10 items-center hover:text-synapz-neural"
+                >
                   Sobre
                 </Link>
               </li>
               <li>
-                <Link href="/projetos" className="hover:text-synapz-neural">
+                <Link
+                  href="/projetos"
+                  className="inline-flex min-h-10 items-center hover:text-synapz-neural"
+                >
                   Projetos
                 </Link>
               </li>
               <li>
-                <Link href="/#metodo" className="hover:text-synapz-neural">
+                <Link
+                  href="/#metodo"
+                  className="inline-flex min-h-10 items-center hover:text-synapz-neural"
+                >
                   Método
                 </Link>
               </li>
               <li>
-                <Link href={CTA.primary.href} className="hover:text-synapz-neural">
+                <Link
+                  href={CTA.primary.href}
+                  className="inline-flex min-h-10 items-center hover:text-synapz-neural"
+                >
                   Contato
                 </Link>
               </li>
@@ -81,19 +93,22 @@ export function Footer() {
 
           <div className="lg:col-span-3">
             <p className="eyebrow mb-4 text-synapz-impulse">Contato</p>
-            <ul className="space-y-3 text-sm text-synapz-signal">
+            <ul className="space-y-1 text-sm text-synapz-signal">
               {SITE.contact.email ? (
                 <li>
                   <a
                     href={`mailto:${SITE.contact.email}`}
-                    className="hover:text-synapz-neural"
+                    className="inline-flex min-h-10 items-center hover:text-synapz-neural"
                   >
                     {SITE.contact.email}
                   </a>
                 </li>
               ) : (
                 <li>
-                  <Link href="/contato" className="hover:text-synapz-neural">
+                  <Link
+                    href="/contato"
+                    className="inline-flex min-h-10 items-center hover:text-synapz-neural"
+                  >
                     Formulário de contato
                   </Link>
                 </li>
@@ -102,7 +117,7 @@ export function Footer() {
                 <li>
                   <a
                     href={`https://wa.me/${whatsappNumber.replace(/\D/g, "")}`}
-                    className="hover:text-synapz-neural"
+                    className="inline-flex min-h-10 items-center hover:text-synapz-neural"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -114,7 +129,7 @@ export function Footer() {
                 <li>
                   <a
                     href={SITE.social.instagram}
-                    className="hover:text-synapz-neural"
+                    className="inline-flex min-h-10 items-center hover:text-synapz-neural"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -126,7 +141,7 @@ export function Footer() {
                 <li>
                   <a
                     href={SITE.social.linkedin}
-                    className="hover:text-synapz-neural"
+                    className="inline-flex min-h-10 items-center hover:text-synapz-neural"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

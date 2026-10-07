@@ -46,45 +46,43 @@ export function ClientsSection() {
           </ScrollReveal>
         </Container>
       ) : (
-        <ScrollReveal variant="fade">
+        <div
+          className="clients-marquee relative border-y border-synapz-neural/10 bg-synapz-graphite"
+          aria-label="Logos de clientes"
+        >
           <div
-            className="clients-marquee relative border-y border-synapz-neural/10 bg-synapz-graphite"
-            aria-label="Logos de clientes"
-          >
-            <div
-              className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 md:w-24 bg-gradient-to-r from-synapz-graphite to-transparent"
-              aria-hidden
-            />
-            <div
-              className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 md:w-24 bg-gradient-to-l from-synapz-graphite to-transparent"
-              aria-hidden
-            />
+            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 md:w-24 bg-gradient-to-r from-synapz-graphite to-transparent"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 md:w-24 bg-gradient-to-l from-synapz-graphite to-transparent"
+            aria-hidden
+          />
 
-            <p className="sr-only">
-              {clients.map((client) => client.name).join(", ")}.
-            </p>
+          <p className="sr-only">
+            {clients.map((client) => client.name).join(", ")}.
+          </p>
 
-            {/* Animated track — hidden when user prefers reduced motion */}
-            <div className="clients-marquee-track motion-reduce:hidden" aria-hidden>
-              <ul className="clients-marquee-group">
-                {track.map((client, index) => (
-                  <li key={`${client.id}-${index}`} className="clients-marquee-item">
-                    <ClientMark client={client} decorative />
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Static fallback for reduced motion */}
-            <ul className="hidden motion-reduce:flex flex-wrap items-center justify-center gap-x-10 gap-y-8 px-6 py-10 md:px-10">
-              {clients.map((client) => (
-                <li key={client.id} className="clients-marquee-item">
-                  <ClientMark client={client} />
+          {/* Animated track — hidden when user prefers reduced motion */}
+          <div className="clients-marquee-track motion-reduce:hidden" aria-hidden>
+            <ul className="clients-marquee-group">
+              {track.map((client, index) => (
+                <li key={`${client.id}-${index}`} className="clients-marquee-item">
+                  <ClientMark client={client} decorative />
                 </li>
               ))}
             </ul>
           </div>
-        </ScrollReveal>
+
+          {/* Static fallback for reduced motion */}
+          <ul className="hidden motion-reduce:flex flex-wrap items-center justify-center gap-x-10 gap-y-8 px-6 py-10 md:px-10">
+            {clients.map((client) => (
+              <li key={client.id} className="clients-marquee-item">
+                <ClientMark client={client} />
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
     </Section>
   );

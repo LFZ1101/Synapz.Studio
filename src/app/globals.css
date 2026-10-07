@@ -168,15 +168,21 @@
 
   .field-input {
     width: 100%;
+    min-height: 2.75rem;
     background: color-mix(in srgb, var(--color-synapz-black) 70%, transparent);
     border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 14%, transparent);
     color: var(--color-synapz-neural);
     padding: 0.85rem 1rem;
-    font-size: 0.95rem;
+    font-size: 1rem;
+    border-radius: 0;
     transition:
       border-color 0.25s ease,
       box-shadow 0.25s ease,
       background-color 0.25s ease;
+  }
+
+  textarea.field-input {
+    min-height: 8rem;
   }
 
   .field-input::placeholder {
@@ -421,6 +427,16 @@
 
 .reveal-up {
   transform: translate3d(0, 28px, 0);
+}
+
+@media (max-width: 767px) {
+  .reveal-up {
+    transform: translate3d(0, 16px, 0);
+  }
+
+  .reveal-left {
+    transform: translate3d(-12px, 0, 0);
+  }
 }
 
 .reveal-fade {

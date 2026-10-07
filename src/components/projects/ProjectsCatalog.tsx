@@ -30,24 +30,34 @@ export function ProjectsCatalog({ projects }: Props) {
             {filtered.length} projeto{filtered.length === 1 ? "" : "s"}
           </p>
         </div>
-        <div
-          className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          role="tablist"
-          aria-label="Filtro de projetos"
-        >
-          <FilterChip
-            label="Todos"
-            active={active === "todos"}
-            onClick={() => setActive("todos")}
+        <div className="relative min-w-0 sm:max-w-full">
+          <div
+            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-6 bg-gradient-to-r from-synapz-graphite to-transparent sm:hidden"
+            aria-hidden
           />
-          {segments.map((segment) => (
+          <div
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-synapz-graphite to-transparent sm:hidden"
+            aria-hidden
+          />
+          <div
+            className="-mx-1 flex gap-2 overflow-x-auto overscroll-x-contain px-1 pb-1 touch-pan-x [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            role="tablist"
+            aria-label="Filtro de projetos"
+          >
             <FilterChip
-              key={segment}
-              label={segment}
-              active={active === segment}
-              onClick={() => setActive(segment)}
+              label="Todos"
+              active={active === "todos"}
+              onClick={() => setActive("todos")}
             />
-          ))}
+            {segments.map((segment) => (
+              <FilterChip
+                key={segment}
+                label={segment}
+                active={active === segment}
+                onClick={() => setActive(segment)}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
@@ -82,7 +92,7 @@ function FilterChip({
       aria-selected={active}
       onClick={onClick}
       className={[
-        "shrink-0 border px-3.5 py-2 text-xs tracking-wide transition-all duration-300",
+        "shrink-0 border px-3.5 py-2.5 min-h-11 text-xs tracking-wide transition-all duration-300",
         active
           ? "border-synapz-impulse bg-synapz-impulse text-synapz-black shadow-[0_10px_30px_-18px_rgba(183,255,0,0.9)]"
           : "border-synapz-neural/15 bg-synapz-black/30 text-synapz-signal hover:border-synapz-neural/35 hover:text-synapz-neural",

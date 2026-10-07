@@ -64,7 +64,8 @@ export function ScrollReveal({
           if (!cancelled) setVisible(false);
         }
       },
-      { threshold: 0.18, rootMargin: "0px 0px -8% 0px" },
+      // Reveal a bit earlier on short mobile viewports so content isn't left invisible.
+      { threshold: 0.06, rootMargin: "64px 0px -4% 0px" },
     );
 
     observer.observe(el);

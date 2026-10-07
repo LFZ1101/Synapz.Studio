@@ -77,7 +77,7 @@ export default function StudioPage() {
               </p>
             </div>
             <div className="lg:col-span-6">
-              <div className="relative mx-auto aspect-[9/16] max-h-[70vh] w-full max-w-[420px] overflow-hidden border border-synapz-neural/10 bg-synapz-black lg:ml-auto lg:mr-0">
+              <div className="relative mx-auto aspect-[9/16] max-h-[min(70vh,560px)] w-full max-w-[min(100%,360px)] sm:max-w-[420px] overflow-hidden border border-synapz-neural/10 bg-synapz-black lg:ml-auto lg:mr-0">
                 <video
                   className="absolute inset-0 h-full w-full object-cover"
                   autoPlay

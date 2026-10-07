@@ -39,10 +39,20 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-1">
-            <Button href={CTA.primary.href} variant="impulse" size="lg">
+            <Button
+              href={CTA.primary.href}
+              variant="impulse"
+              size="lg"
+              className="w-full sm:w-auto"
+            >
               {CTA.primary.label}
             </Button>
-            <Button href={CTA.secondary.href} variant="secondary" size="lg">
+            <Button
+              href={CTA.secondary.href}
+              variant="secondary"
+              size="lg"
+              className="w-full sm:w-auto"
+            >
               {CTA.secondary.label}
             </Button>
           </div>

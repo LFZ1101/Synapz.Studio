@@ -31,10 +31,13 @@ export function Header() {
   const closeMenu = () => setOpen(false);
 
   const isActive = (href: string) => {
-    if (href.startsWith("/#")) return pathname === "/";
+    // In-page anchors should not stay highlighted for the whole page.
     if (href.includes("#")) {
-      const base = href.split("#")[0];
-      return pathname === base;
+      const [base = "/", hash] = href.split("#");
+      const basePath = base || "/";
+      if (pathname !== basePath) return false;
+      if (typeof window === "undefined") return false;
+      return window.location.hash === `#${hash}`;
     }
     return pathname === href || pathname.startsWith(`${href}/`);
   };
@@ -52,8 +55,12 @@ export function Header() {
             : "bg-transparent border-b border-transparent",
         )}
       >
-        <div className="container-wide flex h-[4.5rem] md:h-[5.5rem] items-center justify-between gap-6">
-          <Logo variant="compacta" priority className="h-11 md:h-14 w-auto" />
+        <div className="container-wide flex h-[4.5rem] md:h-[5.5rem] items-center justify-between gap-3 sm:gap-6">
+          <Logo
+            variant="compacta"
+            priority
+            className="h-10 sm:h-11 md:h-14 w-auto shrink-0"
+          />
 
           <nav
             className="hidden lg:flex items-center gap-8"
@@ -76,19 +83,16 @@ export function Header() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
-            <Button
-              href={CTA.primary.href}
-              variant="impulse"
-              size="sm"
-              className="hidden sm:inline-flex"
-            >
-              {CTA.primary.label}
-            </Button>
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <div className="hidden sm:block">
+              <Button href={CTA.primary.href} variant="impulse" size="sm">
+                {CTA.primary.label}
+              </Button>
+            </div>
 
             <button
               type="button"
-              className="lg:hidden inline-flex h-11 w-11 items-center justify-center border border-synapz-neural/15 text-synapz-neural transition-colors hover:border-synapz-impulse/50"
+              className="lg:hidden inline-flex h-11 w-11 shrink-0 items-center justify-center border border-synapz-neural/15 text-synapz-neural transition-colors hover:border-synapz-impulse/50"
               aria-expanded={open}
               aria-controls={menuId}
               aria-label={open ? "Fechar menu" : "Abrir menu"}
@@ -132,36 +136,44 @@ export function Header() {
       >
         <nav aria-label="Mobile" className="relative flex flex-col gap-1">
           <span
-            className="absolute left-0 top-3 bottom-3 w-px bg-gradient-to-b from-synapz-impulse via-synapz-impulse/40 to-transparent"
+            className="absolute left-0 top-3 bottom-3 w-px bg-gradient-to-b from-synapz-neural/35 via-synapz-neural/15 to-transparent"
             aria-hidden
           />
-          {NAV_ITEMS.map((item, index) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "relative pl-8 py-3.5 font-display text-3xl sm:text-4xl tracking-tight transition-colors",
-                isActive(item.href)
-                  ? "text-synapz-impulse"
-                  : "text-synapz-neural hover:text-synapz-impulse",
-              )}
-              onClick={closeMenu}
-            >
-              <span
-                className="absolute left-[-3px] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-synapz-impulse"
-                aria-hidden
-              />
-              <span className="eyebrow mr-3 text-synapz-signal">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              {item.label}
-            </Link>
-          ))}
+          {NAV_ITEMS.map((item, index) => {
+            const active = isActive(item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "relative pl-8 py-3.5 font-display text-3xl sm:text-4xl tracking-tight transition-colors",
+                  active
+                    ? "text-synapz-impulse"
+                    : "text-synapz-neural hover:text-synapz-impulse",
+                )}
+                aria-current={active ? "page" : undefined}
+                onClick={closeMenu}
+              >
+                <span
+                  className={cn(
+                    "absolute left-[-3px] top-1/2 h-2 w-2 -translate-y-1/2 rounded-full transition-colors",
+                    active ? "bg-synapz-impulse" : "bg-synapz-neural/25",
+                  )}
+                  aria-hidden
+                />
+                <span className="eyebrow mr-3 text-synapz-signal">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                {item.label}
+              </Link>
+            );
+          })}
           <div className="mt-10 pl-8">
             <Button
               href={CTA.primary.href}
               variant="impulse"
               size="lg"
+              className="w-full sm:w-auto"
               onClick={closeMenu}
             >
               {CTA.primary.label}

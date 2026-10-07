@@ -312,10 +312,10 @@ export function ContactForm() {
         </div>
 
         <div className="md:col-span-2 space-y-2">
-          <label className="flex items-start gap-3 text-sm text-synapz-signal">
+          <label className="flex items-start gap-3 text-sm text-synapz-signal cursor-pointer">
             <input
               type="checkbox"
-              className="mt-1 accent-synapz-impulse"
+              className="mt-0.5 h-5 w-5 shrink-0 accent-synapz-impulse"
               checked={values.consent}
               onChange={(e) =>
                 setValues((v) => ({ ...v, consent: e.target.checked }))
@@ -340,11 +340,12 @@ export function ContactForm() {
           ) : null}
         </div>
 
-        <div className="md:col-span-2 flex flex-col sm:flex-row gap-4">
+        <div className="md:col-span-2 flex flex-col sm:flex-row gap-3 sm:gap-4">
           <Button
             type="submit"
             variant="impulse"
             size="lg"
+            className="w-full sm:w-auto"
             disabled={status === "success"}
           >
             {status === "success" ? "Abrindo WhatsApp..." : "Enviar e abrir WhatsApp"}
@@ -354,6 +355,7 @@ export function ContactForm() {
               href={wa}
               variant="secondary"
               size="lg"
+              className="w-full sm:w-auto"
               target="_blank"
               rel="noopener noreferrer"
             >

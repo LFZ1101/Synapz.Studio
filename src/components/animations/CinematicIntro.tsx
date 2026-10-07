@@ -24,7 +24,7 @@ function pickIntroSrc() {
 export function CinematicIntro() {
   const [mode, setMode] = useState<Mode>("boot");
   const [fadeOut, setFadeOut] = useState(false);
-  const [videoSrc, setVideoSrc] = useState(DESKTOP_SRC);
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const visible = mode !== "boot" && mode !== "done";
 
@@ -41,11 +41,7 @@ export function CinematicIntro() {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const seen = localStorage.getItem(STORAGE_KEY) === "1";
-
-    // Resolve correct asset before showing video
-    schedule(() => {
-      if (!cancelled) setVideoSrc(pickIntroSrc());
-    }, 0);
+    const src = pickIntroSrc();
 
     if (reduced) {
       schedule(finish, 0);
@@ -69,8 +65,11 @@ export function CinematicIntro() {
       };
     }
 
+    // Resolve mobile/desktop asset, then start — avoids landscape crop on phones.
     schedule(() => {
-      if (!cancelled) setMode("video");
+      if (cancelled) return;
+      setVideoSrc(src);
+      setMode("video");
     }, 0);
 
     return () => {
@@ -80,7 +79,7 @@ export function CinematicIntro() {
   }, []);
 
   useEffect(() => {
-    if (mode !== "video") return;
+    if (mode !== "video" || !videoSrc) return;
     const video = videoRef.current;
     if (!video) return;
 
@@ -128,17 +127,17 @@ export function CinematicIntro() {
       <button
         type="button"
         onClick={skip}
-        className="absolute right-6 top-6 z-10 eyebrow text-synapz-signal hover:text-synapz-impulse transition-colors"
+        className="absolute z-10 min-h-11 px-4 py-2 eyebrow text-synapz-signal hover:text-synapz-impulse transition-colors right-[max(1rem,env(safe-area-inset-right))] top-[max(1rem,env(safe-area-inset-top))]"
       >
         Pular introdução
       </button>
 
-      {mode === "video" && (
+      {mode === "video" && videoSrc && (
         <div className="relative h-full w-full flex items-center justify-center bg-synapz-black">
           <video
             ref={videoRef}
             key={videoSrc}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain md:object-cover"
             muted
             playsInline
             preload="auto"
