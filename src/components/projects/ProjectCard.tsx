@@ -8,9 +8,14 @@ type Props = {
 };
 
 export function ProjectCard({ project, priority = false }: Props) {
-  const hasVideo = Boolean(
-    project.video || project.gallery.some((item) => item.video || item.youtube),
+  // Badge only for projects that are primarily video (gallery is video-only),
+  // not branding/digital pieces that merely include a YouTube or hero clip.
+  const galleryVideos = project.gallery.filter(
+    (item) => item.video || item.youtube,
   );
+  const galleryImages = project.gallery.filter((item) => item.src);
+  const isVideoProject =
+    galleryVideos.length > 0 && galleryImages.length === 0;
 
   return (
     <Link
@@ -30,7 +35,7 @@ export function ProjectCard({ project, priority = false }: Props) {
         ) : null}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-synapz-black/70 via-synapz-black/10 to-transparent" />
         <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_30%_20%,rgba(183,255,0,0.16),transparent_45%)]" />
-        {hasVideo ? (
+        {isVideoProject ? (
           <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 border border-white/10 bg-synapz-black/75 px-2.5 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-synapz-neural backdrop-blur-sm">
             <span aria-hidden>▶</span> Vídeo
           </span>
