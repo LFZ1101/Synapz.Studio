@@ -80,33 +80,35 @@ export default function ProjetosPage() {
                 <li key={project.slug}>
                   <Link
                     href={`/projetos/${project.slug}`}
-                    className="group grid gap-4 py-10 md:grid-cols-12 md:items-center"
+                    className="group grid grid-cols-[6rem_1fr] items-center gap-3 py-3.5 sm:grid-cols-[7.5rem_1fr] sm:gap-4 md:grid-cols-12 md:gap-5 md:py-4"
                   >
-                    <div className="md:col-span-4 relative aspect-[16/10] bg-synapz-black border border-synapz-neural/10 overflow-hidden">
+                    <div className="relative aspect-[4/3] bg-synapz-black border border-synapz-neural/10 overflow-hidden md:col-span-3 md:aspect-[16/10]">
                       {project.cover ? (
                         <Image
                           src={project.cover}
                           alt={project.coverAlt}
                           fill
                           className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                          sizes="(max-width:768px) 100vw, 33vw"
+                          sizes="(max-width:768px) 120px, 25vw"
                         />
                       ) : null}
                     </div>
-                    <div className="md:col-span-5 space-y-2">
-                      <p className="eyebrow">
+                    <div className="min-w-0 space-y-1 md:col-span-6 md:space-y-1.5">
+                      <p className="eyebrow text-[0.65rem] md:text-xs">
                         {project.segment} · {project.year}
                       </p>
-                      <h2 className="font-display text-2xl md:text-3xl group-hover:text-synapz-impulse transition-colors">
+                      <h2 className="font-display text-lg sm:text-xl md:text-2xl leading-tight group-hover:text-synapz-impulse transition-colors">
                         {project.name}
                       </h2>
-                      <p className="text-synapz-signal">{project.summary}</p>
-                      <p className="text-xs text-synapz-signal/80">
+                      <p className="text-synapz-signal text-sm line-clamp-2 md:line-clamp-2">
+                        {project.summary}
+                      </p>
+                      <p className="hidden sm:block text-xs text-synapz-signal/80">
                         {project.services.join(" · ")}
                       </p>
                     </div>
-                    <span className="md:col-span-3 md:text-right text-synapz-impulse text-sm">
-                      Explorar projeto →
+                    <span className="hidden md:block md:col-span-3 md:text-right text-synapz-impulse text-sm">
+                      Explorar →
                     </span>
                   </Link>
                 </li>
