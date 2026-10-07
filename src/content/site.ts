@@ -27,10 +27,10 @@ export const SITE = {
   locale: "pt_BR",
   language: "pt-BR",
   founder: {
-    name: "Luiz Felipe Barbosa Zambianco",
-    role: "Fundador",
+    name: "Luis Felipe B. Zambianco",
+    role: "WebDesigner, Designer gráfico e editor de vídeo",
     /** Optional fields — leave empty until real data is available */
-    photo: "/brand/placeholders/founder.jpg",
+    photo: "/brand/founder-luis-felipe.webp",
     bio: "",
     education: "",
     experience: "",

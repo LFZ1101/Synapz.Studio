@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container, Section, SectionHeading, Eyebrow } from "@/components/ui/Layout";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -10,7 +11,7 @@ import { differentials, methodSteps } from "@/content/studio";
 export const metadata: Metadata = buildMetadata({
   title: "Studio — SYNAPZ STUDIO",
   description:
-    "Conheça a SYNAPZ STUDIO: estúdio digital que conecta estratégia, marketing, criatividade, design e tecnologia. Fundado por Luiz Felipe Barbosa Zambianco.",
+    "Conheça a SYNAPZ STUDIO: estúdio digital que conecta estratégia, marketing, criatividade, design e tecnologia. Fundado por Luis Felipe B. Zambianco.",
   path: "/studio",
 });
 
@@ -114,8 +115,14 @@ export default function StudioPage() {
 
           <div className="mt-12 grid gap-8 lg:grid-cols-12 border border-synapz-neural/10 p-6 md:p-10">
             <div className="lg:col-span-4">
-              <div className="aspect-square bg-synapz-graphite border border-synapz-neural/10 flex items-end p-4">
-                <p className="eyebrow">Fotografia — a adicionar</p>
+              <div className="relative aspect-[4/5] bg-synapz-graphite border border-synapz-neural/10 overflow-hidden">
+                <Image
+                  src={SITE.founder.photo}
+                  alt={SITE.founder.name}
+                  fill
+                  className="object-cover object-[center_18%]"
+                  sizes="(max-width:1024px) 100vw, 30vw"
+                />
               </div>
             </div>
             <div className="lg:col-span-8 grid gap-6 sm:grid-cols-2">
