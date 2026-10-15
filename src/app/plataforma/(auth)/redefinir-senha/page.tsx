@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { AuthCard } from "@/components/plataforma/AuthCard";
-import { ActionForm } from "@/components/plataforma/ActionForm";
 import {
-  Field,
-  FormActions,
-  TextInput,
-} from "@/components/plataforma/FormPrimitives";
+  AuthField,
+  AuthSubmit,
+  IconLock,
+} from "@/components/plataforma/AuthField";
+import { ActionForm } from "@/components/plataforma/ActionForm";
 import { actionResetPassword } from "@/lib/plataforma/actions";
 
 export const metadata = { title: "Redefinir senha" };
@@ -25,46 +25,51 @@ export default async function RedefinirPage({
   if (!token) {
     return (
       <AuthCard
-        title="Link inválido"
+        eyebrow="Link inválido"
+        title="Token"
+        titleAccent="ausente."
         description="Abra o link completo enviado para o seu e-mail."
         footer={
-          <Link href="/plataforma/recuperar" className="text-link">
+          <Link href="/plataforma/recuperar" className="sz-auth-help-link">
             Solicitar novo link
           </Link>
         }
       >
-        <p className="text-sm text-synapz-signal">Token ausente.</p>
+        <p className="sz-auth-muted">Não foi possível validar este acesso.</p>
       </AuthCard>
     );
   }
 
   return (
     <AuthCard
-      title="Nova senha"
+      eyebrow="Segurança"
+      title="Nova"
+      titleAccent="senha."
       description="Defina uma senha com pelo menos 8 caracteres."
+      visualTitle="Sessões encerradas."
+      visualDescription="Ao salvar, as sessões anteriores desta conta são invalidadas."
       footer={
-        <Link href="/plataforma/entrar" className="text-link">
+        <Link href="/plataforma/entrar" className="sz-auth-help-link">
           Voltar ao login
         </Link>
       }
     >
-      <ActionForm action={resetAction} className="space-y-4">
+      <ActionForm action={resetAction} className="sz-auth-form">
         <input type="hidden" name="token" value={token} />
-        <Field label="Nova senha" name="password">
-          <TextInput
-            id="password"
-            name="password"
-            type="password"
-            required
-            minLength={8}
-            autoComplete="new-password"
-          />
-        </Field>
-        <FormActions>
-          <button type="submit" className="platform-btn w-full">
-            Salvar senha
-          </button>
-        </FormActions>
+        <AuthField
+          label="Nova senha"
+          index="01"
+          icon={<IconLock />}
+          id="password"
+          name="password"
+          type="password"
+          required
+          minLength={8}
+          autoComplete="new-password"
+          placeholder="Mínimo 8 caracteres"
+          showPasswordToggle
+        />
+        <AuthSubmit>Salvar senha</AuthSubmit>
       </ActionForm>
     </AuthCard>
   );

@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { AuthCard } from "@/components/plataforma/AuthCard";
-import { ActionForm } from "@/components/plataforma/ActionForm";
 import {
-  Field,
-  FormActions,
-  TextInput,
-} from "@/components/plataforma/FormPrimitives";
+  AuthField,
+  AuthSubmit,
+  IconMail,
+} from "@/components/plataforma/AuthField";
+import { ActionForm } from "@/components/plataforma/ActionForm";
 import { actionRequestReset } from "@/lib/plataforma/actions";
 
 export const metadata = { title: "Recuperar acesso" };
@@ -18,23 +18,31 @@ async function resetRequestAction(_prev: unknown, formData: FormData) {
 export default function RecuperarPage() {
   return (
     <AuthCard
-      title="Recuperar acesso"
-      description="Informe o e-mail da conta. Enviaremos um link seguro de redefinição."
+      eyebrow="Recuperação"
+      title="Recuperar"
+      titleAccent="acesso."
+      description="Informe o e-mail da conta. Geramos um link seguro de redefinição."
+      visualTitle="Link protegido."
+      visualDescription="Se o e-mail existir, um token temporário será criado para troca de senha."
       footer={
-        <Link href="/plataforma/entrar" className="text-link">
+        <Link href="/plataforma/entrar" className="sz-auth-help-link">
           Voltar ao login
         </Link>
       }
     >
-      <ActionForm action={resetRequestAction} className="space-y-4">
-        <Field label="E-mail" name="email">
-          <TextInput id="email" name="email" type="email" required autoComplete="email" />
-        </Field>
-        <FormActions>
-          <button type="submit" className="platform-btn w-full">
-            Enviar link
-          </button>
-        </FormActions>
+      <ActionForm action={resetRequestAction} className="sz-auth-form">
+        <AuthField
+          label="E-mail"
+          index="01"
+          icon={<IconMail />}
+          id="email"
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+          placeholder="voce@email.com"
+        />
+        <AuthSubmit>Enviar link</AuthSubmit>
       </ActionForm>
     </AuthCard>
   );

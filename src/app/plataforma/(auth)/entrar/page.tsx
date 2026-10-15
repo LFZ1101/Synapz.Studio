@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { AuthCard } from "@/components/plataforma/AuthCard";
-import { ActionForm } from "@/components/plataforma/ActionForm";
 import {
-  Field,
-  FormActions,
-  TextInput,
-} from "@/components/plataforma/FormPrimitives";
+  AuthField,
+  AuthSubmit,
+  IconLock,
+  IconMail,
+} from "@/components/plataforma/AuthField";
+import { ActionForm } from "@/components/plataforma/ActionForm";
 import { actionLogin } from "@/lib/plataforma/actions";
 import { hasOwner, isBootstrapConfigured } from "@/lib/plataforma/auth";
 
@@ -21,53 +22,64 @@ export default async function LoginPage() {
 
   return (
     <AuthCard
-      title="Acessar a central"
-      description="Entre com seu e-mail e senha para operar clientes, projetos e resultado."
+      eyebrow="Acesse sua conta"
+      title="Entre na"
+      titleAccent="plataforma."
+      description="Use suas credenciais para abrir a central operacional da SYNAPZ STUDIO."
       footer={
-        <div className="space-y-2">
+        <div className="sz-auth-footer-links">
           <p>
-            <Link href="/plataforma/recuperar" className="text-link">
-              Recuperar acesso
-            </Link>
+            <Link href="/plataforma/recuperar">Esqueci a senha</Link>
           </p>
           {showBootstrap ? (
             <p>
               Primeira conta?{" "}
-              <Link href="/plataforma/bootstrap" className="text-link">
-                Ativar proprietário
-              </Link>
+              <Link href="/plataforma/bootstrap">Ativar proprietário</Link>
             </p>
           ) : (
-            <p className="text-xs">
-              Novos membros entram por convite do proprietário ou administrador.
+            <p className="sz-auth-muted">
+              Novos membros entram por convite do proprietário.
             </p>
           )}
         </div>
       }
     >
-      <ActionForm action={loginAction} className="space-y-4">
-        <Field label="E-mail" name="email">
-          <TextInput id="email" name="email" type="email" required autoComplete="email" />
-        </Field>
-        <Field label="Senha" name="password">
-          <TextInput
-            id="password"
-            name="password"
-            type="password"
-            required
-            minLength={8}
-            autoComplete="current-password"
-          />
-        </Field>
-        <label className="flex items-center gap-2 text-sm text-synapz-signal">
-          <input type="checkbox" name="remember" className="accent-synapz-impulse" defaultChecked />
-          Manter sessão neste dispositivo
-        </label>
-        <FormActions>
-          <button type="submit" className="platform-btn w-full">
-            Entrar
-          </button>
-        </FormActions>
+      <ActionForm action={loginAction} className="sz-auth-form">
+        <AuthField
+          label="E-mail"
+          index="01"
+          icon={<IconMail />}
+          id="email"
+          name="email"
+          type="email"
+          required
+          autoComplete="email"
+          placeholder="voce@email.com"
+        />
+        <AuthField
+          label="Senha"
+          index="02"
+          icon={<IconLock />}
+          id="password"
+          name="password"
+          type="password"
+          required
+          minLength={8}
+          autoComplete="current-password"
+          placeholder="Sua senha"
+          showPasswordToggle
+        />
+        <div className="sz-auth-help">
+          <label className="sz-auth-remember">
+            <input type="checkbox" name="remember" defaultChecked />
+            <i aria-hidden />
+            <span>Salvar sessão</span>
+          </label>
+          <Link href="/plataforma/recuperar" className="sz-auth-help-link">
+            Esqueci a senha
+          </Link>
+        </div>
+        <AuthSubmit>Entrar na dashboard</AuthSubmit>
       </ActionForm>
     </AuthCard>
   );

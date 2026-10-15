@@ -22,104 +22,111 @@ export function PlatformShell({
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <div className="platform-root">
-      <aside className={`platform-sidebar ${mobileOpen ? "is-open" : ""}`}>
-        <div className="flex items-center justify-between gap-3 px-4 py-5">
-          <Link href="/plataforma" className="inline-flex min-w-[120px]" onClick={() => setMobileOpen(false)}>
-            <Image
-              src="/brand/logo-principal.png"
-              alt="SYNAPZ STUDIO"
-              width={140}
-              height={38}
-              className="h-8 w-auto"
-              priority
-            />
-          </Link>
-          <button
-            type="button"
-            className="platform-icon-btn md:hidden"
-            onClick={() => setMobileOpen(false)}
-            aria-label="Fechar menu"
-          >
-            ✕
-          </button>
-        </div>
-        <nav className="flex flex-1 flex-col gap-1 px-2 pb-4" aria-label="Principal">
-          {PLATFORM_NAV.map((item) => {
-            const active = item.exact
-              ? pathname === item.href
-              : pathname === item.href || pathname.startsWith(`${item.href}/`);
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`platform-nav-item ${active ? "is-active" : ""}`}
-                onClick={() => setMobileOpen(false)}
-              >
-                <NavIcons name={item.icon} className="h-5 w-5 shrink-0" />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
-        <div className="border-t border-synapz-neural/10 px-4 py-4">
-          <p className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-synapz-signal">
-            {user.orgName}
-          </p>
-          <p className="mt-1 truncate text-sm text-synapz-neural">{user.name}</p>
-          <p className="text-xs text-synapz-signal">{ROLE_LABELS[user.role]}</p>
+    <div className="sz-shell">
+      <div className="sz-shell-grid" aria-hidden />
+
+      <aside className={`sz-sidebar ${mobileOpen ? "is-open" : ""}`}>
+        <div className="sz-sidebar-glass">
+          <div className="sz-sidebar-top">
+            <Link
+              href="/plataforma"
+              className="sz-sidebar-logo"
+              onClick={() => setMobileOpen(false)}
+            >
+              <Image
+                src="/brand/simbolo.png"
+                alt="SYNAPZ"
+                width={28}
+                height={24}
+                className="h-6 w-auto"
+                priority
+              />
+            </Link>
+            <button
+              type="button"
+              className="sz-icon-btn sz-only-mobile"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Fechar menu"
+            >
+              ✕
+            </button>
+          </div>
+
+          <nav className="sz-sidebar-nav" aria-label="Principal">
+            {PLATFORM_NAV.map((item) => {
+              const active = item.exact
+                ? pathname === item.href
+                : pathname === item.href || pathname.startsWith(`${item.href}/`);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  title={item.label}
+                  className={`sz-nav-btn ${active ? "is-active" : ""}`}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <NavIcons name={item.icon} className="sz-nav-icon" />
+                  <span className="sz-nav-label">{item.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="sz-sidebar-foot">
+            <p className="sz-sidebar-org">{user.orgName}</p>
+            <p className="sz-sidebar-user">{user.name}</p>
+            <p className="sz-sidebar-role">{ROLE_LABELS[user.role]}</p>
+          </div>
         </div>
       </aside>
 
       {mobileOpen ? (
         <button
           type="button"
-          className="platform-backdrop md:hidden"
+          className="sz-backdrop sz-only-mobile"
           aria-label="Fechar navegação"
           onClick={() => setMobileOpen(false)}
         />
       ) : null}
 
-      <div className="platform-main">
-        <header className="platform-topbar">
-          <div className="flex items-center gap-2">
+      <div className="sz-main">
+        <header className="sz-topbar">
+          <div className="sz-topbar-left">
             <button
               type="button"
-              className="platform-icon-btn md:hidden"
+              className="sz-icon-btn sz-only-mobile"
               onClick={() => setMobileOpen(true)}
               aria-label="Abrir menu"
             >
-              <span className="sr-only">Menu</span>
               <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
                 <path d="M4 7h16M4 12h16M4 17h16" />
               </svg>
             </button>
             <GlobalSearch />
           </div>
-          <div className="flex items-center gap-2">
+          <div className="sz-topbar-actions">
             <button
               type="button"
-              className="platform-chip"
+              className="sz-chip"
               onClick={() => actionToggleHideValues(!user.hideValues)}
-              title="Ocultar valores financeiros neste navegador"
             >
               {user.hideValues ? "Mostrar valores" : "Ocultar valores"}
             </button>
-            <Link href="/plataforma/configuracoes" className="platform-chip">
+            <Link href="/plataforma/configuracoes" className="sz-chip">
               Conta
             </Link>
             <form action={actionLogout}>
-              <button type="submit" className="platform-chip">
+              <button type="submit" className="sz-chip">
                 Sair
               </button>
             </form>
           </div>
         </header>
 
-        <main className="platform-content">{children}</main>
+        <main className="sz-content">{children}</main>
       </div>
 
-      <nav className="platform-mobile-nav md:hidden" aria-label="Mobile">
+      <nav className="sz-mobile-nav sz-only-mobile" aria-label="Mobile">
         {PLATFORM_NAV.slice(0, 5).map((item) => {
           const active = item.exact
             ? pathname === item.href
@@ -128,7 +135,7 @@ export function PlatformShell({
             <Link
               key={item.href}
               href={item.href}
-              className={`platform-mobile-item ${active ? "is-active" : ""}`}
+              className={`sz-mobile-item ${active ? "is-active" : ""}`}
             >
               <NavIcons name={item.icon} className="h-5 w-5" />
               <span>{item.label.split(" ")[0]}</span>

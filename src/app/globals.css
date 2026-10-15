@@ -484,38 +484,180 @@
   }
 }
 
-/* ===== Plataforma operacional SYNAPZ ===== */
+/* ===== Plataforma operacional SYNAPZ — estilo OS (ref. visual + cores SYNAPZ) ===== */
+
+.sz-shell,
 .platform-root {
-  --platform-sidebar: 15.5rem;
+  --sz-accent: var(--color-synapz-impulse);
+  --sz-accent-ink: #050605;
+  --sz-panel: color-mix(in srgb, var(--color-synapz-graphite) 88%, #000);
+  --sz-radius-lg: 28px 8px;
+  --sz-radius-md: 16px 6px;
+  --sz-radius-sm: 12px 4px;
+  --sz-sidebar: 17rem;
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
   display: flex;
-  min-height: 100vh;
-  background:
-    radial-gradient(
-      50% 40% at 0% 0%,
-      color-mix(in srgb, var(--color-synapz-impulse) 8%, transparent),
-      transparent 60%
-    ),
-    linear-gradient(180deg, #070807 0%, var(--color-synapz-black) 40%, #050605 100%);
   color: var(--color-synapz-neural);
+  background:
+    radial-gradient(at 16% 12%, color-mix(in srgb, var(--color-synapz-impulse) 10%, transparent), transparent 28%),
+    radial-gradient(at 83% 82%, color-mix(in srgb, var(--color-synapz-impulse) 6%, transparent), transparent 26%),
+    linear-gradient(145deg, #020202 0%, #050605 46%, #020202 100%);
 }
 
+.sz-shell-grid {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(color-mix(in srgb, white 2%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, white 2%, transparent) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(#000, transparent 85%);
+  -webkit-mask-image: linear-gradient(#000, transparent 85%);
+}
+
+.sz-sidebar,
 .platform-sidebar {
   position: fixed;
   inset: 0 auto 0 0;
   z-index: 40;
-  width: var(--platform-sidebar);
-  display: flex;
-  flex-direction: column;
-  background: color-mix(in srgb, var(--color-synapz-graphite) 92%, black);
-  border-right: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
+  width: var(--sz-sidebar);
+  padding: 10px;
   transform: translateX(-105%);
   transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.sz-sidebar.is-open,
 .platform-sidebar.is-open {
   transform: translateX(0);
 }
 
+.sz-sidebar-glass {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 24px 8px;
+  border: 1px solid color-mix(in srgb, white 18%, transparent);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, white 8%, transparent), color-mix(in srgb, black 35%, transparent)),
+    color-mix(in srgb, var(--color-synapz-graphite) 80%, black);
+  box-shadow: 0 24px 60px color-mix(in srgb, black 55%, transparent);
+}
+
+.sz-sidebar-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.7;
+  background:
+    radial-gradient(at 20% 4%, color-mix(in srgb, white 22%, transparent), transparent 23%),
+    linear-gradient(105deg, color-mix(in srgb, white 10%, transparent), transparent 34%, color-mix(in srgb, var(--color-synapz-impulse) 8%, transparent));
+}
+
+.sz-sidebar-glass > * {
+  position: relative;
+  z-index: 1;
+}
+
+.sz-sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 1rem 0.85rem 0.5rem;
+}
+
+.sz-sidebar-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px 6px;
+  border: 1px solid color-mix(in srgb, white 14%, transparent);
+  background: color-mix(in srgb, black 35%, transparent);
+}
+
+.sz-sidebar-nav,
+.platform-sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.5rem 0.65rem 1rem;
+  flex: 1;
+  overflow: auto;
+}
+
+.sz-nav-btn,
+.platform-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.7rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 14px 6px;
+  border: 1px solid transparent;
+  color: color-mix(in srgb, white 88%, transparent);
+  font-size: 0.88rem;
+  opacity: 0.88;
+  transition: color 0.18s, background 0.18s, border-color 0.18s, box-shadow 0.18s, opacity 0.18s;
+}
+
+.sz-nav-btn:hover,
+.platform-nav-item:hover {
+  opacity: 1;
+  background: linear-gradient(145deg, color-mix(in srgb, white 18%, transparent), color-mix(in srgb, white 6%, transparent));
+  border-color: color-mix(in srgb, white 28%, transparent);
+}
+
+.sz-nav-btn.is-active,
+.platform-nav-item.is-active {
+  opacity: 1;
+  color: var(--sz-accent-ink);
+  background: var(--sz-accent);
+  border-color: var(--sz-accent);
+  box-shadow:
+    0 10px 24px color-mix(in srgb, var(--color-synapz-impulse) 28%, transparent),
+    0 0 0 3px color-mix(in srgb, white 12%, transparent);
+}
+
+.sz-nav-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+}
+
+.sz-sidebar-foot {
+  border-top: 1px solid color-mix(in srgb, white 10%, transparent);
+  padding: 0.9rem 1rem 1.1rem;
+}
+
+.sz-sidebar-org {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-synapz-signal);
+}
+
+.sz-sidebar-user {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.sz-sidebar-role {
+  font-size: 0.75rem;
+  color: var(--color-synapz-signal);
+}
+
+.sz-backdrop,
 .platform-backdrop {
   position: fixed;
   inset: 0;
@@ -523,13 +665,17 @@
   background: color-mix(in srgb, black 55%, transparent);
 }
 
+.sz-main,
 .platform-main {
+  position: relative;
+  z-index: 1;
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
 }
 
+.sz-topbar,
 .platform-topbar {
   position: sticky;
   top: 0;
@@ -539,98 +685,104 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
-  background: color-mix(in srgb, var(--color-synapz-black) 86%, transparent);
-  backdrop-filter: blur(12px);
+  margin: 10px 10px 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 18px 6px;
+  border: 1px solid color-mix(in srgb, white 12%, transparent);
+  background: color-mix(in srgb, #0a0b0a 82%, transparent);
+  backdrop-filter: blur(16px);
 }
 
-.platform-content {
-  padding: 1.25rem 1rem 6rem;
-}
-
-.platform-nav-item {
+.sz-topbar-left {
   display: flex;
   align-items: center;
-  gap: 0.7rem;
-  padding: 0.65rem 0.8rem;
-  color: var(--color-synapz-signal);
-  font-size: 0.92rem;
-  transition: color 0.2s ease, background-color 0.2s ease;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
 }
 
-.platform-nav-item:hover {
-  color: var(--color-synapz-neural);
-  background: color-mix(in srgb, var(--color-synapz-neural) 4%, transparent);
+.sz-topbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 
-.platform-nav-item.is-active {
-  color: var(--color-synapz-black);
-  background: var(--color-synapz-impulse);
+.sz-content,
+.platform-content {
+  position: relative;
+  z-index: 1;
+  padding: 1rem 1rem 6rem;
 }
 
+.sz-icon-btn,
 .platform-icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 14%, transparent);
+  border-radius: 12px 4px;
+  border: 1px solid color-mix(in srgb, white 14%, transparent);
   color: var(--color-synapz-neural);
 }
 
+.sz-chip,
 .platform-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  min-height: 2.25rem;
-  padding: 0.35rem 0.8rem;
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 14%, transparent);
+  min-height: 2.2rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, white 14%, transparent);
   color: var(--color-synapz-signal);
-  font-size: 0.82rem;
-  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+  font-size: 0.8rem;
+  background: color-mix(in srgb, white 3%, transparent);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 
+.sz-chip:hover,
+.sz-chip.is-active,
 .platform-chip:hover,
 .platform-chip.is-active {
   color: var(--color-synapz-neural);
-  border-color: color-mix(in srgb, var(--color-synapz-impulse) 50%, transparent);
+  border-color: color-mix(in srgb, var(--color-synapz-impulse) 55%, transparent);
+  background: color-mix(in srgb, var(--color-synapz-impulse) 10%, transparent);
 }
 
-.platform-chip.is-active {
-  background: color-mix(in srgb, var(--color-synapz-impulse) 12%, transparent);
-}
-
-.platform-input {
+.sz-auth-input,
+.platform-input,
+.platform-input.w-full {
   min-height: 2.6rem;
   padding: 0.65rem 0.85rem;
-  background: color-mix(in srgb, var(--color-synapz-black) 70%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 14%, transparent);
+  border-radius: var(--sz-radius-md);
+  background: color-mix(in srgb, black 45%, transparent);
+  border: 1px solid color-mix(in srgb, white 12%, transparent);
   color: var(--color-synapz-neural);
   font-size: 0.95rem;
+  box-shadow: inset 0 1px color-mix(in srgb, white 4%, transparent);
 }
 
-.platform-input:focus {
+.platform-input:focus,
+.sz-auth-input:focus-within {
   outline: none;
   border-color: color-mix(in srgb, var(--color-synapz-impulse) 65%, transparent);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-synapz-impulse) 16%, transparent);
 }
 
-.platform-stat {
-  padding: 1.1rem 1.15rem;
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
+.platform-stat,
+.platform-panel,
+.platform-kanban-col {
+  border-radius: var(--sz-radius-lg);
+  border: 1px solid color-mix(in srgb, white 10%, transparent);
   background:
-    linear-gradient(
-      160deg,
-      color-mix(in srgb, var(--color-synapz-impulse) 5%, transparent),
-      transparent 45%
-    ),
+    linear-gradient(160deg, color-mix(in srgb, var(--color-synapz-impulse) 5%, transparent), transparent 45%),
     color-mix(in srgb, var(--color-synapz-graphite) 70%, transparent);
+  box-shadow: 0 18px 48px color-mix(in srgb, black 35%, transparent);
 }
 
+.platform-stat,
 .platform-panel {
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
-  background: color-mix(in srgb, var(--color-synapz-graphite) 55%, transparent);
   padding: 1.15rem;
 }
 
@@ -639,7 +791,8 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 2.5rem 1.25rem;
-  border: 1px dashed color-mix(in srgb, var(--color-synapz-neural) 18%, transparent);
+  border-radius: var(--sz-radius-lg);
+  border: 1px dashed color-mix(in srgb, white 18%, transparent);
   background: color-mix(in srgb, var(--color-synapz-graphite) 35%, transparent);
 }
 
@@ -655,7 +808,9 @@
 
 .platform-table-wrap {
   overflow-x: auto;
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
+  border-radius: var(--sz-radius-lg);
+  border: 1px solid color-mix(in srgb, white 10%, transparent);
+  background: color-mix(in srgb, var(--color-synapz-graphite) 45%, transparent);
 }
 
 .platform-table {
@@ -669,7 +824,7 @@
 .platform-table td {
   padding: 0.85rem 1rem;
   text-align: left;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-synapz-neural) 8%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, white 7%, transparent);
   vertical-align: top;
 }
 
@@ -679,7 +834,7 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-synapz-signal);
-  background: color-mix(in srgb, var(--color-synapz-graphite) 80%, transparent);
+  background: color-mix(in srgb, black 35%, transparent);
 }
 
 .platform-search-panel {
@@ -690,8 +845,10 @@
   z-index: 30;
   max-height: 20rem;
   overflow: auto;
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 12%, transparent);
+  border-radius: var(--sz-radius-md);
+  border: 1px solid color-mix(in srgb, white 12%, transparent);
   background: var(--color-synapz-graphite);
+  box-shadow: 0 24px 60px color-mix(in srgb, black 55%, transparent);
 }
 
 .platform-search-item {
@@ -699,13 +856,14 @@
   flex-direction: column;
   gap: 0.15rem;
   padding: 0.7rem 0.85rem;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-synapz-neural) 8%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, white 8%, transparent);
 }
 
 .platform-search-item:hover {
   background: color-mix(in srgb, var(--color-synapz-impulse) 8%, transparent);
 }
 
+.sz-mobile-nav,
 .platform-mobile-nav {
   position: fixed;
   left: 0;
@@ -714,11 +872,12 @@
   z-index: 25;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  border-top: 1px solid color-mix(in srgb, var(--color-synapz-neural) 12%, transparent);
-  background: color-mix(in srgb, var(--color-synapz-black) 94%, transparent);
+  border-top: 1px solid color-mix(in srgb, white 12%, transparent);
+  background: color-mix(in srgb, #050605 94%, transparent);
   backdrop-filter: blur(12px);
 }
 
+.sz-mobile-item,
 .platform-mobile-item {
   display: flex;
   flex-direction: column;
@@ -729,29 +888,9 @@
   color: var(--color-synapz-signal);
 }
 
+.sz-mobile-item.is-active,
 .platform-mobile-item.is-active {
   color: var(--color-synapz-impulse);
-}
-
-.platform-auth {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 2rem 1rem;
-  background:
-    radial-gradient(
-      55% 45% at 80% 10%,
-      color-mix(in srgb, var(--color-synapz-impulse) 12%, transparent),
-      transparent 65%
-    ),
-    var(--color-synapz-black);
-}
-
-.platform-auth-panel {
-  width: min(100%, 28rem);
-  padding: 2rem 1.5rem;
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 12%, transparent);
-  background: color-mix(in srgb, var(--color-synapz-graphite) 80%, transparent);
 }
 
 .platform-kanban {
@@ -764,17 +903,17 @@
 }
 
 .platform-kanban-col {
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
-  background: color-mix(in srgb, var(--color-synapz-graphite) 45%, transparent);
   min-height: 18rem;
+  padding-bottom: 0.35rem;
 }
 
 .platform-kanban-card {
   display: block;
   margin: 0.55rem;
   padding: 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
-  background: color-mix(in srgb, var(--color-synapz-black) 55%, transparent);
+  border-radius: var(--sz-radius-md);
+  border: 1px solid color-mix(in srgb, white 10%, transparent);
+  background: color-mix(in srgb, black 45%, transparent);
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -783,17 +922,22 @@
   transform: translateY(-1px);
 }
 
-.platform-btn {
+.platform-btn,
+.sz-auth-submit {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  min-height: 2.6rem;
+  min-height: 2.7rem;
   padding: 0.55rem 1.1rem;
-  background: var(--color-synapz-impulse);
-  color: var(--color-synapz-black);
-  font-weight: 600;
-  font-size: 0.92rem;
+  border-radius: 14px 6px;
+  background: linear-gradient(110deg, #d8ff4a, var(--color-synapz-impulse) 55%, #8fcc00);
+  color: var(--sz-accent-ink);
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow:
+    0 16px 32px color-mix(in srgb, var(--color-synapz-impulse) 22%, transparent),
+    inset 0 1px color-mix(in srgb, white 35%, transparent);
 }
 
 .platform-btn-ghost {
@@ -802,9 +946,11 @@
   justify-content: center;
   min-height: 2.6rem;
   padding: 0.55rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 18%, transparent);
+  border-radius: 14px 6px;
+  border: 1px solid color-mix(in srgb, white 18%, transparent);
   color: var(--color-synapz-neural);
   font-size: 0.92rem;
+  background: color-mix(in srgb, white 3%, transparent);
 }
 
 .platform-btn-danger {
@@ -813,6 +959,7 @@
   justify-content: center;
   min-height: 2.4rem;
   padding: 0.45rem 0.9rem;
+  border-radius: 12px 4px;
   border: 1px solid color-mix(in srgb, var(--color-synapz-danger) 50%, transparent);
   color: var(--color-synapz-danger);
   font-size: 0.85rem;
@@ -829,46 +976,415 @@
 .platform-chart-bar {
   flex: 1;
   min-width: 0.4rem;
-  background: color-mix(in srgb, var(--color-synapz-impulse) 75%, white);
-  transition: height 0.35s ease;
+  border-radius: 8px 8px 2px 2px;
+  background: linear-gradient(180deg, #e8ff7a, var(--color-synapz-impulse));
+  box-shadow: 0 0 18px color-mix(in srgb, var(--color-synapz-impulse) 35%, transparent);
+}
+
+/* ----- Auth OS (split) ----- */
+.sz-auth {
+  min-height: 100svh;
+  padding: 14px;
+  background: #050605;
+  color: #fff;
+}
+
+.sz-auth-frame {
+  position: relative;
+  isolation: isolate;
+  width: min(1560px, 100%);
+  min-height: calc(100svh - 28px);
+  margin: auto;
+  display: grid;
+  grid-template-columns: minmax(420px, 0.46fr) minmax(480px, 0.54fr);
+  border: 1px solid color-mix(in srgb, white 22%, transparent);
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 34px 90px color-mix(in srgb, black 42%, transparent);
+  background: #070807;
+}
+
+.sz-auth-form-side {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(28px, 5vw, 64px);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, #121412 92%, transparent), color-mix(in srgb, #050605 88%, transparent));
+}
+
+.sz-auth-shell {
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+.sz-auth-logo {
+  display: inline-flex;
+  min-width: 120px;
+  margin-bottom: 1.75rem;
+}
+
+.sz-auth-eyebrow {
+  display: block;
+  color: var(--color-synapz-impulse);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font: 800 0.68rem/1 var(--font-ibm-plex-mono), ui-monospace, monospace;
+}
+
+.sz-auth-title {
+  margin: 0.9rem 0 0.7rem;
+  letter-spacing: -0.05em;
+  font: 700 clamp(2rem, 4vw, 3rem)/1.02 var(--font-space-grotesk), system-ui, sans-serif;
+  color: var(--color-synapz-neural);
+}
+
+.sz-auth-title em {
+  color: var(--color-synapz-impulse);
+  font-style: normal;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+
+.sz-auth-desc {
+  color: var(--color-synapz-signal);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  max-width: 34rem;
+}
+
+.sz-auth-body {
+  margin-top: 1.6rem;
+}
+
+.sz-auth-form {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.sz-auth-field {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.sz-auth-field-label {
+  position: relative;
+  color: color-mix(in srgb, var(--color-synapz-neural) 70%, transparent);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding-right: 2rem;
+}
+
+.sz-auth-field-label::after {
+  content: attr(data-index);
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  color: color-mix(in srgb, var(--color-synapz-impulse) 80%, white);
+}
+
+.sz-auth-input {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 3.4rem;
+  padding: 0 0.85rem;
+  border-radius: 16px 6px;
+  background: linear-gradient(100deg, color-mix(in srgb, white 6%, transparent), color-mix(in srgb, white 2%, transparent));
+  border: 1px solid color-mix(in srgb, white 12%, transparent);
+}
+
+.sz-auth-input-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 10px 4px;
+  color: var(--color-synapz-impulse);
+  background: color-mix(in srgb, var(--color-synapz-impulse) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-synapz-impulse) 28%, transparent);
+}
+
+.sz-auth-input-control {
+  flex: 1;
+  min-width: 0;
+}
+
+.sz-auth-input input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  color: var(--color-synapz-neural);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.sz-auth-eye {
+  border: 0;
+  background: transparent;
+  color: var(--color-synapz-signal);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sz-auth-help {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.sz-auth-remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-synapz-signal);
+  font-size: 0.82rem;
+}
+
+.sz-auth-remember input {
+  accent-color: var(--color-synapz-impulse);
+}
+
+.sz-auth-help-link,
+.sz-auth-footer a,
+.sz-auth-footer-links a {
+  color: var(--color-synapz-impulse);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.sz-auth-submit {
+  width: 100%;
+  min-height: 3.5rem;
+  justify-content: space-between;
+  padding: 0 0 0 1.2rem;
+  border: 0;
+  border-radius: 17px 6px;
+  text-align: left;
+  background: linear-gradient(110deg, #1a2208, #3d5200 55%, #6a8f00);
+  color: #fff;
+  box-shadow: 0 18px 34px color-mix(in srgb, #1a2208 40%, transparent);
+  overflow: hidden;
+}
+
+.sz-auth-submit span {
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.sz-auth-submit i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.4rem;
+  height: 3.5rem;
+  background: linear-gradient(160deg, var(--color-synapz-impulse), #8fcc00);
+  color: #050605;
+}
+
+.sz-auth-footer,
+.sz-auth-footer-links {
+  margin-top: 1.25rem;
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--color-synapz-signal);
+}
+
+.sz-auth-muted {
+  color: var(--color-synapz-signal);
+  font-size: 0.82rem;
+}
+
+.sz-auth-signature {
+  margin-top: 2rem;
+  font-size: 0.72rem;
+  color: color-mix(in srgb, var(--color-synapz-signal) 80%, transparent);
+}
+
+.sz-auth-visual {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+  background:
+    radial-gradient(at 70% 30%, color-mix(in srgb, var(--color-synapz-impulse) 35%, transparent), transparent 45%),
+    linear-gradient(130deg, #1a2a00 0%, #0c1400 40%, #050605 100%);
+}
+
+.sz-auth-visual-glow {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(circle at 60% 40%, color-mix(in srgb, var(--color-synapz-impulse) 28%, transparent), transparent 42%),
+    radial-gradient(circle at 30% 80%, color-mix(in srgb, var(--color-synapz-impulse) 12%, transparent), transparent 40%);
+  filter: blur(8px);
+}
+
+.sz-auth-visual-grid {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 96px, color-mix(in srgb, white 8%, transparent) 97px),
+    repeating-linear-gradient(0deg, transparent 0 72px, color-mix(in srgb, white 5%, transparent) 73px);
+  mask-image: linear-gradient(90deg, transparent, #000 20%, #000);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 20%, #000);
+  opacity: 0.45;
+}
+
+.sz-auth-visual-copy {
+  position: absolute;
+  z-index: 2;
+  left: 10%;
+  right: 10%;
+  top: 42%;
+  transform: translateY(-50%);
+}
+
+.sz-auth-visual-eyebrow {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font: 700 0.7rem/1 var(--font-ibm-plex-mono), ui-monospace, monospace;
+  color: color-mix(in srgb, white 80%, transparent);
+}
+
+.sz-auth-visual-title {
+  margin: 1rem 0 0.8rem;
+  max-width: 12ch;
+  font: 500 clamp(2.4rem, 4.5vw, 4rem)/0.95 Georgia, "Times New Roman", serif;
+  color: #fff;
+  letter-spacing: -0.03em;
+}
+
+.sz-auth-visual-desc {
+  max-width: 28rem;
+  color: color-mix(in srgb, white 72%, transparent);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.sz-auth-visual-status {
+  position: absolute;
+  z-index: 2;
+  left: 10%;
+  bottom: 8%;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font: 700 0.68rem/1 var(--font-ibm-plex-mono), ui-monospace, monospace;
+  color: #fff;
+}
+
+.sz-auth-status-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--color-synapz-impulse);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-synapz-impulse) 18%, transparent);
+}
+
+.sz-auth-divider {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sz-auth-divider span {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, white 55%, transparent);
+}
+
+@media (min-width: 980px) {
+  .sz-auth-divider {
+    display: flex;
+  }
+}
+
+@media (max-width: 979px) {
+  .sz-auth {
+    padding: 0;
+  }
+
+  .sz-auth-frame {
+    border: 0;
+    border-radius: 0;
+    width: 100%;
+    min-height: 100svh;
+    grid-template-columns: 1fr;
+  }
+
+  .sz-auth-visual {
+    min-height: 220px;
+    order: -1;
+  }
+
+  .sz-auth-visual-copy {
+    top: auto;
+    bottom: 18%;
+    transform: none;
+  }
+
+  .sz-auth-visual-title {
+    max-width: none;
+    font-size: 2rem;
+  }
 }
 
 @media (min-width: 768px) {
+  .sz-shell,
+  .platform-root {
+    display: grid;
+    grid-template-columns: var(--sz-sidebar) 1fr;
+    padding: 8px;
+  }
+
+  .sz-sidebar,
   .platform-sidebar {
-    transform: none;
     position: sticky;
-    top: 0;
-    height: 100vh;
+    top: 8px;
+    height: calc(100svh - 16px);
+    transform: none;
+    padding: 0;
   }
 
-  .platform-sidebar .platform-icon-btn {
-    display: none;
-  }
-
-  .platform-topbar > div:first-child > .platform-icon-btn {
-    display: none;
-  }
-
-  .platform-mobile-nav {
+  .sz-only-mobile {
     display: none !important;
   }
 
-  .platform-main {
-    margin-left: 0;
-  }
-
+  .sz-content,
   .platform-content {
-    padding: 1.75rem 1.75rem 2.5rem;
+    padding: 1.25rem 1.25rem 1.75rem;
   }
 
-  .platform-root {
-    display: grid;
-    grid-template-columns: var(--platform-sidebar) 1fr;
+  .sz-mobile-nav,
+  .platform-mobile-nav {
+    display: none !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .platform-empty-node,
+  .sz-sidebar,
   .platform-sidebar,
   .platform-kanban-card,
   .platform-chart-bar {
