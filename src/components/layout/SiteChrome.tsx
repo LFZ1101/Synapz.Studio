@@ -8,9 +8,10 @@ import { CinematicIntro } from "@/components/animations/CinematicIntro";
 
 export function SiteChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isAdmin = pathname?.startsWith("/admin");
+  const isShellFree =
+    pathname?.startsWith("/admin") || pathname?.startsWith("/plataforma");
 
-  if (isAdmin) {
+  if (isShellFree) {
     return <div className="flex min-h-full flex-1 flex-col">{children}</div>;
   }
 

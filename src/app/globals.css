@@ -6,6 +6,8 @@
   --color-synapz-neural: #ecede7;
   --color-synapz-graphite: #121412;
   --color-synapz-signal: #898d86;
+  --color-synapz-danger: #e85d4c;
+  --color-synapz-warning: #d4a017;
   --color-background: var(--color-synapz-black);
   --color-foreground: var(--color-synapz-neural);
   --font-display: var(--font-space-grotesk);
@@ -478,6 +480,387 @@
     opacity: 1 !important;
     transform: none !important;
     clip-path: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===== Plataforma operacional SYNAPZ ===== */
+.platform-root {
+  --platform-sidebar: 15.5rem;
+  display: flex;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      50% 40% at 0% 0%,
+      color-mix(in srgb, var(--color-synapz-impulse) 8%, transparent),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #070807 0%, var(--color-synapz-black) 40%, #050605 100%);
+  color: var(--color-synapz-neural);
+}
+
+.platform-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  width: var(--platform-sidebar);
+  display: flex;
+  flex-direction: column;
+  background: color-mix(in srgb, var(--color-synapz-graphite) 92%, black);
+  border-right: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
+  transform: translateX(-105%);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.platform-sidebar.is-open {
+  transform: translateX(0);
+}
+
+.platform-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: color-mix(in srgb, black 55%, transparent);
+}
+
+.platform-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.platform-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
+  background: color-mix(in srgb, var(--color-synapz-black) 86%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.platform-content {
+  padding: 1.25rem 1rem 6rem;
+}
+
+.platform-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.65rem 0.8rem;
+  color: var(--color-synapz-signal);
+  font-size: 0.92rem;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.platform-nav-item:hover {
+  color: var(--color-synapz-neural);
+  background: color-mix(in srgb, var(--color-synapz-neural) 4%, transparent);
+}
+
+.platform-nav-item.is-active {
+  color: var(--color-synapz-black);
+  background: var(--color-synapz-impulse);
+}
+
+.platform-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 14%, transparent);
+  color: var(--color-synapz-neural);
+}
+
+.platform-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 14%, transparent);
+  color: var(--color-synapz-signal);
+  font-size: 0.82rem;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.platform-chip:hover,
+.platform-chip.is-active {
+  color: var(--color-synapz-neural);
+  border-color: color-mix(in srgb, var(--color-synapz-impulse) 50%, transparent);
+}
+
+.platform-chip.is-active {
+  background: color-mix(in srgb, var(--color-synapz-impulse) 12%, transparent);
+}
+
+.platform-input {
+  min-height: 2.6rem;
+  padding: 0.65rem 0.85rem;
+  background: color-mix(in srgb, var(--color-synapz-black) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 14%, transparent);
+  color: var(--color-synapz-neural);
+  font-size: 0.95rem;
+}
+
+.platform-input:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--color-synapz-impulse) 65%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-synapz-impulse) 16%, transparent);
+}
+
+.platform-stat {
+  padding: 1.1rem 1.15rem;
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
+  background:
+    linear-gradient(
+      160deg,
+      color-mix(in srgb, var(--color-synapz-impulse) 5%, transparent),
+      transparent 45%
+    ),
+    color-mix(in srgb, var(--color-synapz-graphite) 70%, transparent);
+}
+
+.platform-panel {
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
+  background: color-mix(in srgb, var(--color-synapz-graphite) 55%, transparent);
+  padding: 1.15rem;
+}
+
+.platform-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2.5rem 1.25rem;
+  border: 1px dashed color-mix(in srgb, var(--color-synapz-neural) 18%, transparent);
+  background: color-mix(in srgb, var(--color-synapz-graphite) 35%, transparent);
+}
+
+.platform-empty-node {
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-bottom: 1rem;
+  border-radius: 999px;
+  background: var(--color-synapz-impulse);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-synapz-impulse) 12%, transparent);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+.platform-table-wrap {
+  overflow-x: auto;
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
+}
+
+.platform-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.platform-table th,
+.platform-table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-synapz-neural) 8%, transparent);
+  vertical-align: top;
+}
+
+.platform-table th {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-synapz-signal);
+  background: color-mix(in srgb, var(--color-synapz-graphite) 80%, transparent);
+}
+
+.platform-search-panel {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  max-height: 20rem;
+  overflow: auto;
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 12%, transparent);
+  background: var(--color-synapz-graphite);
+}
+
+.platform-search-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-synapz-neural) 8%, transparent);
+}
+
+.platform-search-item:hover {
+  background: color-mix(in srgb, var(--color-synapz-impulse) 8%, transparent);
+}
+
+.platform-mobile-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 25;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid color-mix(in srgb, var(--color-synapz-neural) 12%, transparent);
+  background: color-mix(in srgb, var(--color-synapz-black) 94%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.platform-mobile-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.55rem 0.25rem 0.7rem;
+  font-size: 0.62rem;
+  color: var(--color-synapz-signal);
+}
+
+.platform-mobile-item.is-active {
+  color: var(--color-synapz-impulse);
+}
+
+.platform-auth {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
+  background:
+    radial-gradient(
+      55% 45% at 80% 10%,
+      color-mix(in srgb, var(--color-synapz-impulse) 12%, transparent),
+      transparent 65%
+    ),
+    var(--color-synapz-black);
+}
+
+.platform-auth-panel {
+  width: min(100%, 28rem);
+  padding: 2rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 12%, transparent);
+  background: color-mix(in srgb, var(--color-synapz-graphite) 80%, transparent);
+}
+
+.platform-kanban {
+  display: grid;
+  gap: 0.85rem;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(16rem, 1fr);
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.platform-kanban-col {
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
+  background: color-mix(in srgb, var(--color-synapz-graphite) 45%, transparent);
+  min-height: 18rem;
+}
+
+.platform-kanban-card {
+  display: block;
+  margin: 0.55rem;
+  padding: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 10%, transparent);
+  background: color-mix(in srgb, var(--color-synapz-black) 55%, transparent);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.platform-kanban-card:hover {
+  border-color: color-mix(in srgb, var(--color-synapz-impulse) 45%, transparent);
+  transform: translateY(-1px);
+}
+
+.platform-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.6rem;
+  padding: 0.55rem 1.1rem;
+  background: var(--color-synapz-impulse);
+  color: var(--color-synapz-black);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.platform-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.6rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-synapz-neural) 18%, transparent);
+  color: var(--color-synapz-neural);
+  font-size: 0.92rem;
+}
+
+.platform-btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.4rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--color-synapz-danger) 50%, transparent);
+  color: var(--color-synapz-danger);
+  font-size: 0.85rem;
+}
+
+.platform-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.35rem;
+  min-height: 10rem;
+  padding: 1rem 0.25rem 0;
+}
+
+.platform-chart-bar {
+  flex: 1;
+  min-width: 0.4rem;
+  background: color-mix(in srgb, var(--color-synapz-impulse) 75%, white);
+  transition: height 0.35s ease;
+}
+
+@media (min-width: 768px) {
+  .platform-sidebar {
+    transform: none;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+
+  .platform-main {
+    margin-left: 0;
+  }
+
+  .platform-content {
+    padding: 1.75rem 1.75rem 2.5rem;
+  }
+
+  .platform-root {
+    display: grid;
+    grid-template-columns: var(--platform-sidebar) 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .platform-empty-node,
+  .platform-sidebar,
+  .platform-kanban-card,
+  .platform-chart-bar {
+    animation: none !important;
     transition: none !important;
   }
 }
