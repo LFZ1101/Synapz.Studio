@@ -15,7 +15,8 @@ export type NavIcon =
   | "leads"
   | "generator"
   | "builder"
-  | "live";
+  | "live"
+  | "images";
 
 export const PLATFORM_NAV: Array<{
   href: string;
@@ -41,4 +42,5 @@ export const PLATFORM_NAV: Array<{
   { href: "/plataforma/prospeccao", label: "Prospecção", icon: "leads", group: "extras" },
   { href: "/plataforma/gerador-prompts", label: "Gerador de Prompts", icon: "generator", group: "extras" },
   { href: "/plataforma/builder", label: "Builder de Sites", icon: "builder", group: "extras" },
+  { href: "/plataforma/imagens", label: "Imagens IA", icon: "images", group: "extras" },
 ];

@@ -163,11 +163,16 @@ export default async function ConfigPage() {
           <h2 className="font-display text-xl">Plano e integrações</h2>
           <p className="mt-2 text-sm text-synapz-signal">
             Ferramentas liberadas na SYNAPZ sem paywall: Design, Prompts/Skills, Play,
-            Prospecção, Gerador e Builder. Integrações externas (ex.: Asaas) só com
-            credenciais e consentimento.
+            Prospecção, Gerador, Builder e Imagens.
+          </p>
+          <p className="mt-3 text-sm text-synapz-neural">
+            ChatGPT / Cursor: a plataforma não embute API gratuita desses produtos (não
+            existe endpoint livre para “rodar de graça” no nosso servidor). Em vez disso,
+            Gerador, Builder e Imagens abrem ou copiam o prompt para a <em>sua</em> conta
+            ChatGPT/Claude/Cursor — você usa o plano que já tem, sem a SYNAPZ cobrar API.
           </p>
           <p className="mt-4 text-sm text-synapz-signal">
-            Suporte: use o canal oficial da SYNAPZ no site institucional.
+            Asaas e outras integrações de pagamento só com credenciais e consentimento.
           </p>
         </section>
 

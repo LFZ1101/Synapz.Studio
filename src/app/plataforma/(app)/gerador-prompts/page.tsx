@@ -1,4 +1,5 @@
 import { ActionForm } from "@/components/plataforma/ActionForm";
+import { AiHandoff } from "@/components/plataforma/AiHandoff";
 import {
   Field,
   FormActions,
@@ -34,7 +35,7 @@ export default async function GeradorPage() {
       <PageHeader
         eyebrow="Ferramentas"
         title="Gerador de Prompts"
-        description="Crie ou melhore prompts localmente, com estrutura SYNAPZ. Sem API externa e sem limite de créditos de terceiros."
+        description="A SYNAPZ estrutura o prompt. Depois você roda no ChatGPT ou Cursor da sua conta — sem API cobrada pela plataforma."
       />
 
       {writable ? (
@@ -73,11 +74,14 @@ export default async function GeradorPage() {
       ) : null}
 
       {latest ? (
-        <section className="platform-panel mb-6">
-          <p className="eyebrow">Resultado mais recente</p>
-          <pre className="mt-3 max-h-[28rem] overflow-auto whitespace-pre-wrap font-mono text-xs text-synapz-neural">
-            {String(latest.output_text)}
-          </pre>
+        <section className="mb-6">
+          <div className="platform-panel">
+            <p className="eyebrow">Resultado mais recente</p>
+            <pre className="mt-3 max-h-[28rem] overflow-auto whitespace-pre-wrap font-mono text-xs text-synapz-neural">
+              {String(latest.output_text)}
+            </pre>
+          </div>
+          <AiHandoff prompt={String(latest.output_text)} />
         </section>
       ) : null}
 

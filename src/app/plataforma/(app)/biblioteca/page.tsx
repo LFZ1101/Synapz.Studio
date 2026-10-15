@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ActionForm } from "@/components/plataforma/ActionForm";
+import { AiHandoff } from "@/components/plataforma/AiHandoff";
 import { EmptyState } from "@/components/plataforma/EmptyState";
 import {
   Field,
@@ -54,7 +55,7 @@ export default async function BibliotecaPage({
       <PageHeader
         eyebrow="Ferramentas"
         title="Prompts e Skills"
-        description="Templates e métodos da SYNAPZ. Conteúdo próprio da operação — editável e expansível."
+        description="Templates e métodos da SYNAPZ. Rode cada um no ChatGPT ou Cursor da sua conta — sem API cobrada pela plataforma."
         actions={
           writable ? (
             <>
@@ -176,6 +177,7 @@ export default async function BibliotecaPage({
                 <pre className="mt-3 whitespace-pre-wrap font-mono text-xs text-synapz-signal">
                   {String(p.body)}
                 </pre>
+                <AiHandoff prompt={String(p.body)} label="Usar este prompt na sua IA" />
               </article>
             ))}
           </div>
@@ -208,6 +210,7 @@ export default async function BibliotecaPage({
               <pre className="mt-3 whitespace-pre-wrap font-mono text-xs text-synapz-signal">
                 {String(s.body)}
               </pre>
+              <AiHandoff prompt={String(s.body)} label="Aplicar skill na sua IA" />
             </article>
           ))}
         </div>

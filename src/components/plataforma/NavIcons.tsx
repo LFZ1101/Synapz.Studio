@@ -132,5 +132,13 @@ export function NavIcons({ name, className }: { name: NavIcon; className?: strin
           <path d="M5 12a7 7 0 0 1 14 0M2 12a10 10 0 0 1 20 0" />
         </svg>
       );
+    case "images":
+      return (
+        <svg {...common}>
+          <rect x="3" y="5" width="18" height="14" rx="1.5" />
+          <circle cx="9" cy="10" r="1.8" />
+          <path d="M3 16l5-4 4 3 3-2 6 4" />
+        </svg>
+      );
   }
 }

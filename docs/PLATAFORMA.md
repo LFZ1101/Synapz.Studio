@@ -44,12 +44,19 @@ Central única em português do Brasil para operar clientes, CRM, projetos, tare
 | Prompts e Skills | `/plataforma/biblioteca` | Templates e métodos editáveis |
 | SYNAPZ Play | `/plataforma/play` | Vídeos oficiais do estúdio |
 | Prospecção | `/plataforma/prospeccao` | Leads manuais → import CRM |
-| Gerador de Prompts | `/plataforma/gerador-prompts` | Criar/melhorar prompts localmente |
-| Builder de Sites | `/plataforma/builder` | Brief + projeto/portfólio |
+| Gerador de Prompts | `/plataforma/gerador-prompts` | Criar/melhorar prompts + handoff ChatGPT/Cursor |
+| Builder de Sites | `/plataforma/builder` | Brief + projeto/portfólio + handoff para gerar código |
+| Imagens IA | `/plataforma/imagens` | Brief visual SYNAPZ → abre na conta ChatGPT/Claude |
 | Ao vivo | `/plataforma/ao-vivo` | Vendas do dia por horário |
 | CSV | Clientes | Importação `nome,empresa,whatsapp,estagio` |
 | Resumo | Visão geral | Copiar texto / WhatsApp |
 | Notificações | Configurações | Tarefas atrasadas |
+
+### Integração ChatGPT / Cursor (sem API da plataforma)
+Não existe endpoint gratuito para embutir ChatGPT ou Cursor no servidor da SYNAPZ. O fluxo honesto é **handoff**:
+- **ChatGPT / Claude**: abre `chatgpt.com` / `claude.ai` com o prompt na URL e copia o texto para o clipboard (usa o login/plano do usuário).
+- **Cursor**: não há deep-link público de Composer; o botão copia o prompt pronto para colar no Composer/Agent.
+- A SYNAPZ **não** guarda chave OpenAI/Anthropic neste fluxo e **não** cobra API.
 
 **Não copiado da referência:** bibliotecas pagas, DESIGN.md alheios, créditos de mapa, Asaas, cobrança/assinatura.
 

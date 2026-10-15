@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ActionForm } from "@/components/plataforma/ActionForm";
+import { AiHandoff } from "@/components/plataforma/AiHandoff";
 import {
   Field,
   FormActions,
@@ -11,6 +12,7 @@ import { requireUser } from "@/lib/plataforma/auth";
 import { formatDateTime } from "@/lib/plataforma/format";
 import { can } from "@/lib/plataforma/permissions";
 import { listSiteBriefs } from "@/lib/plataforma/extras";
+import { sitePromptForAi } from "@/lib/plataforma/ai-handoff";
 
 export const metadata = { title: "Builder de Sites" };
 
@@ -47,7 +49,7 @@ export default async function BuilderPage() {
       <PageHeader
         eyebrow="Ferramentas"
         title="Builder de Sites"
-        description="Descreva o site e gere um brief operacional SYNAPZ. Opcionalmente cria projeto de execução e item no portfólio."
+        description="Gera o brief SYNAPZ e, se quiser, manda para o ChatGPT/Cursor da sua conta gerar código — sem API paga pela plataforma."
       />
 
       {writable ? (
@@ -80,24 +82,31 @@ export default async function BuilderPage() {
       ) : null}
 
       {latest ? (
-        <section className="platform-panel mb-6">
-          <p className="eyebrow">Brief mais recente</p>
-          <h2 className="mt-2 font-display text-2xl">{String(latest.title)}</h2>
-          <pre className="mt-4 max-h-[28rem] overflow-auto whitespace-pre-wrap font-mono text-xs text-synapz-signal">
-            {JSON.stringify(latest.parsed, null, 2)}
-          </pre>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {latest.project_id ? (
-              <Link href="/plataforma/projetos" className="platform-chip">
-                Ver projetos
-              </Link>
-            ) : null}
-            {latest.portfolio_id ? (
-              <Link href="/plataforma/portfolio" className="platform-chip">
-                Ver portfólio
-              </Link>
-            ) : null}
+        <section className="mb-6">
+          <div className="platform-panel">
+            <p className="eyebrow">Brief mais recente</p>
+            <h2 className="mt-2 font-display text-2xl">{String(latest.title)}</h2>
+            <pre className="mt-4 max-h-[28rem] overflow-auto whitespace-pre-wrap font-mono text-xs text-synapz-signal">
+              {JSON.stringify(latest.parsed, null, 2)}
+            </pre>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {latest.project_id ? (
+                <Link href="/plataforma/projetos" className="platform-chip">
+                  Ver projetos
+                </Link>
+              ) : null}
+              {latest.portfolio_id ? (
+                <Link href="/plataforma/portfolio" className="platform-chip">
+                  Ver portfólio
+                </Link>
+              ) : null}
+            </div>
           </div>
+          <AiHandoff
+            prompt={sitePromptForAi(JSON.stringify(latest.parsed, null, 2))}
+            label="Gerar o site na sua IA"
+            hint="Abre ChatGPT/Claude com pedido de código Next/Tailwind, ou copia para colar no Cursor Composer."
+          />
         </section>
       ) : null}
 
