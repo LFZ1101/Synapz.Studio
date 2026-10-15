@@ -15,6 +15,7 @@ import { StatCard } from "@/components/plataforma/StatCard";
 import { ActionForm } from "@/components/plataforma/ActionForm";
 import {
   actionArchiveClient,
+  actionImportClientsCsv,
   actionSaveClient,
 } from "@/lib/plataforma/actions";
 import { requireUser } from "@/lib/plataforma/auth";
@@ -35,6 +36,11 @@ export const metadata = { title: "Clientes" };
 async function saveClientAction(_prev: unknown, formData: FormData) {
   "use server";
   return actionSaveClient(formData);
+}
+
+async function importCsvAction(_prev: unknown, formData: FormData) {
+  "use server";
+  return actionImportClientsCsv(formData);
 }
 
 export default async function ClientesPage({
@@ -122,6 +128,26 @@ export default async function ClientesPage({
               />
             </form>
           </div>
+
+          {writable ? (
+            <section className="platform-panel">
+              <h2 className="font-display text-lg mb-3">Importar CSV</h2>
+              <p className="mb-3 text-xs text-synapz-signal">
+                Colunas: nome, empresa, whatsapp, estagio (lead|negociacao|proposta_enviada|cliente)
+              </p>
+              <ActionForm action={importCsvAction} className="space-y-3">
+                <TextTextarea
+                  name="csv"
+                  required
+                  className="min-h-28 font-mono text-xs"
+                  placeholder={"nome,empresa,whatsapp,estagio\nAna Silva,Studio X,11999999999,lead"}
+                />
+                <button type="submit" className="platform-btn-ghost">
+                  Importar clientes
+                </button>
+              </ActionForm>
+            </section>
+          ) : null}
 
           {showForm && writable ? (
             <section className="platform-panel">

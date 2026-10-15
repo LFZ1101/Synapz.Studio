@@ -6,8 +6,10 @@ import {
   TextInput,
 } from "@/components/plataforma/FormPrimitives";
 import { PageHeader } from "@/components/plataforma/PageHeader";
+import Link from "next/link";
 import {
   actionChangePassword,
+  actionMarkNotificationRead,
   actionRevokeSession,
   actionSaveProfile,
   actionToggleHideValues,
@@ -19,6 +21,10 @@ import {
 import { listAudit } from "@/lib/plataforma/audit";
 import { formatDateTime } from "@/lib/plataforma/format";
 import { can } from "@/lib/plataforma/permissions";
+import {
+  listNotifications,
+  refreshOperationalNotifications,
+} from "@/lib/plataforma/extras";
 import { ROLE_LABELS } from "@/lib/plataforma/types";
 
 export const metadata = { title: "Configurações" };
@@ -35,7 +41,9 @@ async function passwordAction(_prev: unknown, formData: FormData) {
 
 export default async function ConfigPage() {
   const user = await requireUser();
+  refreshOperationalNotifications(user);
   const sessions = listSessions(user.id);
+  const notifications = listNotifications(user.orgId, user.id);
   const audit = can(user.role, "audit_read")
     ? listAudit(user.orgId, 20)
     : [];
@@ -154,12 +162,58 @@ export default async function ConfigPage() {
         <section className="platform-panel">
           <h2 className="font-display text-xl">Plano e integrações</h2>
           <p className="mt-2 text-sm text-synapz-signal">
-            Sem cobrança, assinatura ou Asaas neste MVP. Integrações externas só entram
-            com credenciais, documentação atual e consentimento do proprietário (Fase C).
+            Ferramentas liberadas na SYNAPZ sem paywall: Design, Prompts/Skills, Play,
+            Prospecção, Gerador e Builder. Integrações externas (ex.: Asaas) só com
+            credenciais e consentimento.
           </p>
           <p className="mt-4 text-sm text-synapz-signal">
             Suporte: use o canal oficial da SYNAPZ no site institucional.
           </p>
+        </section>
+
+        <section className="platform-panel">
+          <h2 className="font-display text-xl">Notificações</h2>
+          <p className="mt-2 text-sm text-synapz-signal">
+            Alertas operacionais (tarefas atrasadas e avisos da central).
+          </p>
+          <ul className="mt-4 space-y-2">
+            {notifications.length === 0 ? (
+              <li className="text-sm text-synapz-signal">Nenhuma notificação no momento.</li>
+            ) : (
+              notifications.map((n) => (
+                <li
+                  key={String(n.id)}
+                  className="border-t border-white/10 pt-2 text-sm"
+                >
+                  <p className="text-synapz-neural">{String(n.title)}</p>
+                  <p className="text-xs text-synapz-signal">{String(n.body || "")}</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {n.href ? (
+                      <Link href={String(n.href)} className="platform-chip">
+                        Abrir
+                      </Link>
+                    ) : null}
+                    {!n.read_at ? (
+                      <form
+                        action={async () => {
+                          "use server";
+                          await actionMarkNotificationRead(String(n.id));
+                        }}
+                      >
+                        <button type="submit" className="platform-chip">
+                          Marcar lida
+                        </button>
+                      </form>
+                    ) : (
+                      <span className="font-mono text-[0.65rem] text-synapz-signal">
+                        lida · {formatDateTime(String(n.read_at))}
+                      </span>
+                    )}
+                  </div>
+                </li>
+              ))
+            )}
+          </ul>
         </section>
       </div>
 

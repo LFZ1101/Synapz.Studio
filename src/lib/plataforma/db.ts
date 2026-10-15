@@ -237,6 +237,99 @@ function migrate(db: Database.Database) {
       updated_at TEXT NOT NULL
     );
 
+    CREATE TABLE IF NOT EXISTS prompts (
+      id TEXT PRIMARY KEY,
+      org_id TEXT NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+      title TEXT NOT NULL,
+      body TEXT NOT NULL,
+      category TEXT,
+      tags_json TEXT NOT NULL DEFAULT '[]',
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      archived_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS skills (
+      id TEXT PRIMARY KEY,
+      org_id TEXT NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+      title TEXT NOT NULL,
+      summary TEXT,
+      body TEXT NOT NULL,
+      category TEXT,
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      archived_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS design_refs (
+      id TEXT PRIMARY KEY,
+      org_id TEXT NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+      title TEXT NOT NULL,
+      url TEXT,
+      notes TEXT,
+      tags_json TEXT NOT NULL DEFAULT '[]',
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      archived_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS prospects (
+      id TEXT PRIMARY KEY,
+      org_id TEXT NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+      company TEXT NOT NULL,
+      contact_name TEXT,
+      phone TEXT,
+      email TEXT,
+      segment TEXT,
+      city TEXT,
+      source TEXT,
+      notes TEXT,
+      status TEXT NOT NULL DEFAULT 'novo',
+      imported_opportunity_id TEXT,
+      imported_client_id TEXT,
+      archived_at TEXT,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS generated_prompts (
+      id TEXT PRIMARY KEY,
+      org_id TEXT NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+      mode TEXT NOT NULL,
+      format TEXT NOT NULL DEFAULT 'texto',
+      input_text TEXT NOT NULL,
+      output_text TEXT NOT NULL,
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS site_briefs (
+      id TEXT PRIMARY KEY,
+      org_id TEXT NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+      title TEXT NOT NULL,
+      description TEXT NOT NULL,
+      brief_json TEXT NOT NULL,
+      project_id TEXT REFERENCES projects(id) ON DELETE SET NULL,
+      portfolio_id TEXT REFERENCES portfolio_sites(id) ON DELETE SET NULL,
+      created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS notifications (
+      id TEXT PRIMARY KEY,
+      org_id TEXT NOT NULL REFERENCES organizations(id) ON DELETE CASCADE,
+      user_id TEXT REFERENCES users(id) ON DELETE CASCADE,
+      title TEXT NOT NULL,
+      body TEXT,
+      href TEXT,
+      read_at TEXT,
+      created_at TEXT NOT NULL
+    );
+
     CREATE INDEX IF NOT EXISTS idx_memberships_user ON memberships(user_id);
     CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
     CREATE INDEX IF NOT EXISTS idx_clients_org ON clients(org_id);
@@ -247,6 +340,10 @@ function migrate(db: Database.Database) {
     CREATE INDEX IF NOT EXISTS idx_cash_org ON cash_entries(org_id);
     CREATE INDEX IF NOT EXISTS idx_portfolio_org ON portfolio_sites(org_id);
     CREATE INDEX IF NOT EXISTS idx_audit_org ON audit_logs(org_id, created_at);
+    CREATE INDEX IF NOT EXISTS idx_prompts_org ON prompts(org_id);
+    CREATE INDEX IF NOT EXISTS idx_skills_org ON skills(org_id);
+    CREATE INDEX IF NOT EXISTS idx_prospects_org ON prospects(org_id);
+    CREATE INDEX IF NOT EXISTS idx_notifications_user ON notifications(user_id, created_at);
   `);
 }
 

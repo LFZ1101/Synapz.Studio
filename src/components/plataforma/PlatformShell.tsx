@@ -53,10 +53,28 @@ export function PlatformShell({
           </div>
 
           <nav className="sz-sidebar-nav" aria-label="Principal">
-            {PLATFORM_NAV.map((item) => {
+            <p className="sz-nav-group">Operação</p>
+            {PLATFORM_NAV.filter((i) => i.group !== "extras").map((item) => {
               const active = item.exact
                 ? pathname === item.href
                 : pathname === item.href || pathname.startsWith(`${item.href}/`);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  title={item.label}
+                  className={`sz-nav-btn ${active ? "is-active" : ""}`}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <NavIcons name={item.icon} className="sz-nav-icon" />
+                  <span className="sz-nav-label">{item.label}</span>
+                </Link>
+              );
+            })}
+            <p className="sz-nav-group">Ferramentas</p>
+            {PLATFORM_NAV.filter((i) => i.group === "extras").map((item) => {
+              const active =
+                pathname === item.href || pathname.startsWith(`${item.href}/`);
               return (
                 <Link
                   key={item.href}

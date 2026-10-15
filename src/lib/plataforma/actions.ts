@@ -37,6 +37,25 @@ import {
   upsertSale,
   upsertTask,
 } from "./services";
+import {
+  archiveDesignRef,
+  archivePrompt,
+  archiveProspect,
+  archiveSkill,
+  buildSiteBrief,
+  composePrompt,
+  deleteGeneratedPrompt,
+  importClientsCsv,
+  importProspectToCrm,
+  markNotificationRead,
+  saveGeneratedPrompt,
+  saveSiteBrief,
+  seedSynapzLibrary,
+  upsertDesignRef,
+  upsertPrompt,
+  upsertProspect,
+  upsertSkill,
+} from "./extras";
 import type {
   CashType,
   ClientStage,
@@ -454,4 +473,203 @@ export async function actionUpdateMemberRole(formData: FormData) {
   }
   revalidateAll();
   return { ok: true as const };
+}
+
+/* ---------- Extras (módulos liberados) ---------- */
+
+export async function actionSeedLibrary() {
+  const user = await requireUser();
+  assertCan(user.role, "write");
+  seedSynapzLibrary(user);
+  revalidateAll();
+  return { ok: true as const, message: "Biblioteca SYNAPZ carregada." };
+}
+
+export async function actionSavePrompt(formData: FormData) {
+  const user = await requireUser();
+  assertCan(user.role, "write");
+  try {
+    const tags = formOptional(formData, "tags");
+    const id = upsertPrompt(user, {
+      id: formOptional(formData, "id"),
+      title: formString(formData, "title"),
+      body: formString(formData, "body"),
+      category: formOptional(formData, "category"),
+      tags: tags ? tags.split(",").map((t) => t.trim()).filter(Boolean) : [],
+    });
+    revalidateAll();
+    return { ok: true as const, id };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Falha ao salvar prompt." };
+  }
+}
+
+export async function actionArchivePrompt(id: string) {
+  const user = await requireUser();
+  assertCan(user.role, "archive");
+  archivePrompt(user, id);
+  revalidateAll();
+}
+
+export async function actionSaveSkill(formData: FormData) {
+  const user = await requireUser();
+  assertCan(user.role, "write");
+  try {
+    const id = upsertSkill(user, {
+      id: formOptional(formData, "id"),
+      title: formString(formData, "title"),
+      summary: formOptional(formData, "summary"),
+      body: formString(formData, "body"),
+      category: formOptional(formData, "category"),
+    });
+    revalidateAll();
+    return { ok: true as const, id };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Falha ao salvar skill." };
+  }
+}
+
+export async function actionArchiveSkill(id: string) {
+  const user = await requireUser();
+  assertCan(user.role, "archive");
+  archiveSkill(user, id);
+  revalidateAll();
+}
+
+export async function actionSaveDesignRef(formData: FormData) {
+  const user = await requireUser();
+  assertCan(user.role, "write");
+  try {
+    const tags = formOptional(formData, "tags");
+    const id = upsertDesignRef(user, {
+      id: formOptional(formData, "id"),
+      title: formString(formData, "title"),
+      url: formOptional(formData, "url"),
+      notes: formOptional(formData, "notes"),
+      tags: tags ? tags.split(",").map((t) => t.trim()).filter(Boolean) : [],
+    });
+    revalidateAll();
+    return { ok: true as const, id };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Falha ao salvar referência." };
+  }
+}
+
+export async function actionArchiveDesignRef(id: string) {
+  const user = await requireUser();
+  assertCan(user.role, "archive");
+  archiveDesignRef(user, id);
+  revalidateAll();
+}
+
+export async function actionGeneratePrompt(formData: FormData) {
+  const user = await requireUser();
+  assertCan(user.role, "write");
+  try {
+    const mode = (formString(formData, "mode") || "criar") as "criar" | "melhorar";
+    const format = (formString(formData, "format") || "texto") as "texto" | "json";
+    const input_text = formString(formData, "text");
+    const output_text = composePrompt({ mode, format, text: input_text });
+    const id = saveGeneratedPrompt(user, { mode, format, input_text, output_text });
+    revalidateAll();
+    return { ok: true as const, id, output: output_text };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Falha ao gerar prompt." };
+  }
+}
+
+export async function actionDeleteGeneratedPrompt(id: string) {
+  const user = await requireUser();
+  assertCan(user.role, "archive");
+  deleteGeneratedPrompt(user, id);
+  revalidateAll();
+}
+
+export async function actionSaveProspect(formData: FormData) {
+  const user = await requireUser();
+  assertCan(user.role, "write");
+  try {
+    const id = upsertProspect(user, {
+      id: formOptional(formData, "id"),
+      company: formString(formData, "company"),
+      contact_name: formOptional(formData, "contact_name"),
+      phone: formOptional(formData, "phone"),
+      email: formOptional(formData, "email"),
+      segment: formOptional(formData, "segment"),
+      city: formOptional(formData, "city"),
+      source: formOptional(formData, "source") || "manual",
+      notes: formOptional(formData, "notes"),
+      status: formOptional(formData, "status") || "novo",
+    });
+    revalidateAll();
+    return { ok: true as const, id };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Falha ao salvar prospecto." };
+  }
+}
+
+export async function actionImportProspect(id: string) {
+  const user = await requireUser();
+  assertCan(user.role, "write");
+  try {
+    const result = importProspectToCrm(user, id);
+    revalidateAll();
+    return { ok: true as const, ...result, message: "Importado para Clientes e CRM." };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Falha ao importar." };
+  }
+}
+
+export async function actionArchiveProspect(id: string) {
+  const user = await requireUser();
+  assertCan(user.role, "archive");
+  archiveProspect(user, id);
+  revalidateAll();
+}
+
+export async function actionCreateSiteBrief(formData: FormData) {
+  const user = await requireUser();
+  assertCan(user.role, "write");
+  try {
+    const description = formString(formData, "description");
+    const brief = buildSiteBrief(description);
+    const result = saveSiteBrief(user, {
+      title: String(brief.titulo),
+      description,
+      brief,
+      createProject: formString(formData, "create_project") === "1",
+      createPortfolio: formString(formData, "create_portfolio") === "1",
+    });
+    revalidateAll();
+    return {
+      ok: true as const,
+      ...result,
+      brief,
+      message: "Brief gerado com sucesso.",
+    };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Falha ao gerar brief." };
+  }
+}
+
+export async function actionImportClientsCsv(formData: FormData) {
+  const user = await requireUser();
+  assertCan(user.role, "write");
+  try {
+    const csv = formString(formData, "csv");
+    const result = importClientsCsv(user, csv);
+    revalidateAll();
+    return {
+      ok: true as const,
+      message: `${result.created} cliente(s) importado(s).`,
+    };
+  } catch (e) {
+    return { error: e instanceof Error ? e.message : "Falha na importação CSV." };
+  }
+}
+
+export async function actionMarkNotificationRead(id: string) {
+  const user = await requireUser();
+  markNotificationRead(user, id);
+  revalidateAll();
 }

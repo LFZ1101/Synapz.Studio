@@ -37,9 +37,21 @@ Central única em português do Brasil para operar clientes, CRM, projetos, tare
 | Equipe | `/plataforma/equipe` | Convite/papel |
 | Configurações | `/plataforma/configuracoes` | Perfil, senha, sessões, ocultar valores, auditoria |
 
-### Fase C / D (não implementadas no MVP)
-- PNG exportável, vendas ao vivo, notificações, CSV, anexos, Asaas
-- Builder, Prompt Lab, Skill Vault, prospecção com mapa
+### Ferramentas liberadas (inspiradas na referência, conteúdo SYNAPZ)
+| Módulo | Rota | O que faz |
+|--------|------|-----------|
+| SYNAPZ Design | `/plataforma/design` | Tokens + referências próprias |
+| Prompts e Skills | `/plataforma/biblioteca` | Templates e métodos editáveis |
+| SYNAPZ Play | `/plataforma/play` | Vídeos oficiais do estúdio |
+| Prospecção | `/plataforma/prospeccao` | Leads manuais → import CRM |
+| Gerador de Prompts | `/plataforma/gerador-prompts` | Criar/melhorar prompts localmente |
+| Builder de Sites | `/plataforma/builder` | Brief + projeto/portfólio |
+| Ao vivo | `/plataforma/ao-vivo` | Vendas do dia por horário |
+| CSV | Clientes | Importação `nome,empresa,whatsapp,estagio` |
+| Resumo | Visão geral | Copiar texto / WhatsApp |
+| Notificações | Configurações | Tarefas atrasadas |
+
+**Não copiado da referência:** bibliotecas pagas, DESIGN.md alheios, créditos de mapa, Asaas, cobrança/assinatura.
 
 ## Como subir localmente
 

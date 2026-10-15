@@ -595,6 +595,15 @@
   overflow: auto;
 }
 
+.sz-nav-group {
+  margin: 0.75rem 0.35rem 0.25rem;
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-synapz-signal);
+}
+
 .sz-nav-btn,
 .platform-nav-item {
   display: flex;

@@ -3,9 +3,11 @@ import { EmptyState } from "@/components/plataforma/EmptyState";
 import { FilterTabs } from "@/components/plataforma/FilterTabs";
 import { Money, Percent } from "@/components/plataforma/Money";
 import { PageHeader } from "@/components/plataforma/PageHeader";
+import { PeriodSummary } from "@/components/plataforma/PeriodSummary";
 import { StatCard } from "@/components/plataforma/StatCard";
 import { requireUser } from "@/lib/plataforma/auth";
-import { formatDate } from "@/lib/plataforma/format";
+import { formatDate, formatMoney } from "@/lib/plataforma/format";
+import { buildPeriodSummaryText } from "@/lib/plataforma/extras";
 import { getDashboardMetrics } from "@/lib/plataforma/services";
 import {
   PERIOD_FILTERS,
@@ -213,6 +215,29 @@ export default async function DashboardPage({
           />
         </div>
       ) : null}
+
+      <PeriodSummary
+        text={buildPeriodSummaryText({
+          orgName: user.orgName,
+          periodLabel: PERIOD_LABELS[period],
+          revenueLabel: formatMoney(metrics.revenue, hide),
+          profitLabel: formatMoney(metrics.profit, hide),
+          ticketLabel: formatMoney(metrics.ticket, hide),
+          salesCount: metrics.salesCount,
+        })}
+      />
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        <Link href="/plataforma/ao-vivo" className="platform-chip">
+          Abrir vendas ao vivo
+        </Link>
+        <Link href="/plataforma/builder" className="platform-chip">
+          Builder de Sites
+        </Link>
+        <Link href="/plataforma/gerador-prompts" className="platform-chip">
+          Gerador de Prompts
+        </Link>
+      </div>
     </div>
   );
 }
