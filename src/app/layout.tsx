@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationSchema, websiteSchema } from "@/lib/schema";
@@ -7,22 +7,10 @@ import { homeMetadata } from "@/lib/seo";
 import { SITE } from "@/content/site";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-ibm-plex-mono",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-montserrat",
   display: "swap",
 });
 
@@ -62,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${spaceGrotesk.variable} ${inter.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-synapz-black text-synapz-neural font-sans">
         <JsonLd data={[organizationSchema(), websiteSchema()]} />

@@ -72,7 +72,7 @@ export default async function DesignPage({
           ))}
         </div>
         <p className="mt-4 text-sm text-synapz-signal">
-          Tipografia: Space Grotesk (títulos), Inter (interface), IBM Plex Mono (dados).
+          Tipografia: Montserrat em todo o sistema (títulos, interface e dados), com pesos e tamanhos ajustados.
         </p>
       </section>
 

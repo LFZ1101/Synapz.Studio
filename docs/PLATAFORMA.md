@@ -13,7 +13,7 @@ Central única em português do Brasil para operar clientes, CRM, projetos, tare
 - Organização/workspace única por conta bootstrap + papéis: `owner`, `admin`, `member`, `viewer`
 - Autorização no servidor (`assertCan` / matriz de permissões)
 - Design system alinhado ao manual (tokens `#050605`, `#B7FF00`, `#ECEDE7`, `#121412`, `#898D86`)
-- Tipografia Space Grotesk / Inter / IBM Plex Mono
+- Tipografia Montserrat (títulos, interface e dados)
 - Logos oficiais em `public/brand/` (origem: manual em `docs/`)
 - Navegação desktop (sidebar) + mobile (barra inferior)
 - Estados vazios com CTA real
