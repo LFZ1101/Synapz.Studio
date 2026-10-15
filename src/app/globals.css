@@ -822,7 +822,7 @@
   display: flex;
   align-items: flex-end;
   gap: 0.35rem;
-  min-height: 10rem;
+  height: 10rem;
   padding: 1rem 0.25rem 0;
 }
 
@@ -839,6 +839,18 @@
     position: sticky;
     top: 0;
     height: 100vh;
+  }
+
+  .platform-sidebar .platform-icon-btn {
+    display: none;
+  }
+
+  .platform-topbar > div:first-child > .platform-icon-btn {
+    display: none;
+  }
+
+  .platform-mobile-nav {
+    display: none !important;
   }
 
   .platform-main {
