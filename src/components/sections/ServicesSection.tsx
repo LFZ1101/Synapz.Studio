@@ -33,8 +33,12 @@ const HOME_BLURB: Record<string, string> = {
 
 export function ServicesSection() {
   return (
-    <Section tone="graphite" id="servicos">
-      <Container>
+    <Section tone="graphite" id="servicos" className="relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_40%_at_0%_0%,rgba(183,255,0,0.05),transparent_60%)]"
+        aria-hidden
+      />
+      <Container className="relative">
         <div className="max-w-2xl">
           <ScrollReveal variant="fade">
             <p className="eyebrow text-synapz-impulse mb-4">Serviços</p>
@@ -56,9 +60,9 @@ export function ServicesSection() {
         <div className="mt-12 md:mt-14 grid gap-4 md:gap-5 lg:grid-cols-3">
           {nuclei.map((nucleus, index) => (
             <ScrollReveal key={nucleus.id} variant="up" delay={index * 90}>
-              <article className="surface-panel surface-panel-hover flex h-full flex-col p-6 md:p-8">
+              <article className="soft-panel flex h-full flex-col p-6 md:p-8">
                 <div className="mb-6 flex items-center justify-between gap-3">
-                  <span className="eyebrow text-synapz-impulse">
+                  <span className="font-display text-3xl text-synapz-impulse/80 leading-none">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <span
@@ -83,7 +87,7 @@ export function ServicesSection() {
                   ))}
                 </ul>
                 <div className="mt-8">
-                  <Button href={nucleus.cta.href} variant="secondary" size="sm">
+                  <Button href={nucleus.cta.href} variant="secondary" size="sm" className="rounded-full">
                     {nucleus.cta.label}
                   </Button>
                 </div>

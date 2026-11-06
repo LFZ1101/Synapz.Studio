@@ -4,7 +4,12 @@ import { Container, Section } from "@/components/ui/Layout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { methodSteps } from "@/content/studio";
 import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
+/**
+ * Six-step method with scroll-activated progress —
+ * visual language inspired by JorgeWebPro timeline, SYNAPZ palette.
+ */
 export function MethodSection() {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -24,14 +29,29 @@ export function MethodSection() {
           }
         });
       },
-      { rootMargin: "-40% 0px -40% 0px", threshold: 0.1 },
+      { rootMargin: "-35% 0px -35% 0px", threshold: 0.1 },
     );
     items.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
   return (
-    <Section id="metodo">
+    <Section id="metodo" className="relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute -right-10 top-24 hidden h-64 w-64 opacity-[0.07] md:block"
+        aria-hidden
+      >
+        <div className="grid grid-cols-6 gap-2">
+          {Array.from({ length: 36 }).map((_, i) => (
+            <span
+              key={i}
+              className="aspect-square bg-synapz-impulse"
+              style={{ opacity: 0.35 + ((i * 7) % 10) / 20 }}
+            />
+          ))}
+        </div>
+      </div>
+
       <Container>
         <div className="max-w-2xl">
           <ScrollReveal variant="fade">
@@ -48,64 +68,110 @@ export function MethodSection() {
           </ScrollReveal>
         </div>
 
-        <div ref={ref} className="mt-12 relative">
-          <div
-            className="absolute left-[11px] top-3 bottom-3 w-px bg-synapz-neural/15 md:left-1/2 md:-translate-x-px"
-            aria-hidden
-          />
-          <div
-            className="absolute left-[11px] top-3 w-px bg-synapz-impulse transition-all duration-500 md:left-1/2 md:-translate-x-px"
-            style={{
-              height: `${((active + 1) / methodSteps.length) * 100}%`,
-              maxHeight: "calc(100% - 1.5rem)",
-            }}
-            aria-hidden
-          />
+        {/* Desktop: 2×3 editorial grid with progress line */}
+        <div ref={ref} className="mt-12 md:mt-16">
+          <div className="relative hidden md:block">
+            <div
+              className="absolute left-0 right-0 top-[1.15rem] h-px bg-synapz-neural/15"
+              aria-hidden
+            />
+            <div
+              className="absolute left-0 top-[1.15rem] h-px bg-synapz-impulse transition-all duration-500"
+              style={{
+                width: `${((active + 1) / methodSteps.length) * 100}%`,
+              }}
+              aria-hidden
+            />
 
-          <ol className="space-y-8 md:space-y-12">
-            {methodSteps.map((step, index) => (
-              <li
-                key={step.number}
-                data-step={index}
-                className="relative grid gap-3 md:grid-cols-2 md:gap-16"
-              >
-                <ScrollReveal
-                  variant="up"
-                  delay={40}
-                  className={
-                    index % 2 === 1 ? "md:order-2 md:text-left" : "md:text-right"
-                  }
-                >
-                  <p
-                    className={`eyebrow mb-2 ${active >= index ? "text-synapz-impulse" : ""}`}
-                  >
-                    {step.number}
-                  </p>
-                  <h3 className="font-display text-xl md:text-2xl text-synapz-neural">
-                    {step.title}
-                  </h3>
-                </ScrollReveal>
-                <div
-                  className={`pl-10 md:pl-0 ${index % 2 === 1 ? "md:order-1 md:text-right" : ""}`}
-                >
+            <ol className="grid grid-cols-3 gap-x-8 gap-y-14">
+              {methodSteps.map((step, index) => {
+                const on = active >= index;
+                return (
+                  <li key={step.number} data-step={index} className="relative">
+                    <span
+                      className={cn(
+                        "relative z-[1] mb-5 flex h-9 w-9 items-center justify-center rounded-full border text-sm font-medium transition-colors duration-300",
+                        on
+                          ? "border-synapz-impulse bg-synapz-impulse text-synapz-black"
+                          : "border-synapz-neural/25 bg-synapz-black text-synapz-signal",
+                      )}
+                      aria-hidden
+                    >
+                      {index + 1}
+                    </span>
+                    <ScrollReveal variant="up" delay={40}>
+                      <p
+                        className={cn(
+                          "eyebrow mb-2",
+                          on ? "text-synapz-impulse" : "text-synapz-signal",
+                        )}
+                      >
+                        {step.number}
+                      </p>
+                      <h3
+                        className={cn(
+                          "font-display text-xl md:text-2xl transition-colors",
+                          on ? "text-synapz-neural" : "text-synapz-signal",
+                        )}
+                      >
+                        {step.title}
+                      </h3>
+                      <p
+                        className={cn(
+                          "mt-3 text-sm md:text-base leading-relaxed max-w-xs transition-colors",
+                          on ? "text-synapz-signal" : "text-synapz-signal/55",
+                        )}
+                      >
+                        {step.description}
+                      </p>
+                    </ScrollReveal>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+
+          {/* Mobile vertical timeline */}
+          <ol className="relative space-y-8 md:hidden">
+            <div
+              className="absolute left-[11px] top-3 bottom-3 w-px bg-synapz-neural/15"
+              aria-hidden
+            />
+            <div
+              className="absolute left-[11px] top-3 w-px bg-synapz-impulse transition-all duration-500"
+              style={{
+                height: `${((active + 1) / methodSteps.length) * 100}%`,
+                maxHeight: "calc(100% - 1.5rem)",
+              }}
+              aria-hidden
+            />
+            {methodSteps.map((step, index) => {
+              const on = active >= index;
+              return (
+                <li key={step.number} data-step={index} className="relative pl-10">
                   <span
-                    className={`absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border text-[0.65rem] font-medium md:left-1/2 md:-translate-x-1/2 ${
-                      active >= index
+                    className={cn(
+                      "absolute left-0 top-1 flex h-6 w-6 items-center justify-center rounded-full border text-[0.65rem] font-medium",
+                      on
                         ? "border-synapz-impulse bg-synapz-impulse text-synapz-black"
-                        : "border-synapz-neural/30 bg-synapz-black text-synapz-signal"
-                    }`}
+                        : "border-synapz-neural/30 bg-synapz-black text-synapz-signal",
+                    )}
                     aria-hidden
                   >
                     {index + 1}
                   </span>
-                  <ScrollReveal variant="fade" delay={100}>
-                    <p className="text-synapz-signal text-sm md:text-base leading-relaxed max-w-md md:inline-block">
-                      {step.description}
-                    </p>
-                  </ScrollReveal>
-                </div>
-              </li>
-            ))}
+                  <p className={cn("eyebrow mb-1", on && "text-synapz-impulse")}>
+                    {step.number}
+                  </p>
+                  <h3 className="font-display text-xl text-synapz-neural">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-synapz-signal leading-relaxed">
+                    {step.description}
+                  </p>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </Container>

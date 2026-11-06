@@ -105,16 +105,17 @@ export function StatsSection() {
   }, []);
 
   return (
-    <Section className="relative overflow-hidden !py-16 md:!py-20">
+    <Section className="relative overflow-hidden film-grain !py-16 md:!py-20">
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_0%,rgba(183,255,0,0.07),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_60%_at_50%_0%,rgba(183,255,0,0.09),transparent_70%)]"
         aria-hidden
       />
+      <div className="pointer-events-none absolute inset-0 blueprint-grid opacity-40" aria-hidden />
       <Container className="relative">
         <ScrollReveal variant="fade">
           <div
             ref={ref}
-            className="grid grid-cols-2 gap-8 border-y border-synapz-neural/10 py-10 md:grid-cols-4 md:gap-6 md:py-12"
+            className="grid grid-cols-2 gap-8 border-y border-synapz-neural/10 py-10 md:grid-cols-4 md:gap-6 md:py-14"
           >
             {STATS.map((stat, index) => (
               <StatItem

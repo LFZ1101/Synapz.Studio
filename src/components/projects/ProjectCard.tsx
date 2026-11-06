@@ -9,8 +9,6 @@ type Props = {
 };
 
 export function ProjectCard({ project, priority = false }: Props) {
-  // Badge only for projects that are primarily video (gallery is video-only),
-  // not branding/digital pieces that merely include a YouTube or hero clip.
   const galleryVideos = project.gallery.filter(
     (item) => item.video || item.youtube,
   );
@@ -21,9 +19,9 @@ export function ProjectCard({ project, priority = false }: Props) {
   return (
     <Link
       href={`/projetos/${project.slug}`}
-      className="group surface-panel surface-panel-hover flex h-full flex-col overflow-hidden focus-visible:outline-offset-4"
+      className="group soft-panel flex h-full flex-col overflow-hidden focus-visible:outline-offset-4"
     >
-      <div className="relative aspect-[16/10] overflow-hidden bg-synapz-black">
+      <div className="relative aspect-[16/11] overflow-hidden bg-synapz-black m-2 rounded-[0.85rem]">
         {project.cover ? (
           <Image
             src={project.cover}
@@ -34,24 +32,26 @@ export function ProjectCard({ project, priority = false }: Props) {
             sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 33vw"
           />
         ) : null}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-synapz-black/70 via-synapz-black/10 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-synapz-black/55 via-transparent to-transparent" />
         <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_30%_20%,rgba(183,255,0,0.16),transparent_45%)]" />
         {isVideoProject ? (
-          <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 border border-white/10 bg-synapz-black/75 px-2.5 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-synapz-neural backdrop-blur-sm">
+          <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 border border-white/10 bg-synapz-black/75 px-2.5 py-1 text-[0.65rem] uppercase tracking-[0.14em] text-synapz-neural backdrop-blur-sm rounded-full">
             <span aria-hidden>▶</span> Vídeo
           </span>
         ) : null}
       </div>
 
-      <div className="flex flex-1 flex-col gap-2.5 p-4 md:p-5">
-        <p className="eyebrow text-[0.65rem] md:text-xs">
-          {project.segment} · {project.year}
-        </p>
+      <div className="flex flex-1 flex-col gap-2 p-4 pt-3 md:p-5 md:pt-4">
         <div className="flex items-start justify-between gap-3">
-          <h3 className="font-display text-xl md:text-2xl leading-tight text-synapz-neural transition-colors group-hover:text-synapz-impulse">
-            {project.name}
-          </h3>
-          <span className="mt-1 inline-flex shrink-0 items-center gap-2 text-sm text-synapz-signal">
+          <div className="min-w-0">
+            <h3 className="font-display text-xl md:text-2xl leading-tight text-synapz-neural transition-colors group-hover:text-synapz-impulse">
+              {project.name}
+            </h3>
+            <p className="mt-1 eyebrow text-[0.65rem] md:text-xs">
+              {project.segment} · {project.year}
+            </p>
+          </div>
+          <span className="mt-0.5 inline-flex shrink-0 items-center gap-2 text-sm text-synapz-signal">
             <ArrowCircle
               tone="soft"
               size="sm"

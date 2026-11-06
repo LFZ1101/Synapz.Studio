@@ -10,11 +10,14 @@ export function ManifestoSection() {
 
   return (
     <Section className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 top-0 impulse-hairline" aria-hidden />
       <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-synapz-impulse/35 to-transparent"
+        className="pointer-events-none absolute -left-8 top-10 watermark-type hidden text-[clamp(4rem,14vw,11rem)] uppercase lg:block"
         aria-hidden
-      />
-      <Container>
+      >
+        Visual
+      </div>
+      <Container className="relative">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 lg:items-end">
           <div className="lg:col-span-7">
             <ScrollReveal variant="fade" delay={0}>

@@ -25,22 +25,26 @@ function homeFaqSchema() {
 
 export function FaqSection() {
   return (
-    <Section tone="graphite" id="faq">
+    <Section tone="graphite" id="faq" className="relative overflow-hidden">
       <JsonLd data={homeFaqSchema()} />
-      <Container>
+      <div className="pointer-events-none absolute inset-0 blueprint-grid opacity-30" aria-hidden />
+      <Container className="relative">
         <div className="max-w-2xl">
           <ScrollReveal variant="fade">
             <p className="eyebrow text-synapz-impulse mb-4">Dúvidas frequentes</p>
           </ScrollReveal>
           <ScrollReveal variant="mask" delay={70}>
             <h2 className="font-display text-3xl sm:text-4xl leading-[1.08]">
-              Respostas objetivas para começar com clareza.
+              Respostas objetivas para começar com{" "}
+              <span className="impulse-word">clareza</span>.
             </h2>
           </ScrollReveal>
         </div>
         <ScrollReveal variant="up" delay={120}>
-          <div className="mt-10 max-w-3xl">
-            <FaqAccordion items={HOME_FAQ} />
+          <div className="mt-10 max-w-3xl soft-panel p-2 md:p-3">
+            <div className="px-4 md:px-5">
+              <FaqAccordion items={HOME_FAQ} />
+            </div>
           </div>
         </ScrollReveal>
       </Container>
@@ -50,18 +54,19 @@ export function FaqSection() {
 
 export function ContactCtaSection() {
   return (
-    <Section className="relative overflow-hidden">
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_40%_at_80%_20%,rgba(183,255,0,0.08),transparent_70%)]"
-        aria-hidden
-      />
+    <Section className="relative overflow-hidden film-grain !pt-10 md:!pt-14">
+      <div className="pointer-events-none absolute inset-0 glow-mesh opacity-90" aria-hidden />
       <Container className="relative">
         <ScrollReveal variant="up">
-          <div className="surface-panel relative overflow-hidden p-8 md:p-12 lg:p-14">
+          <div className="soft-panel relative overflow-hidden p-8 md:p-12 lg:p-14">
+            <div
+              className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-synapz-impulse/15 blur-3xl"
+              aria-hidden
+            />
             <div className="grid gap-8 lg:grid-cols-12 lg:items-center relative">
               <div className="lg:col-span-8 space-y-3">
                 <p className="eyebrow text-synapz-impulse">Próximo passo</p>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] text-balance leading-tight">
+                <h2 className="font-display text-3xl md:text-4xl lg:text-[2.85rem] text-balance leading-tight">
                   Pronto para sua marca{" "}
                   <span className="impulse-word">vender mais</span> com presença
                   digital clara?
