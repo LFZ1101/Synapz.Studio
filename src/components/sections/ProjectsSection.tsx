@@ -19,17 +19,20 @@ export function ProjectsSection() {
             </ScrollReveal>
             <ScrollReveal variant="mask" delay={70}>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-balance">
-                Conexões que viraram experiência.
+                Veja na prática projetos{" "}
+                <span className="impulse-word">reais</span> colocados em
+                movimento.
               </h2>
             </ScrollReveal>
             <ScrollReveal variant="fade" delay={110}>
               <p className="mt-4 max-w-lg text-synapz-signal text-pretty">
-                Uma seleção do que já colocamos em movimento.
+                Cada entrega nasce de estratégia para valorizar a marca, prender
+                atenção e facilitar a decisão.
               </p>
             </ScrollReveal>
           </div>
           <ScrollReveal variant="fade" delay={120}>
-            <Button href="/projetos" variant="secondary" className="shrink-0">
+            <Button href="/projetos" variant="pill" className="shrink-0" size="md">
               Ver projetos
             </Button>
           </ScrollReveal>

@@ -1,8 +1,9 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import type { ComponentProps, ReactNode } from "react";
+import { ArrowCircle } from "@/components/ui/ArrowCircle";
 
-type Variant = "primary" | "secondary" | "ghost" | "impulse";
+type Variant = "primary" | "secondary" | "ghost" | "impulse" | "pill";
 type Size = "md" | "lg" | "sm";
 
 const variants: Record<Variant, string> = {
@@ -14,6 +15,8 @@ const variants: Record<Variant, string> = {
     "bg-transparent text-synapz-signal hover:text-synapz-neural border border-transparent",
   impulse:
     "bg-synapz-impulse text-synapz-black hover:brightness-110 border border-transparent shadow-[0_16px_50px_-28px_rgba(183,255,0,0.85)]",
+  pill:
+    "rounded-full bg-synapz-neural text-synapz-black hover:bg-white border border-transparent shadow-[0_12px_40px_-24px_rgba(236,237,231,0.55)] pl-5 pr-1.5",
 };
 
 const sizes: Record<Size, string> = {
@@ -22,12 +25,20 @@ const sizes: Record<Size, string> = {
   lg: "h-14 px-8 text-base",
 };
 
+const pillSizes: Record<Size, string> = {
+  sm: "h-10 text-sm",
+  md: "h-12 text-sm md:text-base",
+  lg: "h-14 text-base",
+};
+
 type Common = {
   children: ReactNode;
   className?: string;
   variant?: Variant;
   size?: Size;
   impulse?: boolean;
+  /** Show circular arrow accent (conversion CTA polish). */
+  withArrow?: boolean;
 };
 
 type ButtonAsButton = Common &
@@ -48,21 +59,34 @@ export function Button({
   variant = "primary",
   size = "md",
   impulse = true,
+  withArrow = false,
   ...props
 }: ButtonProps) {
+  const isPill = variant === "pill";
+  const showArrow = withArrow || isPill;
+  const arrowTone = variant === "impulse" ? "black" : "impulse";
+
   const classes = cn(
-    "btn-impulse inline-flex items-center justify-center gap-2 font-medium tracking-tight transition-[color,background-color,border-color,filter,box-shadow,transform] duration-300 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.985]",
+    "group btn-impulse inline-flex items-center justify-center gap-2 font-medium tracking-tight transition-[color,background-color,border-color,filter,box-shadow,transform] duration-300 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.985]",
     impulse && "btn-impulse",
     variants[variant],
-    sizes[size],
+    isPill ? pillSizes[size] : sizes[size],
+    showArrow && !isPill && "pr-3",
     className,
+  );
+
+  const content = (
+    <>
+      <span>{children}</span>
+      {showArrow ? <ArrowCircle tone={arrowTone} size={size === "sm" ? "sm" : "md"} /> : null}
+    </>
   );
 
   if ("href" in props && props.href) {
     const { href, ...rest } = props;
     return (
       <Link href={href} className={classes} {...rest}>
-        <span>{children}</span>
+        {content}
       </Link>
     );
   }
@@ -70,7 +94,7 @@ export function Button({
   const buttonProps = props as ButtonAsButton;
   return (
     <button className={classes} {...buttonProps}>
-      <span>{children}</span>
+      {content}
     </button>
   );
 }

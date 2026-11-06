@@ -62,15 +62,18 @@ export function ContactCtaSection() {
               <div className="lg:col-span-8 space-y-3">
                 <p className="eyebrow text-synapz-impulse">Próximo passo</p>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] text-balance leading-tight">
-                  Vamos conversar sobre o que seu negócio precisa agora?
+                  Pronto para sua marca{" "}
+                  <span className="impulse-word">vender mais</span> com presença
+                  digital clara?
                 </h2>
                 <p className="text-synapz-signal max-w-md text-pretty">
                   Conte o momento da empresa. Em poucos minutos alinhamos
-                  escopo, caminho e próximos passos.
+                  escopo, caminho e próximos passos — sem template, com
+                  direção.
                 </p>
               </div>
               <div className="lg:col-span-4 lg:justify-self-end">
-                <Button href={CTA.primary.href} variant="impulse" size="lg">
+                <Button href={CTA.primary.href} variant="pill" size="lg">
                   {CTA.activate.label}
                 </Button>
               </div>

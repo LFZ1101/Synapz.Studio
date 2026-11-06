@@ -39,10 +39,11 @@ export function MethodSection() {
           </ScrollReveal>
           <ScrollReveal variant="mask" delay={70}>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08]">
-              Como o trabalho acontece.
+              Do contato inicial à entrega:{" "}
+              <span className="impulse-word">seis passos</span>.
             </h2>
             <p className="mt-4 text-synapz-signal max-w-xl text-pretty">
-              Seis etapas claras — do entendimento do negócio à evolução contínua.
+              Etapas claras — do entendimento do negócio à evolução contínua.
             </p>
           </ScrollReveal>
         </div>
@@ -88,13 +89,15 @@ export function MethodSection() {
                   className={`pl-10 md:pl-0 ${index % 2 === 1 ? "md:order-1 md:text-right" : ""}`}
                 >
                   <span
-                    className={`absolute left-0 top-2 h-6 w-6 rounded-full border md:left-1/2 md:-translate-x-1/2 ${
+                    className={`absolute left-0 top-2 flex h-6 w-6 items-center justify-center rounded-full border text-[0.65rem] font-medium md:left-1/2 md:-translate-x-1/2 ${
                       active >= index
-                        ? "border-synapz-impulse bg-synapz-impulse"
-                        : "border-synapz-neural/30 bg-synapz-black"
+                        ? "border-synapz-impulse bg-synapz-impulse text-synapz-black"
+                        : "border-synapz-neural/30 bg-synapz-black text-synapz-signal"
                     }`}
                     aria-hidden
-                  />
+                  >
+                    {index + 1}
+                  </span>
                   <ScrollReveal variant="fade" delay={100}>
                     <p className="text-synapz-signal text-sm md:text-base leading-relaxed max-w-md md:inline-block">
                       {step.description}

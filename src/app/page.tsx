@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/sections/HeroSection";
 import { ManifestoSection } from "@/components/sections/ManifestoSection";
+import { StatsSection } from "@/components/sections/StatsSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { ClientsSection } from "@/components/sections/ClientsSection";
 import { IntegrationSection } from "@/components/sections/IntegrationSection";
@@ -19,14 +20,15 @@ export const dynamic = "force-dynamic";
 
 /**
  * Home journey:
- * Who we are → Why SYNAPZ → What we do → Clients → How it connects →
- * Method → Evidence → About → FAQ → Contact
+ * Hero → Why → Proof stats → Services → Clients → Integration →
+ * Method → Projects → About → FAQ → Contact
  */
 export default function HomePage() {
   return (
     <main id="conteudo-principal">
       <HeroSection />
       <ManifestoSection />
+      <StatsSection />
       <ServicesSection />
       <ClientsSection />
       <IntegrationSection />

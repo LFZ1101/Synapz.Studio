@@ -85,7 +85,7 @@ export function Header() {
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <div className="hidden sm:block">
-              <Button href={CTA.primary.href} variant="impulse" size="sm">
+              <Button href={CTA.primary.href} variant="pill" size="sm">
                 {CTA.primary.label}
               </Button>
             </div>
@@ -171,7 +171,7 @@ export function Header() {
           <div className="mt-10 pl-8">
             <Button
               href={CTA.primary.href}
-              variant="impulse"
+              variant="pill"
               size="lg"
               className="w-full sm:w-auto"
               onClick={closeMenu}

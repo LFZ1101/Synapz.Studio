@@ -1,9 +1,29 @@
 import { Button } from "@/components/ui/Button";
 import { Container, Eyebrow } from "@/components/ui/Layout";
+import { ClientAvatarStack } from "@/components/ui/ClientAvatarStack";
 import { ConnectionNetwork } from "@/components/animations/ConnectionNetwork";
 import { CTA, SITE } from "@/content/site";
+import { clients } from "@/content/clients";
+
+function Headline() {
+  const accent = SITE.headlineAccent;
+  const full = SITE.headline;
+  if (!accent || !full.includes(accent)) {
+    return <>{full}</>;
+  }
+  const [before, after] = full.split(accent);
+  return (
+    <>
+      {before}
+      <span className="impulse-word">{accent}</span>
+      {after}
+    </>
+  );
+}
 
 export function HeroSection() {
+  const brandCount = clients.filter((c) => c.published).length;
+
   return (
     <section className="relative min-h-[100svh] overflow-hidden pt-24 md:pt-28">
       <div className="absolute inset-0 opacity-45">
@@ -31,7 +51,7 @@ export function HeroSection() {
           </div>
 
           <h1 className="font-display text-[2.35rem] sm:text-5xl md:text-6xl lg:text-[4.05rem] leading-[1.03] text-balance">
-            {SITE.headline}
+            <Headline />
           </h1>
 
           <p className="max-w-xl text-base md:text-lg leading-relaxed text-synapz-signal text-pretty">
@@ -41,7 +61,7 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-1">
             <Button
               href={CTA.primary.href}
-              variant="impulse"
+              variant="pill"
               size="lg"
               className="w-full sm:w-auto"
             >
@@ -51,11 +71,17 @@ export function HeroSection() {
               href={CTA.secondary.href}
               variant="secondary"
               size="lg"
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto rounded-full"
             >
               {CTA.secondary.label}
             </Button>
           </div>
+
+          <ClientAvatarStack
+            count={5}
+            label={`+${brandCount} marcas acompanhadas`}
+            className="pt-2"
+          />
         </div>
 
         <div className="mt-16 md:mt-20 flex items-center gap-3 text-synapz-signal">

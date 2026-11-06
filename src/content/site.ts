@@ -14,10 +14,11 @@ export const SITE = {
   positioning:
     "A SYNAPZ STUDIO é um estúdio digital que conecta estratégia, marketing, criatividade, design e tecnologia para construir marcas, experiências e resultados.",
   promise: "Reunir competências diferentes para colocar negócios em movimento.",
-  /** Home hero — precise, not "we do everything" */
-  headline: "Estratégia, design e tecnologia trabalhando juntos no seu negócio.",
+  /** Home hero — precise, conversion-forward without template sales speak */
+  headline: "Faça sua marca ter uma presença digital que realmente conecta e converte.",
+  headlineAccent: "conecta e converte",
   description:
-    "A SYNAPZ cuida de marca, conteúdo, campanha e experiência digital com uma única direção — do diagnóstico à publicação.",
+    "Do primeiro contato à decisão: marca, conteúdo, campanha e experiência digital com uma única direção — do diagnóstico à publicação.",
   identification: {
     type: "Estúdio digital",
     pillars: "Marca · Web · Campanhas",
@@ -76,9 +77,10 @@ export const NAV_ITEMS = [
 ] as const;
 
 export const CTA = {
-  primary: { href: "/contato", label: "Conversar sobre meu projeto" },
-  secondary: { href: "/servicos", label: "Conhecer os serviços" },
+  primary: { href: "/contato", label: "Solicitar orçamento" },
+  secondary: { href: "/projetos", label: "Ver projetos" },
   projects: { href: "/projetos", label: "Ver projetos" },
+  services: { href: "/servicos", label: "Conhecer os serviços" },
   whatsapp: { label: "Abrir WhatsApp" },
-  activate: { href: "/contato", label: "Ative o próximo passo" },
+  activate: { href: "/contato", label: "Solicitar orçamento" },
 } as const;

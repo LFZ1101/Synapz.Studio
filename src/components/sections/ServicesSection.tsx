@@ -41,7 +41,8 @@ export function ServicesSection() {
           </ScrollReveal>
           <ScrollReveal variant="mask" delay={70}>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-balance">
-              Três núcleos. Uma direção.
+              Três núcleos. Uma{" "}
+              <span className="impulse-word">direção</span>.
             </h2>
           </ScrollReveal>
           <ScrollReveal variant="up" delay={140}>

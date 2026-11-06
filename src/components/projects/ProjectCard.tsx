@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/content/projects";
+import { ArrowCircle } from "@/components/ui/ArrowCircle";
 
 type Props = {
   project: Project;
@@ -46,21 +47,22 @@ export function ProjectCard({ project, priority = false }: Props) {
         <p className="eyebrow text-[0.65rem] md:text-xs">
           {project.segment} · {project.year}
         </p>
-        <h3 className="font-display text-xl md:text-2xl leading-tight text-synapz-neural transition-colors group-hover:text-synapz-impulse">
-          {project.name}
-        </h3>
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="font-display text-xl md:text-2xl leading-tight text-synapz-neural transition-colors group-hover:text-synapz-impulse">
+            {project.name}
+          </h3>
+          <span className="mt-1 inline-flex shrink-0 items-center gap-2 text-sm text-synapz-signal">
+            <ArrowCircle
+              tone="soft"
+              size="sm"
+              className="group-hover:border-synapz-impulse/60 group-hover:bg-synapz-impulse group-hover:text-synapz-black"
+            />
+            <span className="hidden sm:inline">Portfolio</span>
+          </span>
+        </div>
         <p className="text-sm text-synapz-signal leading-relaxed line-clamp-2">
           {project.summary}
         </p>
-        <span className="mt-auto pt-4 inline-flex items-center gap-2 text-sm text-synapz-impulse">
-          Ver projeto
-          <span
-            className="transition-transform duration-300 group-hover:translate-x-1"
-            aria-hidden
-          >
-            →
-          </span>
-        </span>
       </div>
     </Link>
   );
