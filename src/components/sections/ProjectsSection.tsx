@@ -1,75 +1,99 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container, Section } from "@/components/ui/Layout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
-import { ProjectCard } from "@/components/projects/ProjectCard";
-import { getFeaturedProjects, getPublishedProjects } from "@/content/projects";
+import { getProject } from "@/content/projects";
+
+const FEATURED_SLUGS = ["syelle", "viane-brasil", "dunamis-wear"] as const;
 
 export function ProjectsSection() {
-  const featured = getFeaturedProjects();
-  const projects =
-    featured.length > 0 ? featured.slice(0, 6) : getPublishedProjects().slice(0, 6);
+  const projects = FEATURED_SLUGS.map((slug) => getProject(slug)).filter(
+    Boolean,
+  );
 
   return (
-    <Section tone="graphite" id="projetos" className="relative overflow-hidden">
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-synapz-black/40 to-transparent"
-        aria-hidden
-      />
-      <Container className="relative">
-        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+    <Section tone="graphite" id="projetos" className="relative">
+      <Container>
+        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between mb-10 md:mb-12">
           <div className="max-w-2xl">
             <ScrollReveal variant="fade">
               <p className="eyebrow text-synapz-impulse mb-3">Projetos</p>
             </ScrollReveal>
-            <ScrollReveal variant="mask" delay={70}>
+            <ScrollReveal variant="mask" delay={60}>
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-balance">
-                Veja na prática projetos{" "}
-                <span className="impulse-word">reais</span> colocados em
-                movimento.
+                A direção aparece nas entregas.
               </h2>
             </ScrollReveal>
-            <ScrollReveal variant="fade" delay={110}>
+            <ScrollReveal variant="fade" delay={100}>
               <p className="mt-4 max-w-lg text-synapz-signal text-pretty">
-                Cada entrega nasce de estratégia para valorizar a marca, prender
-                atenção e facilitar a decisão.
+                Identidades e experiências digitais com decisões visuais
+                próprias. Abra cada projeto para ver o trabalho e o raciocínio
+                por trás dele.
               </p>
             </ScrollReveal>
           </div>
           <ScrollReveal variant="fade" delay={120}>
-            <Button href="/projetos" variant="pill" className="shrink-0" size="md">
-              Ver projetos
+            <Button href="/projetos" variant="secondary" className="shrink-0 min-h-11">
+              Explorar projetos
             </Button>
           </ScrollReveal>
         </div>
 
-        {projects.length === 0 ? (
-          <ScrollReveal variant="up" delay={100}>
-            <div className="mt-10 soft-panel p-8 md:p-10 max-w-2xl">
-              <p className="eyebrow text-synapz-impulse mb-3">Em breve</p>
-              <h3 className="font-display text-2xl text-synapz-neural">
-                Estudos de caso reais serão publicados aqui.
-              </h3>
-              <p className="mt-3 text-synapz-signal leading-relaxed">
-                Sem clientes ou métricas inventadas.
-              </p>
-              <div className="mt-6">
-                <Button href="/contato" variant="pill" size="sm">
-                  Solicitar orçamento
-                </Button>
-              </div>
-            </div>
-          </ScrollReveal>
-        ) : (
-          <ul className="mt-10 md:mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, index) => (
-              <ScrollReveal key={project.slug} variant="up" delay={index * 60}>
-                <li className="h-full">
-                  <ProjectCard project={project} priority={index < 3} />
+        <ul className="grid gap-8 lg:gap-10">
+          {projects.map((project, index) => {
+            if (!project) return null;
+            const reverse = index % 2 === 1;
+            return (
+              <ScrollReveal key={project.slug} variant="up" delay={index * 70}>
+                <li>
+                  <Link
+                    href={`/projetos/${project.slug}`}
+                    className={`group grid gap-5 md:gap-8 md:grid-cols-12 md:items-center focus-visible:outline-offset-4`}
+                  >
+                    <div
+                      className={`relative overflow-hidden border border-synapz-neural/10 bg-synapz-black aspect-[16/10] md:col-span-7 ${
+                        reverse ? "md:order-2" : ""
+                      }`}
+                    >
+                      {project.cover ? (
+                        <Image
+                          src={project.cover}
+                          alt={project.coverAlt}
+                          fill
+                          priority={index === 0}
+                          className="object-contain p-2 transition duration-700 group-hover:scale-[1.02]"
+                          sizes="(max-width:768px) 100vw, 58vw"
+                        />
+                      ) : null}
+                    </div>
+                    <div
+                      className={`md:col-span-5 space-y-3 ${
+                        reverse ? "md:order-1" : ""
+                      }`}
+                    >
+                      <p className="eyebrow text-synapz-signal">
+                        {project.segment} · {project.year}
+                      </p>
+                      <h3 className="font-display text-2xl md:text-3xl text-synapz-neural group-hover:text-synapz-impulse transition-colors">
+                        {project.name}
+                      </h3>
+                      <p className="text-sm md:text-base text-synapz-signal leading-relaxed text-pretty">
+                        {project.summary}
+                      </p>
+                      <span className="inline-flex items-center gap-2 pt-2 text-sm text-synapz-impulse min-h-11">
+                        Ver estudo de caso
+                        <span aria-hidden className="transition-transform group-hover:translate-x-1">
+                          →
+                        </span>
+                      </span>
+                    </div>
+                  </Link>
                 </li>
               </ScrollReveal>
-            ))}
-          </ul>
-        )}
+            );
+          })}
+        </ul>
       </Container>
     </Section>
   );

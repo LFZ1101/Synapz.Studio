@@ -2,15 +2,11 @@
 
 import { Button } from "@/components/ui/Button";
 import { SITE } from "@/content/site";
-import {
-  investmentRanges,
-  projectTypes,
-  timelineOptions,
-} from "@/content/studio";
+import { projectTypes } from "@/content/studio";
 import { whatsappUrl } from "@/lib/utils";
 import { useState, type FormEvent, type ReactNode } from "react";
 
-type Status = "idle" | "submitting" | "success" | "error" | "unavailable";
+type Status = "idle" | "ready" | "error";
 
 type FieldErrors = Partial<Record<string, string>>;
 
@@ -20,9 +16,6 @@ const initial = {
   whatsapp: "",
   email: "",
   projectType: "",
-  objective: "",
-  investment: "",
-  timeline: "",
   message: "",
   consent: false,
   website: "", // honeypot
@@ -36,7 +29,7 @@ export function ContactForm() {
 
   const studioWhatsapp = SITE.contact.whatsapp || "5543999541462";
 
-  const wa = whatsappUrl(
+  const directWa = whatsappUrl(
     studioWhatsapp,
     "Olá SYNAPZ, gostaria de conversar sobre um projeto.",
   );
@@ -48,13 +41,10 @@ export function ContactForm() {
       `Nome: ${values.name.trim()}`,
       values.company.trim() ? `Empresa: ${values.company.trim()}` : "",
       `WhatsApp: ${values.whatsapp.trim()}`,
-      `E-mail: ${values.email.trim()}`,
-      `Tipo de projeto: ${values.projectType}`,
-      values.investment ? `Faixa de investimento: ${values.investment}` : "",
-      values.timeline ? `Prazo: ${values.timeline}` : "",
-      values.objective.trim() ? `Objetivo: ${values.objective.trim()}` : "",
+      values.email.trim() ? `E-mail: ${values.email.trim()}` : "",
+      `O que precisa: ${values.projectType}`,
       "",
-      "Mensagem:",
+      "Contexto do projeto:",
       values.message.trim(),
     ].filter((line) => line !== "");
 
@@ -64,48 +54,64 @@ export function ContactForm() {
   function validate() {
     const next: FieldErrors = {};
     if (!values.name.trim()) next.name = "Informe seu nome.";
-    if (!values.email.trim()) next.email = "Informe um e-mail.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email))
-      next.email = "E-mail inválido.";
     if (!values.whatsapp.trim()) next.whatsapp = "Informe um WhatsApp.";
-    if (!values.projectType) next.projectType = "Selecione o tipo de projeto.";
-    if (!values.message.trim()) next.message = "Conte um pouco sobre o projeto.";
-    if (!values.consent)
-      next.consent = "É necessário consentir com o uso dos dados.";
+    if (values.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+      next.email = "E-mail inválido.";
+    }
+    if (!values.projectType) next.projectType = "Selecione o que você precisa.";
+    if (!values.message.trim()) {
+      next.message = "Conte o contexto do projeto.";
+    }
+    if (!values.consent) {
+      next.consent = "É necessário consentir com o retorno comercial.";
+    }
+    if (values.website.trim()) {
+      next.website = "Spam detectado.";
+    }
     setErrors(next);
     return Object.keys(next).length === 0;
   }
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!validate()) return;
+    if (!validate()) {
+      setStatus("error");
+      setServerMessage("Revise os campos destacados antes de continuar.");
+      return;
+    }
 
     const destination = whatsappUrl(studioWhatsapp, buildWhatsappMessage());
     if (!destination) {
       setStatus("error");
       setServerMessage(
-        "Não foi possível abrir o WhatsApp. Tente novamente em instantes.",
+        "Não foi possível preparar o WhatsApp. Tente novamente em instantes.",
       );
       return;
     }
 
-    setStatus("success");
+    setStatus("ready");
     setServerMessage(
-      "Abrindo o WhatsApp com sua mensagem preenchida. Se nada acontecer, use o botão “WhatsApp sem formulário”.",
+      "Mensagem preparada. Você ainda poderá revisar e enviar no WhatsApp.",
     );
     window.setTimeout(() => {
       window.location.href = destination;
-    }, 150);
+    }, 200);
   }
 
   const field = (
     id: keyof typeof initial,
     label: string,
     node: ReactNode,
+    hint?: string,
   ) => (
     <div className="space-y-2">
       <label htmlFor={id} className="eyebrow text-synapz-signal">
         {label}
+        {hint ? (
+          <span className="ml-2 normal-case tracking-normal text-synapz-signal/70">
+            {hint}
+          </span>
+        ) : null}
       </label>
       {node}
       {errors[id] ? (
@@ -126,7 +132,6 @@ export function ContactForm() {
         className="grid gap-6 md:grid-cols-2"
         aria-describedby="form-status"
       >
-        {/* Honeypot */}
         <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden>
           <label htmlFor="website">Website</label>
           <input
@@ -143,7 +148,7 @@ export function ContactForm() {
 
         {field(
           "name",
-          "Nome",
+          "Seu nome",
           <input
             id="name"
             name="name"
@@ -169,11 +174,12 @@ export function ContactForm() {
               setValues((v) => ({ ...v, company: e.target.value }))
             }
           />,
+          "(opcional)",
         )}
 
         {field(
           "whatsapp",
-          "WhatsApp",
+          "Seu WhatsApp",
           <input
             id="whatsapp"
             name="whatsapp"
@@ -205,97 +211,40 @@ export function ContactForm() {
               setValues((v) => ({ ...v, email: e.target.value }))
             }
           />,
-        )}
-
-        {field(
-          "projectType",
-          "Tipo de projeto",
-          <select
-            id="projectType"
-            name="projectType"
-            className={inputClass}
-            value={values.projectType}
-            aria-invalid={Boolean(errors.projectType)}
-            onChange={(e) =>
-              setValues((v) => ({ ...v, projectType: e.target.value }))
-            }
-          >
-            <option value="">Selecione</option>
-            {projectTypes.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>,
-        )}
-
-        <div className="space-y-3 pt-1 md:pt-2">
-          <label htmlFor="investment" className="eyebrow text-synapz-signal block mb-1">
-            Faixa de investimento
-          </label>
-          <select
-            id="investment"
-            name="investment"
-            className={`${inputClass} mt-1`}
-            value={values.investment}
-            onChange={(e) =>
-              setValues((v) => ({ ...v, investment: e.target.value }))
-            }
-          >
-            <option value="">Selecione</option>
-            {investmentRanges.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-          {errors.investment ? (
-            <p id="investment-error" className="text-sm text-red-300" role="alert">
-              {errors.investment}
-            </p>
-          ) : null}
-        </div>
-
-        {field(
-          "timeline",
-          "Prazo",
-          <select
-            id="timeline"
-            name="timeline"
-            className={inputClass}
-            value={values.timeline}
-            onChange={(e) =>
-              setValues((v) => ({ ...v, timeline: e.target.value }))
-            }
-          >
-            <option value="">Selecione</option>
-            {timelineOptions.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>,
-        )}
-
-        {field(
-          "objective",
-          "Objetivo",
-          <input
-            id="objective"
-            name="objective"
-            className={inputClass}
-            placeholder="Ex.: lançar produto, redesenhar site..."
-            value={values.objective}
-            onChange={(e) =>
-              setValues((v) => ({ ...v, objective: e.target.value }))
-            }
-          />,
+          "(opcional)",
         )}
 
         <div className="md:col-span-2">
           {field(
+            "projectType",
+            "O que você precisa?",
+            <select
+              id="projectType"
+              name="projectType"
+              className={inputClass}
+              value={values.projectType}
+              aria-invalid={Boolean(errors.projectType)}
+              aria-describedby={
+                errors.projectType ? "projectType-error" : undefined
+              }
+              onChange={(e) =>
+                setValues((v) => ({ ...v, projectType: e.target.value }))
+              }
+            >
+              <option value="">Selecione</option>
+              {projectTypes.map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
+            </select>,
+          )}
+        </div>
+
+        <div className="md:col-span-2">
+          {field(
             "message",
-            "Mensagem",
+            "Conte o contexto do projeto",
             <textarea
               id="message"
               name="message"
@@ -323,7 +272,7 @@ export function ContactForm() {
               aria-invalid={Boolean(errors.consent)}
             />
             <span>
-              Concordo com o uso dos dados para retorno comercial, conforme a{" "}
+              Autorizo o retorno comercial da SYNAPZ, conforme a{" "}
               <a
                 href="/politica-de-privacidade"
                 className="text-synapz-neural underline underline-offset-4"
@@ -345,45 +294,35 @@ export function ContactForm() {
             type="submit"
             variant="impulse"
             size="lg"
-            className="w-full sm:w-auto"
-            disabled={status === "success"}
+            className="w-full sm:w-auto min-h-11"
+            disabled={status === "ready"}
           >
-            {status === "success" ? "Abrindo WhatsApp..." : "Enviar e abrir WhatsApp"}
+            {status === "ready"
+              ? "Abrindo WhatsApp..."
+              : "Preparar mensagem no WhatsApp"}
           </Button>
-          {wa ? (
+          {directWa ? (
             <Button
-              href={wa}
+              href={directWa}
               variant="secondary"
               size="lg"
-              className="w-full sm:w-auto"
+              className="w-full sm:w-auto min-h-11"
               target="_blank"
               rel="noopener noreferrer"
             >
-              WhatsApp sem formulário
+              Abrir sem preencher
             </Button>
           ) : null}
         </div>
       </form>
 
       <div id="form-status" aria-live="polite" className="min-h-[1.5rem]">
-        {status === "success" && (
+        {status === "ready" && (
           <p className="text-synapz-impulse">{serverMessage}</p>
         )}
-        {(status === "error" || status === "unavailable") && (
+        {status === "error" && (
           <p className="text-synapz-neural/90 border border-synapz-neural/20 bg-synapz-black p-4">
             {serverMessage}
-            {!wa && SITE.contact.email ? (
-              <>
-                {" "}
-                E-mail:{" "}
-                <a
-                  className="text-synapz-impulse underline"
-                  href={`mailto:${SITE.contact.email}`}
-                >
-                  {SITE.contact.email}
-                </a>
-              </>
-            ) : null}
           </p>
         )}
       </div>

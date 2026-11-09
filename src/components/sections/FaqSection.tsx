@@ -25,26 +25,22 @@ function homeFaqSchema() {
 
 export function FaqSection() {
   return (
-    <Section tone="graphite" id="faq" className="relative overflow-hidden">
+    <Section tone="graphite" id="faq">
       <JsonLd data={homeFaqSchema()} />
-      <div className="pointer-events-none absolute inset-0 blueprint-grid opacity-30" aria-hidden />
-      <Container className="relative">
+      <Container>
         <div className="max-w-2xl">
           <ScrollReveal variant="fade">
             <p className="eyebrow text-synapz-impulse mb-4">Dúvidas frequentes</p>
           </ScrollReveal>
-          <ScrollReveal variant="mask" delay={70}>
+          <ScrollReveal variant="mask" delay={60}>
             <h2 className="font-display text-3xl sm:text-4xl leading-[1.08]">
-              Respostas objetivas para começar com{" "}
-              <span className="impulse-word">clareza</span>.
+              Respostas objetivas para começar com clareza.
             </h2>
           </ScrollReveal>
         </div>
-        <ScrollReveal variant="up" delay={120}>
-          <div className="mt-10 max-w-3xl soft-panel p-2 md:p-3">
-            <div className="px-4 md:px-5">
-              <FaqAccordion items={HOME_FAQ} />
-            </div>
+        <ScrollReveal variant="up" delay={100}>
+          <div className="mt-10 max-w-3xl">
+            <FaqAccordion items={HOME_FAQ} />
           </div>
         </ScrollReveal>
       </Container>
@@ -54,31 +50,23 @@ export function FaqSection() {
 
 export function ContactCtaSection() {
   return (
-    <Section className="relative overflow-hidden film-grain !pt-10 md:!pt-14">
-      <div className="pointer-events-none absolute inset-0 glow-mesh opacity-90" aria-hidden />
+    <Section className="relative overflow-hidden">
       <Container className="relative">
         <ScrollReveal variant="up">
-          <div className="soft-panel relative overflow-hidden p-8 md:p-12 lg:p-14">
-            <div
-              className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-synapz-impulse/15 blur-3xl"
-              aria-hidden
-            />
-            <div className="grid gap-8 lg:grid-cols-12 lg:items-center relative">
+          <div className="border border-synapz-neural/10 bg-synapz-graphite/60 p-8 md:p-12 lg:p-14">
+            <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-8 space-y-3">
                 <p className="eyebrow text-synapz-impulse">Próximo passo</p>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-[2.85rem] text-balance leading-tight">
-                  Pronto para sua marca{" "}
-                  <span className="impulse-word">vender mais</span> com presença
-                  digital clara?
+                <h2 className="font-display text-3xl md:text-4xl lg:text-[2.75rem] text-balance leading-tight">
+                  Vamos dar uma direção clara ao seu próximo projeto?
                 </h2>
                 <p className="text-synapz-signal max-w-md text-pretty">
-                  Conte o momento da empresa. Em poucos minutos alinhamos
-                  escopo, caminho e próximos passos — sem template, com
-                  direção.
+                  Conte o que você quer construir. A conversa começa com seu
+                  contexto e segue para um escopo adequado ao momento da marca.
                 </p>
               </div>
               <div className="lg:col-span-4 lg:justify-self-end">
-                <Button href={CTA.primary.href} variant="pill" size="lg">
+                <Button href={CTA.primary.href} variant="impulse" size="lg" className="min-h-11">
                   {CTA.activate.label}
                 </Button>
               </div>

@@ -6,7 +6,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function absoluteUrl(path = "") {
-  const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://synapz.studio";
+  const base =
+    process.env.NEXT_PUBLIC_SITE_URL ??
+    "https://synapz-studio-vercel.vercel.app";
   if (!path) return base;
   return `${base.replace(/\/$/, "")}${path.startsWith("/") ? path : `/${path}`}`;
 }
