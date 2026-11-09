@@ -25,11 +25,21 @@ No painel do app Node.js → Environment variables:
 4. Configuração típica:
    - Framework: Next.js
    - Node: 20 ou 22
-   - Build: `npm run build`
+   - Build: `npm run build` (já usa `next build --webpack` — obrigatório no Next 16.3.3+ na Hostinger)
    - Output: `.next`
    - Start: `npm run start` (Hostinger usa `$PORT`)
 5. Colar as variáveis acima
 6. **Deploy**
+
+### Upload ZIP (sem Git)
+
+Envie **apenas o código-fonte**. Não inclua `node_modules`, `.next` nem `tsconfig.tsbuildinfo`.
+A Hostinger instala dependências e gera o build no servidor.
+
+### Erro Turbopack / `globals.css` / PostCSS
+
+No Next.js **16.3.3+**, use webpack no build (`next build --webpack`).
+Não faça upload de `node_modules` / `.next` gerados em outra máquina.
 
 Em todo `git push` na branch conectada, a Hostinger reconstrói o app.
 

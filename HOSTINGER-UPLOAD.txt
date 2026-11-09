@@ -1,0 +1,25 @@
+SYNAPZ STUDIO — upload Hostinger (Node.js Web App)
+==================================================
+
+1) Variáveis de ambiente
+   NEXT_PUBLIC_SITE_URL=https://synapz-studio.com.br
+   NEXT_PUBLIC_CONTACT_EMAIL=felipe.zambianco2005@icloud.com
+   NEXT_PUBLIC_WHATSAPP=5543999541462
+   ADMIN_SECRET=Studio200573
+   NODE_ENV=production
+
+2) Build settings
+   Framework: Next.js
+   Node: 22.x
+   Package manager: npm
+   Build command: npm run build
+   Output directory: .next
+   Start command: npm run start
+
+   O script "build" já usa: next build --webpack
+   (obrigatório no Next 16.3.3+ na Hostinger)
+
+3) Este ZIP NÃO contém node_modules nem .next
+   A Hostinger instala e compila no servidor.
+
+4) Admin: https://SEU-DOMINIO/admin  senha = ADMIN_SECRET
