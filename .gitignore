@@ -28,6 +28,10 @@
 /public/media/projects/uploads/**
 !/public/media/projects/uploads/.gitkeep
 
+# Plataforma operacional (SQLite local)
+/data/plataforma.db
+/data/plataforma.db-*
+
 # debug
 npm-debug.log*
 yarn-debug.log*

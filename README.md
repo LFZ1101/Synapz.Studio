@@ -1,14 +1,17 @@
-# SYNAPZ STUDIO — Site institucional
+# SYNAPZ STUDIO — Site institucional + plataforma operacional
 
 Estúdio digital brasileiro que conecta estratégia, marketing, criatividade, design e tecnologia.
+
+A **plataforma operacional** vive em `/plataforma` (clientes, CRM, projetos, vendas, fluxo, portfólio e equipe). Veja `docs/PLATAFORMA.md`.
 
 ## Stack
 
 - Next.js (App Router)
 - TypeScript
 - Tailwind CSS v4
+- SQLite (`better-sqlite3`) para a plataforma
 - Framer Motion (disponível; animações principais em CSS/Canvas)
-- Zod (validação do formulário)
+- Zod (validação)
 
 ## Desenvolvimento
 
@@ -37,6 +40,15 @@ npm start
 ## Identidade
 
 Logos oficiais em `public/brand/` (extraídos do Manual de Identidade Visual V1.0).
+Manual: `docs/manual-identidade-synapz-studio.pdf` (somente leitura).
+
+## Plataforma (`/plataforma`)
+
+1. Defina `PLATFORM_BOOTSTRAP_SECRET` e `PLATFORM_SESSION_SECRET` no `.env.local`
+2. Acesse `/plataforma/bootstrap` para criar o proprietário (fluxo único e seguro)
+3. Entre em `/plataforma/entrar`
+
+Nunca conceda papel de proprietário ao primeiro visitante público.
 
 ## SEO
 
