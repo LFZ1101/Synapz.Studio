@@ -28,15 +28,6 @@ export function Header() {
     };
   }, [open]);
 
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
-
   const closeMenu = () => setOpen(false);
 
   const isActive = (href: string) => {
@@ -94,7 +85,7 @@ export function Header() {
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <div className="hidden sm:block">
-              <Button href={CTA.primary.href} variant="impulse" size="sm" className="min-h-11">
+              <Button href={CTA.primary.href} variant="pill" size="sm">
                 {CTA.primary.label}
               </Button>
             </div>
@@ -180,9 +171,9 @@ export function Header() {
           <div className="mt-10 pl-8">
             <Button
               href={CTA.primary.href}
-              variant="impulse"
+              variant="pill"
               size="lg"
-              className="w-full sm:w-auto min-h-11"
+              className="w-full sm:w-auto"
               onClick={closeMenu}
             >
               {CTA.primary.label}

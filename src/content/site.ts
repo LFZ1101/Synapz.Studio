@@ -14,19 +14,17 @@ export const SITE = {
   positioning:
     "A SYNAPZ STUDIO é um estúdio digital que conecta estratégia, marketing, criatividade, design e tecnologia para construir marcas, experiências e resultados.",
   promise: "Reunir competências diferentes para colocar negócios em movimento.",
-  /** Home hero */
-  headline: "Uma direção para toda a sua marca.",
+  /** Home hero — precise, conversion-forward without template sales speak */
+  headline: "Faça sua marca ter uma presença digital que realmente conecta e converte.",
+  headlineAccent: "conecta e converte",
   description:
-    "Estratégia, identidade, conteúdo, sites e campanhas concebidos em conjunto. Para que cada ponto de contato diga com clareza quem você é e por que importa.",
+    "Do primeiro contato à decisão: marca, conteúdo, campanha e experiência digital com uma única direção — do diagnóstico à publicação.",
   identification: {
-    type: "Estúdio de marca, web e campanhas",
+    type: "Estúdio digital",
     pillars: "Marca · Web · Campanhas",
   },
-  /**
-   * Canonical public URL until a custom domain is confirmed.
-   * Override with NEXT_PUBLIC_SITE_URL in production.
-   */
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://synapz-studio-vercel.vercel.app",
+  /** Confirmed production domain when ready; override via NEXT_PUBLIC_SITE_URL */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://synapz.studio",
   locale: "pt_BR",
   language: "pt-BR",
   founder: {
@@ -79,10 +77,10 @@ export const NAV_ITEMS = [
 ] as const;
 
 export const CTA = {
-  primary: { href: "/contato", label: "Conversar sobre um projeto" },
-  secondary: { href: "/projetos", label: "Explorar projetos" },
-  projects: { href: "/projetos", label: "Explorar projetos" },
+  primary: { href: "/contato", label: "Solicitar orçamento" },
+  secondary: { href: "/projetos", label: "Ver projetos" },
+  projects: { href: "/projetos", label: "Ver projetos" },
   services: { href: "/servicos", label: "Conhecer os serviços" },
-  whatsapp: { label: "Abrir sem preencher" },
-  activate: { href: "/contato", label: "Conversar sobre um projeto" },
+  whatsapp: { label: "Abrir WhatsApp" },
+  activate: { href: "/contato", label: "Solicitar orçamento" },
 } as const;

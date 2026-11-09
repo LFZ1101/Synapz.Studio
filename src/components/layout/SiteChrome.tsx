@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingCta } from "@/components/layout/FloatingCta";
+import { CinematicIntro } from "@/components/animations/CinematicIntro";
 
 export function SiteChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
@@ -16,6 +17,7 @@ export function SiteChrome({ children }: { children: ReactNode }) {
 
   return (
     <>
+      <CinematicIntro />
       <Header />
       <div className="flex-1 flex flex-col">{children}</div>
       <Footer />

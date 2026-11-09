@@ -11,7 +11,7 @@ import { whatsappUrl } from "@/lib/utils";
 export const metadata: Metadata = buildMetadata({
   title: "Contato — Conversar com a SYNAPZ STUDIO",
   description:
-    "Conte o contexto do seu próximo projeto. A SYNAPZ prepara a mensagem para você revisar e enviar no WhatsApp.",
+    "Fale com a SYNAPZ sobre marca, conteúdo, campanhas, sites e sistemas. Envie o formulário e continue a conversa no WhatsApp.",
   path: "/contato",
 });
 
@@ -37,80 +37,67 @@ export default function ContatoPage() {
         ]}
       />
 
-      <Section className="pt-28 md:pt-32">
-        <Container>
-          <div className="mx-auto max-w-2xl space-y-5 lg:mx-0 lg:max-w-none">
-            <div className="grid gap-10 lg:grid-cols-12 lg:gap-12 lg:items-start">
-              <div className="lg:col-span-5 space-y-5">
-                <Eyebrow accent>Contato</Eyebrow>
-                <h1 className="font-display text-4xl sm:text-5xl text-balance">
-                  Vamos entender o seu próximo projeto.
-                </h1>
-                <p className="text-synapz-signal leading-relaxed text-base md:text-lg text-pretty">
-                  A mensagem será preparada para revisão no WhatsApp. Você ainda
-                  poderá conferir o texto e enviar quando estiver pronto — nada é
-                  enviado automaticamente.
-                </p>
+      <Section className="relative overflow-hidden pt-28 md:pt-32">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_40%_at_15%_10%,rgba(183,255,0,0.08),transparent_70%)]"
+          aria-hidden
+        />
+        <Container className="relative">
+          <div className="grid gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-5 space-y-6">
+              <Eyebrow accent>Contato</Eyebrow>
+              <h1 className="font-display text-4xl sm:text-5xl text-balance">
+                Conte o que precisa. Seguimos juntos no WhatsApp.
+              </h1>
+              <p className="text-synapz-signal leading-relaxed text-lg text-pretty">
+                Preencha o formulário com o essencial do projeto. Ao enviar, você
+                é direcionado ao WhatsApp da SYNAPZ com a mensagem já montada.
+              </p>
 
-                <div className="hidden lg:block space-y-4 pt-4">
-                  <ContactChannels wa={wa} />
-                </div>
-              </div>
+              <ul className="space-y-4 text-sm text-synapz-signal border border-synapz-neural/10 p-5 bg-synapz-black/40">
+                <li>
+                  <p className="eyebrow text-synapz-impulse mb-1">WhatsApp</p>
+                  <p className="text-synapz-neural text-base">
+                    {SITE.contact.whatsappDisplay || "+55 43 99954-1462"}
+                  </p>
+                </li>
+                {SITE.contact.email ? (
+                  <li>
+                    <p className="eyebrow text-synapz-impulse mb-1">E-mail</p>
+                    <a
+                      className="text-synapz-neural underline underline-offset-4"
+                      href={`mailto:${SITE.contact.email}`}
+                    >
+                      {SITE.contact.email}
+                    </a>
+                  </li>
+                ) : null}
+                <li>
+                  <p className="eyebrow text-synapz-impulse mb-1">Atendimento</p>
+                  <p>{SITE.contact.areaServed}</p>
+                </li>
+              </ul>
 
-              <div className="lg:col-span-7">
-                <div className="border border-synapz-neural/10 bg-synapz-graphite/40 p-5 sm:p-6 md:p-8">
-                  <ContactForm />
-                </div>
-              </div>
+              {wa ? (
+                <Button
+                  href={wa}
+                  variant="secondary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {CTA.whatsapp.label}
+                </Button>
+              ) : null}
             </div>
 
-            <div className="lg:hidden space-y-4 pt-2">
-              <ContactChannels wa={wa} />
+            <div className="lg:col-span-7">
+              <div className="surface-panel p-6 md:p-8">
+                <ContactForm />
+              </div>
             </div>
           </div>
         </Container>
       </Section>
     </main>
-  );
-}
-
-function ContactChannels({ wa }: { wa: string }) {
-  return (
-    <>
-      <ul className="space-y-4 text-sm text-synapz-signal border border-synapz-neural/10 p-5">
-        <li>
-          <p className="eyebrow text-synapz-impulse mb-1">WhatsApp</p>
-          <p className="text-synapz-neural text-base">
-            {SITE.contact.whatsappDisplay || "+55 43 99954-1462"}
-          </p>
-        </li>
-        {SITE.contact.email ? (
-          <li>
-            <p className="eyebrow text-synapz-impulse mb-1">E-mail</p>
-            <a
-              className="text-synapz-neural underline underline-offset-4"
-              href={`mailto:${SITE.contact.email}`}
-            >
-              {SITE.contact.email}
-            </a>
-          </li>
-        ) : null}
-        <li>
-          <p className="eyebrow text-synapz-impulse mb-1">Atendimento</p>
-          <p>{SITE.contact.areaServed}</p>
-        </li>
-      </ul>
-      {wa ? (
-        <Button
-          href={wa}
-          variant="secondary"
-          className="min-h-11"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {CTA.whatsapp.label}
-        </Button>
-      ) : null}
-    </>
   );
 }

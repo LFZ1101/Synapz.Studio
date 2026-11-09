@@ -44,19 +44,15 @@ export default async function ProjectCasePage({ params }: Props) {
 
   const next = getNextProject(project.slug);
 
-  const narrative: { title: string; body: string }[] = [
+  const blocks: { title: string; body: string }[] = [
     { title: "Contexto", body: project.context },
     { title: "Problema", body: project.problem },
     { title: "Objetivo", body: project.objective },
     { title: "Estratégia", body: project.strategy },
     { title: "Direção criativa", body: project.creativeDirection },
     { title: "Design", body: project.design },
-    { title: "Produção", body: project.development },
+    { title: "Desenvolvimento ou produção", body: project.development },
   ].filter((b) => b.body.trim().length > 0);
-
-  const verifiedResults = project.results.filter(
-    (r) => r.value?.trim() && r.label?.trim() && (r.source?.trim() || r.period?.trim()),
-  );
 
   return (
     <main id="conteudo-principal">
@@ -84,7 +80,7 @@ export default async function ProjectCasePage({ params }: Props) {
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl max-w-4xl text-balance">
             {project.name}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-synapz-signal text-pretty">
+          <p className="mt-6 max-w-2xl text-lg text-synapz-signal">
             {project.summary}
           </p>
           <ul className="mt-8 flex flex-wrap gap-2">
@@ -125,7 +121,7 @@ export default async function ProjectCasePage({ params }: Props) {
                 href={project.externalUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center text-sm text-synapz-impulse hover:underline"
+                className="text-sm text-synapz-impulse hover:underline"
               >
                 Ver projeto online →
               </a>
@@ -138,7 +134,7 @@ export default async function ProjectCasePage({ params }: Props) {
         <Container>
           <dl className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <div>
-              <dt className="eyebrow mb-2">Área</dt>
+              <dt className="eyebrow mb-2">Segmento</dt>
               <dd>{project.segment}</dd>
             </div>
             <div>
@@ -161,28 +157,19 @@ export default async function ProjectCasePage({ params }: Props) {
         </Container>
       </Section>
 
-      {narrative.length > 0 ? (
-        <Section>
+      {blocks.map((block, index) => (
+        <Section key={block.title} tone={index % 2 ? "graphite" : "dark"}>
           <Container className="max-w-3xl">
-            <h2 className="font-display text-3xl mb-8">O projeto por dentro</h2>
-            <dl className="space-y-6 divide-y divide-synapz-neural/10 border-y border-synapz-neural/10">
-              {narrative.map((block) => (
-                <div key={block.title} className="grid gap-2 py-6 sm:grid-cols-12 sm:gap-6">
-                  <dt className="eyebrow text-synapz-impulse sm:col-span-3">
-                    {block.title}
-                  </dt>
-                  <dd className="sm:col-span-9 text-synapz-signal leading-relaxed whitespace-pre-line">
-                    {block.body}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+            <h2 className="font-display text-3xl mb-6">{block.title}</h2>
+            <p className="text-lg text-synapz-signal leading-relaxed whitespace-pre-line">
+              {block.body}
+            </p>
           </Container>
         </Section>
-      ) : null}
+      ))}
 
       {project.deliverables.length > 0 ? (
-        <Section tone="graphite">
+        <Section>
           <Container>
             <h2 className="font-display text-3xl mb-8">Entregas</h2>
             <ul className="grid gap-3 md:grid-cols-2">
@@ -199,12 +186,12 @@ export default async function ProjectCasePage({ params }: Props) {
         </Section>
       ) : null}
 
-      {verifiedResults.length > 0 ? (
-        <Section>
+      {project.results.length > 0 ? (
+        <Section tone="graphite">
           <Container>
             <h2 className="font-display text-3xl mb-8">Resultado</h2>
             <ul className="grid gap-6 md:grid-cols-3">
-              {verifiedResults.map((r) => (
+              {project.results.map((r) => (
                 <li key={r.label} className="border border-synapz-neural/10 p-6">
                   <p className="font-display text-3xl text-synapz-impulse">
                     {r.value}
@@ -226,7 +213,7 @@ export default async function ProjectCasePage({ params }: Props) {
       ) : null}
 
       {project.gallery.length > 0 ? (
-        <Section tone={verifiedResults.length > 0 ? "graphite" : "dark"}>
+        <Section>
           <Container wide>
             <h2 className="font-display text-3xl mb-8">Galeria</h2>
             <ul className="grid grid-cols-1 gap-6 md:gap-8">
@@ -313,9 +300,7 @@ export default async function ProjectCasePage({ params }: Props) {
         </Section>
       ) : null}
 
-      {project.testimonial?.quote &&
-      project.testimonial?.name &&
-      project.testimonial?.company ? (
+      {project.testimonial ? (
         <Section>
           <Container className="max-w-3xl">
             <blockquote className="border-l border-synapz-impulse pl-6">
@@ -326,9 +311,8 @@ export default async function ProjectCasePage({ params }: Props) {
                 <cite className="not-italic text-synapz-neural">
                   {project.testimonial.name}
                 </cite>
-                {project.testimonial.role
-                  ? ` — ${project.testimonial.role}, ${project.testimonial.company}`
-                  : ` — ${project.testimonial.company}`}
+                {" — "}
+                {project.testimonial.role}, {project.testimonial.company}
               </footer>
             </blockquote>
           </Container>
@@ -351,18 +335,19 @@ export default async function ProjectCasePage({ params }: Props) {
         </Section>
       ) : null}
 
-      <Section>
-        <Container>
-          <div className="border border-synapz-neural/10 p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <Section className="relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 ambient-glow opacity-40" />
+        <Container className="relative">
+          <div className="surface-panel p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
               <h2 className="font-display text-2xl md:text-3xl">
-                Tem um desafio parecido?
+                Quer um resultado parecido para o seu negócio?
               </h2>
               <p className="mt-2 text-synapz-signal">
-                Conte o contexto da sua marca e vamos encontrar a entrega certa.
+                Conte o momento da empresa e alinhamos o próximo passo.
               </p>
             </div>
-            <Button href={CTA.primary.href} variant="impulse" size="lg" className="min-h-11">
+            <Button href={CTA.primary.href} variant="impulse" size="lg">
               {CTA.primary.label}
             </Button>
           </div>

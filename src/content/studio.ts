@@ -1,27 +1,38 @@
 export const methodSteps = [
   {
     number: "01",
-    title: "Entender",
-    description:
-      "Ouvir o negócio, o público e a mudança desejada — e definir o problema com clareza.",
+    title: "Conectar",
+    description: "Entendemos o negócio, o público, o momento e o objetivo.",
   },
   {
     number: "02",
-    title: "Dar direção",
+    title: "Mapear",
     description:
-      "Organizar mensagem, linguagem visual e prioridades. Apresentar o caminho antes da produção.",
+      "Organizamos estratégia, mensagem, canais, conteúdo e experiência.",
   },
   {
     number: "03",
-    title: "Construir",
+    title: "Criar",
     description:
-      "Transformar a direção aprovada em identidade, conteúdo, campanha ou experiência digital.",
+      "Transformamos direção em conceitos, narrativas, identidades e interfaces.",
   },
   {
     number: "04",
-    title: "Colocar no mundo",
+    title: "Construir",
     description:
-      "Revisar, publicar quando fizer parte do escopo e indicar os próximos passos.",
+      "Produzimos conteúdos, campanhas, páginas, sistemas e integrações.",
+  },
+  {
+    number: "05",
+    title: "Ativar",
+    description:
+      "Publicamos, lançamos e colocamos cada ponto da estratégia em movimento.",
+  },
+  {
+    number: "06",
+    title: "Evoluir",
+    description:
+      "Analisamos aprendizados e identificamos as próximas oportunidades.",
   },
 ] as const;
 
@@ -63,32 +74,32 @@ export const faqItems = [
   {
     question: "A SYNAPZ atende apenas projetos completos?",
     answer:
-      "Não. Dá para contratar uma entrega pontual — marca, site, conteúdo ou campanha — ou conectar mais de uma frente no mesmo processo.",
-  },
-  {
-    question: "É possível combinar serviços diferentes?",
-    answer:
-      "Sim. Identidade, conteúdo, web e campanhas podem caminhar juntos quando a marca precisa de uma direção compartilhada.",
-  },
-  {
-    question: "Como começa um projeto?",
-    answer:
-      "Com uma conversa sobre o contexto da marca. A partir disso, alinhamos escopo, entregas e próximos passos — sem valores ou prazos inventados de antemão.",
-  },
-  {
-    question: "Vocês acompanham depois da entrega?",
-    answer:
-      "Quando faz sentido para o escopo, podemos estruturar suporte, atualizações e evoluções. Isso é definido no diálogo, caso a caso.",
-  },
-  {
-    question: "A SYNAPZ desenvolve sistemas personalizados?",
-    answer:
-      "Sim. Portais, dashboards, áreas de clientes, automações e sistemas sob medida fazem parte da frente de web e tecnologia.",
+      "Não. Podemos desenvolver uma solução específica ou estruturar uma entrega integrada, dependendo da necessidade do negócio.",
   },
   {
     question: "Vocês trabalham com empresas de qualquer segmento?",
     answer:
-      "Sim. O ponto de partida é entender o negócio, o público e o que precisa mudar — independentemente do nicho.",
+      "Sim. O processo começa pelo entendimento do negócio, do público e do objetivo.",
+  },
+  {
+    question: "É possível contratar site, conteúdo e campanha juntos?",
+    answer:
+      "Sim. Esse é um dos principais diferenciais da SYNAPZ: conectar diferentes competências em uma única direção estratégica.",
+  },
+  {
+    question: "A SYNAPZ desenvolve sistemas personalizados?",
+    answer:
+      "Sim. Desenvolvemos portais, dashboards, áreas de clientes, automações e sistemas para necessidades específicas.",
+  },
+  {
+    question: "Como funciona o início de um projeto?",
+    answer:
+      "Começamos com uma conversa de diagnóstico. Depois, definimos escopo, entregas, investimento, prazo e etapas.",
+  },
+  {
+    question: "Vocês acompanham o projeto depois da entrega?",
+    answer:
+      "Quando necessário, podemos estruturar suporte, atualizações e evoluções conforme a realidade do cliente.",
   },
 ] as const;
 

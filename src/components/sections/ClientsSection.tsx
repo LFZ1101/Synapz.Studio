@@ -19,11 +19,12 @@ export function ClientsSection() {
             <div>
               <p className="eyebrow text-synapz-impulse mb-3">Clientes</p>
               <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-synapz-neural text-balance max-w-xl">
-                Marcas acompanhadas.
+                Marcas com quem já conectamos.
               </h2>
             </div>
             <p className="text-sm text-synapz-signal max-w-xs md:text-right">
-              Logos publicados com autorização — identidade, conteúdo e digital.
+              Uma seleção de marcas acompanhadas em identidade, conteúdo e
+              digital.
             </p>
           </div>
         </ScrollReveal>

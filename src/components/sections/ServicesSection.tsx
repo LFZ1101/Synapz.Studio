@@ -1,96 +1,107 @@
-import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 import { Container, Section } from "@/components/ui/Layout";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
 import { nuclei } from "@/content/services";
+import Link from "next/link";
 
-const HOME_BLURB: Record<string, string> = {
-  marca:
-    "Para marcas que precisam de identidade, conteúdo e presença consistentes.",
-  web: "Para quem precisa de sites, páginas ou sistemas claros e funcionais.",
-  marketing:
-    "Para ideias que precisam virar campanha — conceito, peças e páginas.",
-};
-
-const HOME_ITEMS: Record<string, string[]> = {
+const HOME_SERVICE_PREVIEW: Record<string, string[]> = {
   marca: [
-    "identidade e estratégia de conteúdo",
+    "estratégia de conteúdo",
     "social media",
-    "vídeo e materiais",
+    "vídeo e motion",
+    "materiais publicitários",
   ],
-  web: ["sites e landing pages", "lojas virtuais", "sistemas personalizados"],
+  web: [
+    "sites institucionais",
+    "landing pages",
+    "lojas virtuais",
+    "sistemas personalizados",
+  ],
   marketing: [
-    "conceito e peças",
+    "estratégia de campanha",
+    "conceitos criativos",
     "páginas de campanha",
     "otimização",
   ],
 };
 
+const HOME_BLURB: Record<string, string> = {
+  marca: "Conteúdo e identidade para marcas presentes e consistentes.",
+  web: "Sites, páginas e sistemas claros, bonitos e funcionais.",
+  marketing: "Campanhas que conectam ideia, mídia e conversão.",
+};
+
 export function ServicesSection() {
   return (
-    <Section id="servicos">
-      <Container>
+    <Section tone="graphite" id="servicos" className="relative overflow-hidden">
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(50%_40%_at_0%_0%,rgba(183,255,0,0.05),transparent_60%)]"
+        aria-hidden
+      />
+      <Container className="relative">
         <div className="max-w-2xl">
           <ScrollReveal variant="fade">
             <p className="eyebrow text-synapz-impulse mb-4">Serviços</p>
           </ScrollReveal>
-          <ScrollReveal variant="mask" delay={60}>
+          <ScrollReveal variant="mask" delay={70}>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-balance">
-              O que sua marca precisa, trabalhando em conjunto.
+              Três núcleos. Uma{" "}
+              <span className="impulse-word">direção</span>.
             </h2>
           </ScrollReveal>
-          <ScrollReveal variant="up" delay={120}>
+          <ScrollReveal variant="up" delay={140}>
             <p className="mt-5 text-synapz-signal leading-relaxed text-pretty">
-              Dá para contratar uma entrega pontual ou conectar diferentes
-              frentes — marca e conteúdo, web e tecnologia, marketing e
-              campanhas — sob a mesma direção.
+              Contrate uma frente específica ou uma jornada completa — marca e
+              conteúdo, web e tecnologia, marketing e campanhas.
             </p>
           </ScrollReveal>
         </div>
 
-        <ul className="mt-12 md:mt-14 divide-y divide-synapz-neural/10 border-y border-synapz-neural/10">
+        <div className="mt-12 md:mt-14 grid gap-4 md:gap-5 lg:grid-cols-3">
           {nuclei.map((nucleus, index) => (
-            <ScrollReveal key={nucleus.id} variant="up" delay={index * 70}>
-              <li className="grid gap-4 py-8 md:grid-cols-12 md:items-start md:gap-8">
-                <p className="eyebrow text-synapz-impulse md:col-span-2">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <div className="md:col-span-4 space-y-2">
-                  <h3 className="font-display text-2xl text-synapz-neural">
-                    {nucleus.title}
-                  </h3>
-                  <p className="text-sm text-synapz-signal leading-relaxed">
-                    {HOME_BLURB[nucleus.id]}
-                  </p>
+            <ScrollReveal key={nucleus.id} variant="up" delay={index * 90}>
+              <article className="soft-panel flex h-full flex-col p-6 md:p-8">
+                <div className="mb-6 flex items-center justify-between gap-3">
+                  <span className="font-display text-3xl text-synapz-impulse/80 leading-none">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span
+                    className="h-px flex-1 bg-gradient-to-r from-synapz-impulse/50 to-transparent"
+                    aria-hidden
+                  />
                 </div>
-                <ul className="md:col-span-4 space-y-2 text-sm text-synapz-signal">
-                  {(HOME_ITEMS[nucleus.id] ?? []).map((item) => (
-                    <li key={item} className="flex gap-2">
-                      <span className="text-synapz-impulse" aria-hidden>
-                        ·
-                      </span>
-                      <span>{item}</span>
+                <h3 className="font-display text-2xl md:text-[1.7rem] text-synapz-neural leading-tight">
+                  {nucleus.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-synapz-signal">
+                  {HOME_BLURB[nucleus.id]}
+                </p>
+                <ul className="mt-6 space-y-2.5 flex-1">
+                  {(HOME_SERVICE_PREVIEW[nucleus.id] ?? []).map((item) => (
+                    <li
+                      key={item}
+                      className="border-l border-synapz-impulse/45 pl-3 text-sm text-synapz-signal"
+                    >
+                      {item}
                     </li>
                   ))}
                 </ul>
-                <div className="md:col-span-2 md:justify-self-end">
-                  <Link
-                    href={nucleus.href}
-                    className="inline-flex min-h-11 items-center text-sm text-synapz-impulse hover:underline underline-offset-4"
-                  >
-                    Ver área →
-                  </Link>
+                <div className="mt-8">
+                  <Button href={nucleus.cta.href} variant="secondary" size="sm" className="rounded-full">
+                    {nucleus.cta.label}
+                  </Button>
                 </div>
-              </li>
+              </article>
             </ScrollReveal>
           ))}
-        </ul>
+        </div>
 
-        <ScrollReveal variant="fade" delay={100}>
-          <p className="mt-8">
+        <ScrollReveal variant="fade" delay={120}>
+          <div className="mt-10">
             <Link href="/servicos" className="text-link text-sm">
               Ver todos os serviços →
             </Link>
-          </p>
+          </div>
         </ScrollReveal>
       </Container>
     </Section>
